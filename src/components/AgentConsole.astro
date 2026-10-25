@@ -1,0 +1,31 @@
+---
+interface Props {
+  c: { title: string; approve: string; reject: string; lines: { kind: string; text: string }[] };
+}
+const { c } = Astro.props;
+const prefix: Record<string, string> = { cmd: '›', plan: '◆', file: ' ', ask: '?', ok: '✓' };
+---
+
+<figure class="console" aria-label={c.title}>
+  <div class="console-bar">
+    <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="console-title">{c.title}</span>
+  </div>
+  <ol class="console-body">
+    {
+      c.lines.map((l, i) => (
+        <li class={`ln ${l.kind}`} style={`--i:${i}`}>
+          <span class="pfx" aria-hidden="true">{prefix[l.kind]}</span>
+          <span>{l.text}</span>
+          {l.kind === 'ask' && (
+            <span class="approval" aria-hidden="true">
+              <span class="ap yes">{c.approve}</span>
+              <span class="ap no">{c.reject}</span>
+            </span>
+          )}
+        </li>
+      ))
+    }
+    <li class="ln caret" style={`--i:${c.lines.length}`} aria-hidden="true"><span class="pfx">›</span><span class="cur"></span></li>
+  </ol>
+</figure>

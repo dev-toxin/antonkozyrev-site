@@ -1,6 +1,6 @@
 // Site copy. Source of every fact: Anton's notebook (06 Карьера: resume, LinkedIn draft,
 // cover letters, portfolio plan). Do not add numbers or skills that are not there.
-// Placeholders to replace before publishing: TODO_EMAIL, TODO_LINKEDIN, TODO_RESUME.
+// Empty link = not rendered (linkedin until the profile is ready; resume = "coming soon").
 
 export type Lang = 'en' | 'ru';
 
@@ -9,9 +9,9 @@ export const links = {
   terroir: 'https://github.com/dev-toxin/terroir-monorepo',
   sitefarm: 'https://github.com/dev-toxin/sitefarm-showcase',
   tapreply: 'https://www.tapreply.net',
-  email: 'TODO_EMAIL',
-  linkedin: 'TODO_LINKEDIN',
-  resume: 'TODO_RESUME',
+  email: 'hello@antonkozyrev.dev',
+  linkedin: '',
+  resume: '',
 };
 
 type LinkRef = { href: string; label: string };
@@ -28,24 +28,43 @@ type Case = {
 
 type StackGroup = { group: string; items: string; where: LinkRef[] };
 
+export type AppId = 'zhabby' | 'jobline' | 'qworking' | 'mealhub' | 'greenfeed';
+
+type App = {
+  id: AppId;
+  name: string;
+  years: string;
+  what: string;
+  role: string;
+  links: LinkRef[];
+};
+
+type ConsoleLine = { kind: 'cmd' | 'plan' | 'file' | 'ask' | 'ok'; text: string };
+
 export type Copy = {
   htmlLang: string;
   path: string;
   title: string;
   description: string;
-  nav: { cases: string; stack: string; ai: string; contact: string };
+  nav: { cases: string; apps: string; stack: string; ai: string; contact: string };
   switchLabel: string;
   switchTitle: string;
   switchHref: string;
   hero: { name: string; role: string; lead: string; meta: string[]; ctaPrimary: string; ctaSecondary: string };
   casesTitle: string;
   cases: Case[];
+  appsTitle: string;
+  appsLead: string;
+  apps: App[];
   stackTitle: string;
   stackLead: string;
   stack: StackGroup[];
   aiTitle: string;
   aiLead: string;
   ai: { title: string; text: string }[];
+  toolsTitle: string;
+  tools: { name: string; note: string; main?: boolean }[];
+  console: { title: string; approve: string; reject: string; lines: ConsoleLine[] };
   contactTitle: string;
   contactLead: string;
   contactItems: { label: string; value: string; href: string }[];
@@ -61,7 +80,7 @@ export const copy: Record<Lang, Copy> = {
     title: 'Anton Kozyrev — Senior Flutter Developer · Go · LLM integrations',
     description:
       'Senior Flutter developer (4.5+ years, 10 apps) building Go backends and LLM features in his own products. Open to project and part-time work.',
-    nav: { cases: 'Work', stack: 'Stack', ai: 'AI workflow', contact: 'Contact' },
+    nav: { cases: 'Work', apps: 'Apps', stack: 'Stack', ai: 'AI workflow', contact: 'Contact' },
     switchLabel: 'RU',
     switchTitle: 'Русская версия',
     switchHref: '/ru/',
@@ -130,6 +149,40 @@ export const copy: Record<Lang, Copy> = {
         link: { href: links.tapreply, label: 'tapreply.net' },
       },
     ],
+    appsTitle: 'Apps I built',
+    appsLead: 'Published apps I worked on before my current product team — store pages and screenshots are public.',
+    apps: [
+      {
+        id: 'zhabby', name: 'Zhabby', years: '2025',
+        what: 'Short-video social network that rewards activity: personal feed, video upload, points for views, likes and comments, rewards exchange.',
+        role: 'Second developer on the team: built every screen from Figma designs, connected API requests and state management in several sections. Published on the App Store and Google Play.',
+        links: [{ href: 'https://apps.apple.com/ru/app/id6758106499', label: 'App Store' }, { href: 'https://zhabby.info/', label: 'zhabby.info' }],
+      },
+      {
+        id: 'jobline', name: 'Jobline', years: '2023–2024',
+        what: 'Platform for working with external contractors: self-employed onboarding, documents and receipts, payouts with tax (NPD) withholding.',
+        role: 'Built the mobile app from scratch.',
+        links: [{ href: 'https://teleport.run/projects/jobline', label: 'Case study' }, { href: 'https://jobline.one/', label: 'jobline.one' }],
+      },
+      {
+        id: 'qworking', name: 'Q-Working', years: '2023–2024',
+        what: 'Service that finds contractors, handles deals and pays self-employed workers.',
+        role: 'Built the worker mobile app from scratch: onboarding, profile and services, orders and payouts.',
+        links: [{ href: 'https://teleport.run/projects/q-working', label: 'Case study' }],
+      },
+      {
+        id: 'mealhub', name: 'Mealhub', years: '2022–2023',
+        what: 'Restaurant search on a map, table booking and food ordering.',
+        role: 'Second developer: responsive UI from Figma, Google Maps API, state management, REST API integration, bug fixing and feature work.',
+        links: [{ href: 'https://apps.apple.com/ru/app/mealhub/id1640713837', label: 'App Store' }],
+      },
+      {
+        id: 'greenfeed', name: 'GreenFeed', years: '2022–2023',
+        what: 'Feed product catalog and animal diet calculator for farmers.',
+        role: 'Second developer: UI from Figma, state management, REST API integration, bug fixing and feature work.',
+        links: [{ href: 'https://apps.apple.com/ru/app/greenfeed/id6453763960', label: 'App Store' }],
+      },
+    ],
     stackTitle: 'Stack',
     stackLead: 'Each skill points to where it is used — not a tag cloud.',
     stack: [
@@ -164,7 +217,7 @@ export const copy: Record<Lang, Copy> = {
     ai: [
       {
         title: 'Agent in the IDE, plan first',
-        text: 'My main tool is an agent in the IDE (Veai in IntelliJ). It reads the project, edits code, runs tests and commands. Plan and decomposition come first, code second; the agent keeps project memory, my own skills and rules.',
+        text: 'My daily driver is an agent in the IDE (Veai in IntelliJ). It reads the project, edits code, runs tests and commands. Plan and decomposition come first, code second; the agent keeps project memory, my own skills and rules. I have also worked with Cursor and GitHub Copilot; Claude Code and OpenAI Codex follow the same agentic workflow — plan → diff → tests — so switching between them is quick.',
       },
       {
         title: 'Parallel work in git worktrees, review before merge',
@@ -175,13 +228,36 @@ export const copy: Record<Lang, Copy> = {
         text: 'In sitefarm texts are generated through Yandex AI Studio and checked by a second model; in Terroir code picks the data and every answer is validated against the database. Both have hard monthly budgets.',
       },
     ],
+    toolsTitle: 'Agent toolchain',
+    tools: [
+      { name: 'Veai', note: 'daily driver', main: true },
+      { name: 'Cursor', note: 'used' },
+      { name: 'GitHub Copilot', note: 'used' },
+      { name: 'Claude Code', note: 'same workflow' },
+      { name: 'OpenAI Codex', note: 'same workflow' },
+    ],
+    console: {
+      title: 'agent · session',
+      approve: 'Approve',
+      reject: 'Reject',
+      lines: [
+        { kind: 'cmd', text: 'task: add a monthly budget guard to the LLM client' },
+        { kind: 'plan', text: 'plan: check worst-case cost before each call → fail fast → test' },
+        { kind: 'file', text: '~ internal/llm/client.go' },
+        { kind: 'file', text: '+ internal/llm/budget.go' },
+        { kind: 'file', text: '+ internal/llm/budget_test.go' },
+        { kind: 'ask', text: 'Change 3 files. Approve?' },
+        { kind: 'ok', text: 'go test ./... — ok' },
+        { kind: 'ok', text: 'diff reviewed · secrets scan clean' },
+      ],
+    },
     contactTitle: 'Contact',
     contactLead:
       'Open to project work and part-time engagement (up to 20 h/week) alongside my main job. Before development I spent 5 years running city projects and leading a team of 6.',
     contactItems: [
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
       { label: 'GitHub', value: 'github.com/dev-toxin', href: links.github },
-      { label: 'LinkedIn', value: links.linkedin, href: links.linkedin },
+      ...(links.linkedin ? [{ label: 'LinkedIn', value: links.linkedin, href: links.linkedin }] : []),
     ],
     resumeLabel: 'Résumé (PDF)',
     resumeNote: 'coming soon',
@@ -193,7 +269,7 @@ export const copy: Record<Lang, Copy> = {
     title: 'Антон Козырев — Senior Flutter Developer · Go · LLM-интеграции',
     description:
       'Senior Flutter-разработчик (4,5+ года, 10 приложений), в своих продуктах — Go-бэкенд и LLM-фичи. Открыт к проектной работе и частичной занятости.',
-    nav: { cases: 'Проекты', stack: 'Стек', ai: 'Работа с AI', contact: 'Контакты' },
+    nav: { cases: 'Проекты', apps: 'Приложения', stack: 'Стек', ai: 'Работа с AI', contact: 'Контакты' },
     switchLabel: 'EN',
     switchTitle: 'English version',
     switchHref: '/',
@@ -262,6 +338,40 @@ export const copy: Record<Lang, Copy> = {
         link: { href: links.tapreply, label: 'tapreply.net' },
       },
     ],
+    appsTitle: 'Приложения, которые я делал',
+    appsLead: 'Опубликованные приложения до нынешней продуктовой команды — страницы в сторах и скриншоты публичные.',
+    apps: [
+      {
+        id: 'zhabby', name: 'Zhabby', years: '2025',
+        what: 'Социальная сеть коротких видео с вознаграждением за активность: персональная лента, загрузка видео, баллы за просмотры, лайки и комментарии, обмен баллов на награды.',
+        role: 'Второй разработчик в команде: сверстал все экраны по макетам Figma, в ряде разделов подключал API и управление состоянием. Опубликовано в App Store и Google Play.',
+        links: [{ href: 'https://apps.apple.com/ru/app/id6758106499', label: 'App Store' }, { href: 'https://zhabby.info/', label: 'zhabby.info' }],
+      },
+      {
+        id: 'jobline', name: 'Jobline', years: '2023–2024',
+        what: 'Платформа для работы с внешними исполнителями: регистрация самозанятых, документы и чеки по сделкам, выплаты с уплатой НПД.',
+        role: 'Мобильное приложение с нуля.',
+        links: [{ href: 'https://teleport.run/projects/jobline', label: 'Кейс' }, { href: 'https://jobline.one/', label: 'jobline.one' }],
+      },
+      {
+        id: 'qworking', name: 'Q-Working', years: '2023–2024',
+        what: 'Сервис для поиска исполнителей, заключения сделок и выплат самозанятым.',
+        role: 'Мобильное приложение исполнителя с нуля: регистрация, профиль и услуги, заказы и вознаграждения.',
+        links: [{ href: 'https://teleport.run/projects/q-working', label: 'Кейс' }],
+      },
+      {
+        id: 'mealhub', name: 'Mealhub', years: '2022–2023',
+        what: 'Поиск ресторанов на карте, бронирование столов и заказ еды.',
+        role: 'Второй разработчик: адаптивная вёрстка по Figma, Google Maps API, состояние приложения, интеграция с REST API, исправление ошибок и доработки.',
+        links: [{ href: 'https://apps.apple.com/ru/app/mealhub/id1640713837', label: 'App Store' }],
+      },
+      {
+        id: 'greenfeed', name: 'GreenFeed', years: '2022–2023',
+        what: 'Каталог кормовой продукции и расчёт рациона питания животных для фермеров.',
+        role: 'Второй разработчик: вёрстка по Figma, состояние приложения, интеграция с REST API, исправление ошибок и доработки.',
+        links: [{ href: 'https://apps.apple.com/ru/app/greenfeed/id6453763960', label: 'App Store' }],
+      },
+    ],
     stackTitle: 'Стек',
     stackLead: 'У каждого навыка — ссылка на то, где он применён, а не облако тегов.',
     stack: [
@@ -296,7 +406,7 @@ export const copy: Record<Lang, Copy> = {
     ai: [
       {
         title: 'Агент в IDE, сначала план',
-        text: 'Основной инструмент — агент в IDE (Veai в IntelliJ). Он читает проект, правит код, запускает тесты и команды. Сначала план и декомпозиция, потом код; у агента память о проекте, мои skills и правила.',
+        text: 'Основной ежедневный инструмент — агент в IDE (Veai в IntelliJ). Он читает проект, правит код, запускает тесты и команды. Сначала план и декомпозиция, потом код; у агента память о проекте, мои skills и правила. Работал также с Cursor и GitHub Copilot; Claude Code и OpenAI Codex устроены по тому же агентному циклу — план → дифф → тесты, — так что переключаюсь между ними без проблем.',
       },
       {
         title: 'Параллельная работа в git worktree, ревью до слияния',
@@ -307,13 +417,36 @@ export const copy: Record<Lang, Copy> = {
         text: 'В sitefarm тексты генерируются через Yandex AI Studio и проверяются второй моделью; в Terroir данные подбирает код, а каждый ответ сверяется с базой. В обоих — жёсткий месячный бюджет.',
       },
     ],
+    toolsTitle: 'Агентный инструментарий',
+    tools: [
+      { name: 'Veai', note: 'каждый день', main: true },
+      { name: 'Cursor', note: 'работал' },
+      { name: 'GitHub Copilot', note: 'работал' },
+      { name: 'Claude Code', note: 'тот же цикл' },
+      { name: 'OpenAI Codex', note: 'тот же цикл' },
+    ],
+    console: {
+      title: 'агент · сессия',
+      approve: 'Подтвердить',
+      reject: 'Отклонить',
+      lines: [
+        { kind: 'cmd', text: 'задача: месячный лимит бюджета в LLM-клиенте' },
+        { kind: 'plan', text: 'план: оценить худший случай до вызова → остановиться → тест' },
+        { kind: 'file', text: '~ internal/llm/client.go' },
+        { kind: 'file', text: '+ internal/llm/budget.go' },
+        { kind: 'file', text: '+ internal/llm/budget_test.go' },
+        { kind: 'ask', text: 'Изменю 3 файла. Подтверждаешь?' },
+        { kind: 'ok', text: 'go test ./... — ok' },
+        { kind: 'ok', text: 'дифф проверен · секретов нет' },
+      ],
+    },
     contactTitle: 'Контакты',
     contactLead:
       'Открыт к проектной работе и частичной занятости (до 20 ч/нед) параллельно с основной работой. До разработки 5 лет вёл городские проекты и руководил отделом из 6 человек.',
     contactItems: [
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
       { label: 'GitHub', value: 'github.com/dev-toxin', href: links.github },
-      { label: 'LinkedIn', value: links.linkedin, href: links.linkedin },
+      ...(links.linkedin ? [{ label: 'LinkedIn', value: links.linkedin, href: links.linkedin }] : []),
     ],
     resumeLabel: 'Резюме (PDF)',
     resumeNote: 'скоро',

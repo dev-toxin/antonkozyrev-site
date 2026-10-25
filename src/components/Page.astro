@@ -1,9 +1,35 @@
 ---
-import { copy, links, type Lang } from '../content';
+import '@fontsource-variable/unbounded/wght.css';
+import '@fontsource-variable/manrope/wght.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import { copy, links, type Lang, type AppId } from '../content';
+import AgentConsole from './AgentConsole.astro';
+
+import zhabbyIcon from '../assets/apps/zhabby-icon.png';
+import zhabby1 from '../assets/apps/zhabby-1.jpg';
+import zhabby2 from '../assets/apps/zhabby-2.jpg';
+import mealhubIcon from '../assets/apps/mealhub-icon.png';
+import mealhub1 from '../assets/apps/mealhub-1.jpg';
+import mealhub2 from '../assets/apps/mealhub-2.jpg';
+import greenfeedIcon from '../assets/apps/greenfeed-icon.png';
+import greenfeed1 from '../assets/apps/greenfeed-1.jpg';
+import greenfeed2 from '../assets/apps/greenfeed-2.jpg';
+import jobline1 from '../assets/apps/jobline-1.webp';
+import qworking1 from '../assets/apps/qworking-1.webp';
 
 interface Props {
   lang: Lang;
 }
+
+const media: Record<AppId, { icon?: ImageMetadata; phones: ImageMetadata[]; wide?: ImageMetadata }> = {
+  zhabby: { icon: zhabbyIcon, phones: [zhabby1, zhabby2] },
+  jobline: { phones: [], wide: jobline1 },
+  qworking: { phones: [], wide: qworking1 },
+  mealhub: { icon: mealhubIcon, phones: [mealhub1, mealhub2] },
+  greenfeed: { icon: greenfeedIcon, phones: [greenfeed1, greenfeed2] },
+};
 
 const { lang } = Astro.props;
 const t = copy[lang];
@@ -11,6 +37,7 @@ const site = Astro.site ?? new URL('https://antonkozyrev.dev');
 const canonical = new URL(t.path, site).href;
 const altLang: Lang = lang === 'en' ? 'ru' : 'en';
 const altUrl = new URL(copy[altLang].path, site).href;
+const ogImage = new URL('/og.png', site).href;
 const isExternal = (href: string) => href.startsWith('http');
 ---
 
@@ -26,27 +53,32 @@ const isExternal = (href: string) => href.startsWith('http');
     <link rel="alternate" hreflang={copy[altLang].htmlLang} href={altUrl} />
     <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#07060f" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={t.title} />
     <meta property="og:description" content={t.description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'ru_RU'} />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={t.title} />
     <meta name="twitter:description" content={t.description} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body id="top">
     <a class="skip" href="#main">{lang === 'en' ? 'Skip to content' : 'К содержанию'}</a>
+    <div class="bg" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="grid"></span></div>
     <header class="bar">
       <div class="wrap bar-inner">
-        <a class="logo" href={t.path} aria-label={t.hero.name}>AK</a>
+        <a class="logo" href={t.path} aria-label={t.hero.name}><span>AK</span></a>
         <nav aria-label={lang === 'en' ? 'Sections' : 'Разделы'}>
           <a href="#work">{t.nav.cases}</a>
-          <a href="#stack">{t.nav.stack}</a>
-          <a href="#ai">{t.nav.ai}</a>
+          <a href="#apps">{t.nav.apps}</a>
+          <a href="#ai" class="hide-s">{t.nav.ai}</a>
+          <a href="#stack" class="hide-s">{t.nav.stack}</a>
           <a href="#contact">{t.nav.contact}</a>
           <a class="lang" href={t.switchHref} hreflang={copy[altLang].htmlLang} lang={copy[altLang].htmlLang} title={t.switchTitle}>{t.switchLabel}</a>
         </nav>
@@ -55,24 +87,27 @@ const isExternal = (href: string) => href.startsWith('http');
 
     <main id="main">
       <section class="hero wrap">
-        <p class="eyebrow">{t.hero.role}</p>
-        <h1>{t.hero.name}</h1>
-        <p class="lead">{t.hero.lead}</p>
-        <ul class="meta">
-          {t.hero.meta.map((m) => <li>{m}</li>)}
-        </ul>
-        <div class="cta">
-          <a class="btn primary" href="#work">{t.hero.ctaPrimary}</a>
-          <a class="btn" href="#contact">{t.hero.ctaSecondary}</a>
+        <div class="hero-text">
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{t.hero.role}</p>
+          <h1><span class="neon">{t.hero.name}</span></h1>
+          <p class="lead">{t.hero.lead}</p>
+          <ul class="meta">
+            {t.hero.meta.map((m) => <li>{m}</li>)}
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href="#work">{t.hero.ctaPrimary}</a>
+            <a class="btn" href="#contact">{t.hero.ctaSecondary}</a>
+          </div>
         </div>
+        <AgentConsole c={t.console} />
       </section>
 
       <section id="work" class="wrap section">
-        <h2>{t.casesTitle}</h2>
+        <h2><span class="num">01</span>{t.casesTitle}</h2>
         <div class="cases">
           {
             t.cases.map((c) => (
-              <article class="card" id={c.id}>
+              <article class="card glow" id={c.id}>
                 <p class="tag">{c.tag}</p>
                 <h3>{c.title}</h3>
                 <p>{c.summary}</p>
@@ -91,8 +126,80 @@ const isExternal = (href: string) => href.startsWith('http');
         </div>
       </section>
 
+      <section id="apps" class="wrap section">
+        <h2><span class="num">02</span>{t.appsTitle}</h2>
+        <p class="sub">{t.appsLead}</p>
+        <div class="apps">
+          {
+            t.apps.map((a) => {
+              const m = media[a.id];
+              return (
+                <article class="app glow">
+                  <div class={`shots ${m.wide ? 'wide' : ''}`}>
+                    {m.phones.map((img, i) => (
+                      <div class={`phone p${i}`}>
+                        <Image src={img} alt={`${a.name} — ${lang === 'en' ? 'screenshot' : 'скриншот'} ${i + 1}`} widths={[200, 300]} sizes="(max-width: 640px) 40vw, 150px" format="webp" quality={70} loading="lazy" />
+                      </div>
+                    ))}
+                    {m.wide && (
+                      <div class="screen">
+                        <Image src={m.wide} alt={`${a.name} — ${lang === 'en' ? 'product screen' : 'экран продукта'}`} widths={[400, 755]} sizes="(max-width: 640px) 90vw, 420px" format="webp" quality={72} loading="lazy" />
+                      </div>
+                    )}
+                  </div>
+                  <div class="app-body">
+                    <div class="app-head">
+                      {m.icon ? (
+                        <Image class="icon" src={m.icon} alt="" width={56} height={56} format="webp" loading="lazy" />
+                      ) : (
+                        <span class="icon mono" aria-hidden="true">{a.name.slice(0, 1)}</span>
+                      )}
+                      <div>
+                        <h3>{a.name}</h3>
+                        <p class="years">{a.years} · Flutter</p>
+                      </div>
+                    </div>
+                    <p>{a.what}</p>
+                    <p class="role">{a.role}</p>
+                    <p class="app-links">
+                      {a.links.map((l) => (
+                        <a class="chip" href={l.href} rel="noopener">{l.label} ↗</a>
+                      ))}
+                    </p>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </section>
+
+      <section id="ai" class="wrap section">
+        <h2><span class="num">03</span>{t.aiTitle}</h2>
+        <p class="sub">{t.aiLead}</p>
+        <div class="tools" aria-label={t.toolsTitle}>
+          <span class="tools-title">{t.toolsTitle}</span>
+          <ul>
+            {t.tools.map((x) => (
+              <li class={x.main ? 'main' : ''}><strong>{x.name}</strong><span>{x.note}</span></li>
+            ))}
+          </ul>
+        </div>
+        <ol class="ai">
+          {
+            t.ai.map((a, i) => (
+              <li class="glow">
+                <span class="step">0{i + 1}</span>
+                <h3>{a.title}</h3>
+                <p>{a.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
       <section id="stack" class="wrap section">
-        <h2>{t.stackTitle}</h2>
+        <h2><span class="num">04</span>{t.stackTitle}</h2>
         <p class="sub">{t.stackLead}</p>
         <dl class="stack">
           {
@@ -116,38 +223,26 @@ const isExternal = (href: string) => href.startsWith('http');
         </dl>
       </section>
 
-      <section id="ai" class="wrap section">
-        <h2>{t.aiTitle}</h2>
-        <p class="sub">{t.aiLead}</p>
-        <ol class="ai">
-          {
-            t.ai.map((a) => (
-              <li>
-                <h3>{a.title}</h3>
-                <p>{a.text}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </section>
-
       <section id="contact" class="wrap section">
-        <h2>{t.contactTitle}</h2>
-        <p class="sub">{t.contactLead}</p>
-        <ul class="contacts">
-          {
-            t.contactItems.map((c) => (
-              <li>
-                <span class="label">{c.label}</span>
-                <a href={c.href} rel={isExternal(c.href) ? 'noopener' : undefined}>{c.value}</a>
-              </li>
-            ))
-          }
-          <li>
-            <span class="label">{t.resumeLabel}</span>
-            <span class="muted" data-placeholder={links.resume}>{t.resumeNote}</span>
-          </li>
-        </ul>
+        <div class="contact glow">
+          <h2><span class="num">05</span>{t.contactTitle}</h2>
+          <p class="sub">{t.contactLead}</p>
+          <a class="btn primary big" href={`mailto:${links.email}`}>{links.email}</a>
+          <ul class="contacts">
+            {
+              t.contactItems.filter((c) => c.label !== 'Email').map((c) => (
+                <li>
+                  <span class="label">{c.label}</span>
+                  <a href={c.href} rel={isExternal(c.href) ? 'noopener' : undefined}>{c.value}</a>
+                </li>
+              ))
+            }
+            <li>
+              <span class="label">{t.resumeLabel}</span>
+              {links.resume ? <a href={links.resume}>PDF</a> : <span class="muted">{t.resumeNote}</span>}
+            </li>
+          </ul>
+        </div>
       </section>
     </main>
 
@@ -157,314 +252,3 @@ const isExternal = (href: string) => href.startsWith('http');
     </footer>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --bg: #f7f6f2;
-    --surface: #ffffff;
-    --text: #1b1d21;
-    --muted: #5d636d;
-    --line: #e3e1da;
-    --accent: #2b6cb0;
-    --accent-ink: #ffffff;
-    --radius: 14px;
-    color-scheme: light dark;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #121417;
-      --surface: #1a1d22;
-      --text: #e8e9eb;
-      --muted: #9aa1ab;
-      --line: #2a2f36;
-      --accent: #7ab4f5;
-      --accent-ink: #0d1117;
-    }
-  }
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 17px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  }
-  a {
-    color: var(--accent);
-    text-underline-offset: 3px;
-  }
-  a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-  h1,
-  h2,
-  h3 {
-    line-height: 1.2;
-    margin: 0 0 0.5em;
-  }
-  h1 {
-    font-size: clamp(2.2rem, 6vw, 3.6rem);
-    letter-spacing: -0.02em;
-  }
-  h2 {
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    letter-spacing: -0.01em;
-  }
-  h3 {
-    font-size: 1.15rem;
-  }
-  .wrap {
-    width: min(1040px, 100% - 2.5rem);
-    margin-inline: auto;
-  }
-  .skip {
-    position: absolute;
-    left: -999px;
-  }
-  .skip:focus {
-    left: 1rem;
-    top: 1rem;
-    background: var(--surface);
-    padding: 0.5rem 1rem;
-    z-index: 10;
-  }
-  .bar {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-  .bar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    min-height: 56px;
-  }
-  .logo {
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    color: var(--text);
-    border: 2px solid var(--text);
-    border-radius: 8px;
-    padding: 0.1rem 0.4rem;
-  }
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.1rem;
-    font-size: 0.95rem;
-  }
-  nav a {
-    color: var(--muted);
-    text-decoration: none;
-  }
-  nav a:hover {
-    color: var(--text);
-  }
-  nav .lang {
-    color: var(--text);
-    font-weight: 700;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 0 0.45rem;
-  }
-  .hero {
-    padding: clamp(3rem, 9vw, 6rem) 0 clamp(2rem, 6vw, 4rem);
-  }
-  .eyebrow {
-    color: var(--accent);
-    font-weight: 600;
-    margin: 0 0 0.75rem;
-  }
-  .lead {
-    font-size: 1.15rem;
-    max-width: 62ch;
-    color: var(--text);
-  }
-  .meta {
-    list-style: none;
-    padding: 0;
-    margin: 1.25rem 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .meta li {
-    font-size: 0.9rem;
-    color: var(--muted);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 0.2rem 0.75rem;
-  }
-  .cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 2rem;
-  }
-  .btn {
-    display: inline-block;
-    padding: 0.7rem 1.2rem;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .btn.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--accent-ink);
-  }
-  .section {
-    padding: clamp(2.5rem, 6vw, 4rem) 0;
-    border-top: 1px solid var(--line);
-    scroll-margin-top: 56px;
-  }
-  .sub {
-    color: var(--muted);
-    margin: 0 0 1.5rem;
-    max-width: 62ch;
-  }
-  .cases {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
-    gap: 1.25rem;
-    margin-top: 1.5rem;
-  }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    scroll-margin-top: 72px;
-  }
-  .card p {
-    margin: 0 0 0.75rem;
-  }
-  .tag {
-    font-size: 0.85rem;
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .facts {
-    margin: 0 0 1rem;
-    padding-left: 1.1rem;
-  }
-  .facts li {
-    margin-bottom: 0.35rem;
-  }
-  .stackline {
-    font-size: 0.88rem;
-    color: var(--muted);
-    margin-top: auto !important;
-  }
-  .more {
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .stack {
-    margin: 0;
-  }
-  .stack .row {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 1rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .stack dt {
-    font-weight: 700;
-  }
-  .stack dd {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-  .where {
-    font-size: 0.9rem;
-  }
-  .ai {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 1.25rem;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-    counter-reset: ai;
-  }
-  .ai li {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    counter-increment: ai;
-  }
-  .ai li::before {
-    content: '0' counter(ai);
-    display: block;
-    font-weight: 800;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-  }
-  .ai p {
-    margin: 0;
-  }
-  .contacts {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 0.6rem;
-  }
-  .contacts li {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 1rem;
-  }
-  .label,
-  .muted {
-    color: var(--muted);
-  }
-  .foot {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 2rem 0 3rem;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-  @media (max-width: 640px) {
-    nav a:not(.lang) {
-      display: none;
-    }
-    .stack .row,
-    .contacts li {
-      grid-template-columns: 1fr;
-      gap: 0.25rem;
-    }
-  }
-</style>
