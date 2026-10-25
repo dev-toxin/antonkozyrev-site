@@ -42,10 +42,9 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
 ---
 
 <!doctype html>
-<html lang={t.htmlLang} data-theme="soft">
+<html lang={t.htmlLang}>
   <head>
     <meta charset="utf-8" />
-    <script is:inline>(function(){try{var t=new URLSearchParams(location.search).get('theme');if(t&&/^(soft|magenta|acid|blade)$/.test(t))document.documentElement.dataset.theme=t;}catch(e){}})();</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{t.title}</title>
     <meta name="description" content={t.description} />
@@ -55,7 +54,7 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
     <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#07060f" />
+    <meta name="theme-color" content="#04060d" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={t.title} />
     <meta property="og:description" content={t.description} />
@@ -275,7 +274,7 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
             {links.resume && (
               <li>
                 <span class="label">{t.resumeLabel}</span>
-                <a href={links.resume} rel="noopener">hh.ru ↗</a>
+                <a href={links.resume} target="_blank" rel="noopener">hh.ru ↗</a>
               </li>
             )}
           </ul>

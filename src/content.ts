@@ -11,7 +11,7 @@ export const links = {
   tapreply: 'https://www.tapreply.net',
   email: 'hello@antonkozyrev.dev',
   linkedin: '',
-  resume: '',
+  resume: 'https://kaliningrad.hh.ru/resume/d6422a11ff0994ce8a0039ed1f546d58714a71',
 };
 
 type LinkRef = { href: string; label: string };
