@@ -76,6 +76,7 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
       <div class="wrap bar-inner">
         <a class="logo" href={t.path} aria-label={t.hero.name}><span>AK</span></a>
         <nav aria-label={lang === 'en' ? 'Sections' : 'Разделы'}>
+          <a href="#help" class="hide-s">{t.help.nav}</a>
           <a href="#work">{t.nav.cases}</a>
           <a href="#apps">{t.nav.apps}</a>
           <a href="#ai" class="hide-s">{t.nav.ai}</a>
@@ -106,8 +107,23 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
         <AgentConsole c={t.console} />
       </section>
 
+      <section id="help" class="wrap section">
+        <h2><span class="num">01</span>{t.help.title}</h2>
+        <div class="cases">
+          {
+            t.help.items.map((h) => (
+              <article class="card glow">
+                <h3>{h.title}</h3>
+                <p>{h.text}</p>
+              </article>
+            ))
+          }
+        </div>
+        <p class="sub">{t.help.format} <a href="#contact">{t.hero.ctaSecondary} →</a></p>
+      </section>
+
       <section id="work" class="wrap section">
-        <h2><span class="num">01</span>{t.casesTitle}</h2>
+        <h2><span class="num">02</span>{t.casesTitle}</h2>
         <div class="cases">
           {
             t.cases.map((c) => (
@@ -131,7 +147,7 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
       </section>
 
       <section id="apps" class="wrap section">
-        <h2><span class="num">02</span>{t.appsTitle}</h2>
+        <h2><span class="num">03</span>{t.appsTitle}</h2>
         <p class="sub">{t.appsLead}</p>
         <div class="apps">
           {
@@ -194,7 +210,7 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
       </section>
 
       <section id="ai" class="wrap section">
-        <h2><span class="num">03</span>{t.aiTitle}</h2>
+        <h2><span class="num">04</span>{t.aiTitle}</h2>
         <p class="sub">{t.aiLead}</p>
         <div class="tools" aria-label={t.toolsTitle}>
           <span class="tools-title">{t.toolsTitle}</span>
@@ -218,7 +234,7 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
       </section>
 
       <section id="stack" class="wrap section">
-        <h2><span class="num">04</span>{t.stackTitle}</h2>
+        <h2><span class="num">05</span>{t.stackTitle}</h2>
         <p class="sub">{t.stackLead}</p>
         <dl class="stack">
           {
@@ -244,7 +260,7 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
 
       <section id="contact" class="wrap section">
         <div class="contact glow">
-          <h2><span class="num">05</span>{t.contactTitle}</h2>
+          <h2><span class="num">06</span>{t.contactTitle}</h2>
           <p class="sub">{t.contactLead}</p>
           <a class="btn primary big" href={`mailto:${links.email}`}>{links.email}</a>
           <ul class="contacts">
@@ -256,10 +272,12 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
                 </li>
               ))
             }
-            <li>
-              <span class="label">{t.resumeLabel}</span>
-              {links.resume ? <a href={links.resume}>PDF</a> : <span class="muted">{t.resumeNote}</span>}
-            </li>
+            {links.resume && (
+              <li>
+                <span class="label">{t.resumeLabel}</span>
+                <a href={links.resume} rel="noopener">hh.ru ↗</a>
+              </li>
+            )}
           </ul>
         </div>
       </section>

@@ -1,6 +1,6 @@
 // Site copy. Source of every fact: Anton's notebook (06 Карьера: resume, LinkedIn draft,
 // cover letters, portfolio plan). Do not add numbers or skills that are not there.
-// Empty link = not rendered (linkedin until the profile is ready; resume = "coming soon").
+// Empty link = not rendered (linkedin until the profile is ready; resume = hh.ru URL from Anton).
 
 export type Lang = 'en' | 'ru';
 
@@ -51,6 +51,7 @@ export type Copy = {
   switchTitle: string;
   switchHref: string;
   hero: { name: string; role: string; lead: string; meta: string[]; stats: string[]; ctaPrimary: string; ctaSecondary: string };
+  help: { title: string; nav: string; items: { title: string; text: string }[]; format: string };
   casesTitle: string;
   cases: Case[];
   appsTitle: string;
@@ -69,7 +70,6 @@ export type Copy = {
   contactLead: string;
   contactItems: { label: string; value: string; href: string }[];
   resumeLabel: string;
-  resumeNote: string;
   footer: string;
 };
 
@@ -79,7 +79,7 @@ export const copy: Record<Lang, Copy> = {
     path: '/',
     title: 'Anton Kozyrev — Senior Flutter Developer · Go · LLM integrations',
     description:
-      'Senior Flutter developer (4.5+ years, 10 apps) building Go backends and LLM features in his own products. Open to project and part-time work.',
+      'Senior Flutter developer: 4.5+ years of commercial mobile development, sole mobile developer behind three products. Go backends and LLM features with guardrails. Open to projects and full-time offers.',
     nav: { cases: 'Work', apps: 'Apps', stack: 'Stack', ai: 'AI workflow', contact: 'Contact' },
     switchLabel: 'RU',
     switchTitle: 'Русская версия',
@@ -88,11 +88,22 @@ export const copy: Record<Lang, Copy> = {
       name: 'Anton Kozyrev',
       role: 'Senior Flutter Developer · Go · LLM integrations',
       lead:
-        'Flutter developer with 4.5+ years of commercial mobile development. For the last three years I have been the only mobile developer in a product team: architecture, stack, API contracts, releases. My own products I build end to end — Go backend, web, LLM integration, deployment.',
-      meta: ['Kaliningrad, Russia · Remote', 'Open to project and part-time work', 'Self-employed contracts'],
-      stats: ['4.5+ yrs Flutter', '10 apps shipped', 'Go + LLM'],
+        "Flutter developer with 4.5+ years of commercial mobile development. For the last three years I've been the sole mobile developer behind three products: architecture, stack, API contracts, releases. I build my own products end to end — Go backend, web, LLM integration, deployment.",
+      meta: ['Kaliningrad, Russia · Remote', 'Open to projects and full-time offers'],
+      stats: ['4.5+ yrs Flutter', '10 apps in the stores', '3 products solo'],
       ctaPrimary: 'See the work',
       ctaSecondary: 'Get in touch',
+    },
+    help: {
+      title: 'What I can help with',
+      nav: 'Services',
+      items: [
+        { title: 'Flutter features and releases', text: 'New screens and flows from Figma to the App Store and Google Play: state, API integration, push notifications, crash reporting.' },
+        { title: 'Taking over Flutter code', text: "Picking up someone else's codebase, refactoring legacy code without stopping feature work, covering key logic with tests." },
+        { title: 'Go backend and MVP API', text: 'REST API in Go with PostgreSQL and CI on GitHub Actions — enough to launch a product and validate the idea.' },
+        { title: 'LLM features with guardrails', text: 'Budget limits, fact-checking and fallbacks: the model does not invent data and does not burn the budget.' },
+      ],
+      format: "Part-time project, long-term contract or a full-time role — tell me about the task, and I'll come back with a clear plan and estimate.",
     },
     casesTitle: 'Selected work',
     cases: [
@@ -101,11 +112,11 @@ export const copy: Record<Lang, Copy> = {
         title: 'Commercial mobile apps',
         tag: 'Flutter · 4.5+ years',
         summary:
-          'Platforms for self-employed and external workers: onboarding, documents, deals, payouts and tax receipts. The code is under NDA, so this is what I did rather than the code itself.',
+          'Platforms for working with external contractors: onboarding, documents, deals, payouts and tax receipts. The code is under NDA, so this is what I did rather than the code itself.',
         facts: [
-          '10 mobile apps — from greenfield launches to taking over code from other teams',
-          'Migrated a native Android (Java) app to Flutter with no loss of functionality and shipped it on iOS and Android; now maintaining version 3.x',
-          'Feature-first Clean Architecture with Riverpod, API contracts co-designed with the backend, real-time chat on Socket.IO, FCM push, Crashlytics, Remote Config',
+          '10 mobile apps in the stores — from greenfield launches to taking over code from other teams',
+          'Migrated a native Android (Java) app to Flutter at full feature parity and shipped it on iOS and Android; now maintaining version 3.x',
+          'Feature-first Clean Architecture, Riverpod for state, API contracts co-designed with the backend team, real-time chat on Socket.IO, FCM push, Crashlytics, Remote Config',
           'Key logic covered with unit and integration tests; legacy refactoring without stopping feature work',
         ],
         stack: 'Flutter · Dart · Riverpod · GoRouter · Dio · Socket.IO · Firebase · Drift/SQLite',
@@ -117,10 +128,11 @@ export const copy: Record<Lang, Copy> = {
         summary:
           'A Go pipeline that turns open data into a content site: collect data (NOAA, PRISM) → generate text with an LLM → fact-check with a second model → build a static site.',
         facts: [
-          'Pilot of ~2,100 pages; generation costs about 0.5 RUB per page',
-          'Numbers come from the data, never from the model; a reviewer model checks texts against the facts — 84% of pages pass automatically',
+          'Pilot of ~2,100 pages; generation costs about 0.5 RUB (under one US cent) per page',
+          'Numbers come from the data, never from the model; a second model fact-checks every text',
+          '42 of 50 pages (84%) passed the automated fact check in the pilot run; a rejected page gets one automatic retry, and if it fails again it goes to a manual review queue and is never published',
           'Budget guard: the model is not called if the worst case would exceed the monthly limit',
-          'Models compared on the real task — one was rejected because it did not fit the response limit',
+          'Models compared on the real task — a reasoning model spent the whole token limit on reasoning and returned no answer, so it was rejected',
         ],
         stack: 'Go · Yandex AI Studio (gpt-oss-120b) · Hugo · Cloudflare',
         link: { href: links.sitefarm, label: 'Code: sitefarm-showcase' },
@@ -130,7 +142,7 @@ export const copy: Record<Lang, Copy> = {
         title: 'Terroir — personal wine assistant',
         tag: 'Go · PostgreSQL · PWA · LLM',
         summary:
-          'An assistant with memory: cellar, taste profile, wine matched to your own recipes. Code selects the data, the LLM only phrases the answer.',
+          'An assistant with memory: cellar, taste profile, wine matched to your own recipes. Retrieval-grounded answers: the code picks the data, the model only explains it.',
         facts: [
           'Answers are validated: the model cannot reference a bottle that is not in the cellar',
           'Monthly token budget and a fallback when the LLM fails',
@@ -151,7 +163,7 @@ export const copy: Record<Lang, Copy> = {
       },
     ],
     appsTitle: 'Apps I built',
-    appsLead: 'Published apps I worked on before my current product team — store pages and screenshots are public.',
+    appsLead: "Built in parallel with my main product role — I'm used to running several projects at once: separate repos, clear scopes, every app released to the stores.",
     apps: [
       {
         id: 'zhabby', name: 'Zhabby', years: '2025',
@@ -161,13 +173,13 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         id: 'jobline', name: 'Jobline', years: '2023–2024',
-        what: 'Platform for working with external contractors: self-employed onboarding, documents and receipts, payouts with tax (NPD) withholding.',
+        what: 'Platform for working with external contractors: contractor onboarding, documents and receipts, payouts with tax (NPD) withholding.',
         role: 'Built the mobile app from scratch.',
         links: [{ href: 'https://teleport.run/projects/jobline', label: 'Case study' }, { href: 'https://jobline.one/', label: 'jobline.one' }],
       },
       {
         id: 'qworking', name: 'Q-Working', years: '2023–2024',
-        what: 'Service that finds contractors, handles deals and pays self-employed workers.',
+        what: 'Service that finds contractors, handles deals and pays them.',
         role: 'Built the worker mobile app from scratch: onboarding, profile and services, orders and payouts.',
         links: [{ href: 'https://teleport.run/projects/q-working', label: 'Case study' }],
       },
@@ -194,12 +206,12 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         group: 'Backend',
-        items: 'Go, REST API, PostgreSQL, SQLite, Docker, CI/CD (GitHub Actions)',
+        items: 'Go, REST API, PostgreSQL, SQLite, CI/CD (GitHub Actions)',
         where: [{ href: links.terroir, label: 'terroir-monorepo' }, { href: links.sitefarm, label: 'sitefarm-showcase' }],
       },
       {
         group: 'LLM',
-        items: 'OpenAI-compatible APIs, Yandex AI Studio, fact checking by a second model, budget limits, regression question sets',
+        items: 'OpenAI-compatible APIs, Yandex AI Studio, second-model fact-checking, budget limits, fallbacks',
         where: [{ href: '#sitefarm', label: 'sitefarm' }, { href: '#terroir', label: 'Terroir' }],
       },
       {
@@ -209,7 +221,7 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         group: 'Architecture & quality',
-        items: 'Clean Architecture, feature-first, SOLID, unit and integration tests, legacy code',
+        items: 'Clean Architecture, feature-first, unit and integration tests, legacy code',
         where: [{ href: '#mobile', label: 'Commercial apps' }, { href: links.terroir, label: 'Terroir tests' }],
       },
     ],
@@ -218,11 +230,11 @@ export const copy: Record<Lang, Copy> = {
     ai: [
       {
         title: 'Agent in the IDE, plan first',
-        text: 'My daily driver is an agent in the IDE (Veai in IntelliJ). It reads the project, edits code, runs tests and commands. Plan and decomposition come first, code second; the agent keeps project memory, my own skills and rules. I have also worked with Cursor and GitHub Copilot; Claude Code and OpenAI Codex follow the same agentic workflow — plan → diff → tests — so switching between them is quick.',
+        text: 'My daily driver is Veai (AI coding agent for JetBrains IDEs), in IntelliJ. It reads the project, edits code, runs tests and commands. Plan and decomposition come first, code second; the agent keeps project memory, my own skills and rules. I have also worked with Cursor and GitHub Copilot; Claude Code and OpenAI Codex follow the same agentic workflow — plan → diff → tests — so switching between them is quick.',
       },
       {
-        title: 'Parallel work in git worktrees, review before merge',
-        text: 'Sub-agents work in separate git worktrees — in one session 6 agents rebuilt 5 projects in about 2 hours. Nothing lands without tests, a diff review and a scan of git history for secrets before publishing.',
+        title: 'Parallel agents, review before merge',
+        text: 'One session: 6 agents in parallel, each in its own repo (Astro/Hugo sites, PWA clients, Go backend), ~2 hours of staged work with acceptance criteria. Then I review: tests, builds, commit authorship, secret scan. Within one repo, parallel agents get separate git worktrees. Nothing lands in main without this review.',
       },
       {
         title: 'LLMs inside the product, with guardrails',
@@ -247,21 +259,20 @@ export const copy: Record<Lang, Copy> = {
         { kind: 'file', text: '~ internal/llm/client.go' },
         { kind: 'file', text: '+ internal/llm/budget.go' },
         { kind: 'file', text: '+ internal/llm/budget_test.go' },
-        { kind: 'ask', text: 'Change 3 files. Approve?' },
+        { kind: 'ask', text: '3 files to change. Approve?' },
         { kind: 'ok', text: 'go test ./... — ok' },
         { kind: 'ok', text: 'diff reviewed · secrets scan clean' },
       ],
     },
     contactTitle: 'Contact',
     contactLead:
-      'Open to project work and part-time engagement (up to 20 h/week) alongside my main job. Before development I spent 5 years running city projects and leading a team of 6.',
+      "Tell me about your task — a project, a long-term contract or a full-time role. Before moving into development I spent 5 years running projects and led a department of 6.",
     contactItems: [
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
       { label: 'GitHub', value: 'github.com/dev-toxin', href: links.github },
       ...(links.linkedin ? [{ label: 'LinkedIn', value: links.linkedin, href: links.linkedin }] : []),
     ],
-    resumeLabel: 'Résumé (PDF)',
-    resumeNote: 'coming soon',
+    resumeLabel: 'Résumé on hh.ru',
     footer: 'Anton Kozyrev',
   },
   ru: {
@@ -269,7 +280,7 @@ export const copy: Record<Lang, Copy> = {
     path: '/ru/',
     title: 'Антон Козырев — Senior Flutter Developer · Go · LLM-интеграции',
     description:
-      'Senior Flutter-разработчик (4,5+ года, 10 приложений), в своих продуктах — Go-бэкенд и LLM-фичи. Открыт к проектной работе и частичной занятости.',
+      'Senior Flutter-разработчик: 4,5+\u00A0года коммерческой мобильной разработки, единственный мобильный разработчик трёх продуктов. Go-бэкенд и LLM-фичи с ограничителями. Открыт к проектам и предложениям о работе.',
     nav: { cases: 'Проекты', apps: 'Приложения', stack: 'Стек', ai: 'Работа с AI', contact: 'Контакты' },
     switchLabel: 'EN',
     switchTitle: 'English version',
@@ -278,11 +289,22 @@ export const copy: Record<Lang, Copy> = {
       name: 'Антон Козырев',
       role: 'Senior Flutter Developer · Go · LLM-интеграции',
       lead:
-        'Flutter-разработчик с 4,5+ годами коммерческого опыта в мобильной разработке. Последние три года — единственный мобильный разработчик в продуктовой команде: архитектура, стек, API-контракты, релизы. Свои продукты делаю целиком: Go-бэкенд, веб, LLM-интеграции, деплой.',
-      meta: ['Калининград · удалённо', 'Открыт к проектной работе и подработке', 'Самозанятый'],
-      stats: ['4,5+ года во Flutter', '10 приложений в сторах', 'Go + LLM'],
+        'Flutter-разработчик, 4,5+\u00A0года коммерческой мобильной разработки. Последние три года — единственный мобильный разработчик трёх продуктов: архитектура, стек, API-контракты, релизы. Свои продукты делаю целиком: Go-бэкенд, веб, LLM-интеграции, деплой.',
+      meta: ['Калининград · удалённо', 'Открыт к проектам и предложениям о работе'],
+      stats: ['4,5+\u00A0года Flutter', '10\u00A0приложений в сторах', '3\u00A0продукта в одиночку'],
       ctaPrimary: 'Смотреть проекты',
       ctaSecondary: 'Связаться',
+    },
+    help: {
+      title: 'С чем могу помочь',
+      nav: 'Услуги',
+      items: [
+        { title: 'Фичи и релизы на Flutter', text: 'Новые экраны и сценарии от макета в Figma до App Store и Google Play: состояние, интеграция с API, push-уведомления, отчёты о сбоях.' },
+        { title: 'Подхват чужого Flutter-кода', text: 'Разберусь в чужой кодовой базе, проведу рефакторинг легаси-кода без остановки разработки, покрою ключевую логику тестами.' },
+        { title: 'Go-бэкенд и MVP API', text: 'REST API на Go с PostgreSQL и CI на GitHub Actions — достаточно, чтобы запустить продукт и проверить идею.' },
+        { title: 'LLM-фичи с ограничителями', text: 'Лимит бюджета, проверка фактов и запасной сценарий: модель не выдумывает данные и не сжигает бюджет.' },
+      ],
+      format: 'Проект, долгий контракт или работа в штат — расскажите о задаче, а я вернусь с понятным планом и оценкой.',
     },
     casesTitle: 'Проекты',
     cases: [
@@ -291,12 +313,12 @@ export const copy: Record<Lang, Copy> = {
         title: 'Коммерческие мобильные приложения',
         tag: 'Flutter · 4,5+ года',
         summary:
-          'Платформы для самозанятых и внешних исполнителей: регистрация, документы, сделки, выплаты, налоговые чеки. Код под NDA, поэтому здесь — что я делал, а не сам код.',
+          'Платформы для работы с внешними исполнителями: регистрация, документы, сделки, выплаты, налоговые чеки. Код под NDA, поэтому здесь — что я делал, а не сам код.',
         facts: [
-          '10 мобильных приложений — от запуска с нуля до доработки после других команд',
+          '10\u00A0мобильных приложений в сторах — от запуска с нуля до доработки после других команд',
           'Перенёс нативное Android-приложение (Java) на Flutter без потери функциональности и выпустил на iOS и Android; сейчас веду версию 3.x',
-          'Feature-first и Clean Architecture на Riverpod, API-контракты вместе с backend, realtime-чат на Socket.IO, push (FCM), Crashlytics, Remote Config',
-          'Ключевая логика покрыта unit- и integration-тестами; рефакторинг legacy без остановки разработки',
+          'Feature-first и Clean Architecture, состояние на Riverpod, API-контракты вместе с бэкендом, чат в реальном времени на Socket.IO, push (FCM), Crashlytics, Remote Config',
+          'Ключевая логика покрыта unit- и integration-тестами; рефакторинг легаси-кода без остановки разработки',
         ],
         stack: 'Flutter · Dart · Riverpod · GoRouter · Dio · Socket.IO · Firebase · Drift/SQLite',
       },
@@ -307,10 +329,11 @@ export const copy: Record<Lang, Copy> = {
         summary:
           'Go-конвейер, который превращает открытые данные в контентный сайт: сбор данных (NOAA, PRISM) → генерация текстов через LLM → проверка фактов второй моделью → сборка статического сайта.',
         facts: [
-          'Пилот — около 2 100 страниц, генерация стоит примерно 0,5 ₽ за страницу',
-          'Числа берутся только из данных, а не от модели; проверяющая модель сверяет тексты с фактами — 84% страниц проходят автоматически',
+          'Пилот — около 2\u00A0100 страниц, генерация стоит примерно 0,5\u00A0₽ за страницу',
+          'Числа берутся только из данных, а не от модели; вторая модель сверяет каждый текст с фактами',
+          '42 из 50 страниц (84%) прошли автоматическую проверку фактов в пилоте; отклонённая страница получает один автоповтор, а при повторном отказе уходит в ручную очередь и не публикуется',
           'Защита бюджета: модель не вызывается, если худший сценарий выходит за месячный лимит',
-          'Модели сравнивал на своей задаче — одну отбраковал, потому что она не укладывалась в лимит ответа',
+          'Модели сравнивал на своей задаче — рассуждающая модель потратила весь лимит токенов на рассуждения и не вернула ответа, поэтому отбракована',
         ],
         stack: 'Go · Yandex AI Studio (gpt-oss-120b) · Hugo · Cloudflare',
         link: { href: links.sitefarm, label: 'Код: sitefarm-showcase' },
@@ -320,10 +343,10 @@ export const copy: Record<Lang, Copy> = {
         title: 'Terroir — персональный винный помощник',
         tag: 'Go · PostgreSQL · PWA · LLM',
         summary:
-          'Помощник с памятью: погреб, вкусовой профиль, подбор вина к своим рецептам. Данные подбирает код, LLM только формулирует ответ.',
+          'Помощник с памятью: погреб, вкусовой профиль, подбор вина к своим рецептам. Ответы с опорой на данные: данные подбирает код, модель только объясняет.',
         facts: [
           'Ответ проверяется: модель не может сослаться на бутылку, которой нет в погребе',
-          'Месячный бюджет на токены и fallback при сбое LLM',
+          'Месячный бюджет на токены и запасной сценарий при сбое LLM',
           '90+ тестов, CI на GitHub Actions',
         ],
         stack: 'Go · PostgreSQL/SQLite · PWA · OpenAI-совместимый клиент LLM',
@@ -341,7 +364,7 @@ export const copy: Record<Lang, Copy> = {
       },
     ],
     appsTitle: 'Приложения, которые я делал',
-    appsLead: 'Опубликованные приложения до нынешней продуктовой команды — страницы в сторах и скриншоты публичные.',
+    appsLead: 'Сделаны параллельно с основной продуктовой ролью — привык вести несколько проектов одновременно: отдельные репозитории, понятные границы задач, каждое приложение дошло до стора.',
     apps: [
       {
         id: 'zhabby', name: 'Zhabby', years: '2025',
@@ -351,14 +374,14 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         id: 'jobline', name: 'Jobline', years: '2023–2024',
-        what: 'Платформа для работы с внешними исполнителями: регистрация самозанятых, документы и чеки по сделкам, выплаты с уплатой НПД.',
+        what: 'Платформа для работы с внешними исполнителями: регистрация исполнителей, документы и чеки по сделкам, выплаты с уплатой НПД.',
         role: 'Мобильное приложение с нуля.',
         links: [{ href: 'https://teleport.run/projects/jobline', label: 'Кейс' }, { href: 'https://jobline.one/', label: 'jobline.one' }],
       },
       {
         id: 'qworking', name: 'Q-Working', years: '2023–2024',
-        what: 'Сервис для поиска исполнителей, заключения сделок и выплат самозанятым.',
-        role: 'Мобильное приложение исполнителя с нуля: регистрация, профиль и услуги, заказы и вознаграждения.',
+        what: 'Сервис для поиска исполнителей, заключения сделок и выплат исполнителям.',
+        role: 'Мобильное приложение исполнителя с нуля: регистрация, профиль и услуги, заказы и выплаты.',
         links: [{ href: 'https://teleport.run/projects/q-working', label: 'Кейс' }],
       },
       {
@@ -369,7 +392,7 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         id: 'greenfeed', name: 'GreenFeed', years: '2022–2023',
-        what: 'Каталог кормовой продукции и расчёт рациона питания животных для фермеров.',
+        what: 'Каталог кормовой продукции и расчёт рациона для животных для фермеров.',
         role: 'Второй разработчик: вёрстка по Figma, состояние приложения, интеграция с REST API, исправление ошибок и доработки.',
         links: [{ href: 'https://apps.apple.com/ru/app/greenfeed/id6453763960', label: 'App Store' }],
       },
@@ -384,12 +407,12 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         group: 'Бэкенд',
-        items: 'Go, REST API, PostgreSQL, SQLite, Docker, CI/CD (GitHub Actions)',
+        items: 'Go, REST API, PostgreSQL, SQLite, CI/CD (GitHub Actions)',
         where: [{ href: links.terroir, label: 'terroir-monorepo' }, { href: links.sitefarm, label: 'sitefarm-showcase' }],
       },
       {
         group: 'LLM',
-        items: 'OpenAI-совместимые API, Yandex AI Studio, проверка фактов второй моделью, лимиты бюджета, эталонные вопросы для регрессии',
+        items: 'OpenAI-совместимые API, Yandex AI Studio, проверка фактов второй моделью, лимиты бюджета, запасные сценарии',
         where: [{ href: '#sitefarm', label: 'sitefarm' }, { href: '#terroir', label: 'Terroir' }],
       },
       {
@@ -399,7 +422,7 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         group: 'Архитектура и качество',
-        items: 'Clean Architecture, feature-first, SOLID, unit- и integration-тесты, legacy-код',
+        items: 'Clean Architecture, feature-first, unit- и integration-тесты, легаси-код',
         where: [{ href: '#mobile', label: 'Коммерческие приложения' }, { href: links.terroir, label: 'тесты Terroir' }],
       },
     ],
@@ -408,11 +431,11 @@ export const copy: Record<Lang, Copy> = {
     ai: [
       {
         title: 'Агент в IDE, сначала план',
-        text: 'Основной ежедневный инструмент — агент в IDE (Veai в IntelliJ). Он читает проект, правит код, запускает тесты и команды. Сначала план и декомпозиция, потом код; у агента память о проекте, мои skills и правила. Работал также с Cursor и GitHub Copilot; Claude Code и OpenAI Codex устроены по тому же агентному циклу — план → дифф → тесты, — так что переключаюсь между ними без проблем.',
+        text: 'Основной ежедневный инструмент — Veai (AI-агент для IDE JetBrains), в IntelliJ. Он читает проект, правит код, запускает тесты и команды. Сначала план и декомпозиция, потом код; у агента память о проекте, мои навыки (skills) и правила. Работал также с Cursor и GitHub Copilot; Claude Code и OpenAI Codex устроены по тому же агентному циклу — план → дифф → тесты, — так что переключаюсь между ними без проблем.',
       },
       {
-        title: 'Параллельная работа в git worktree, ревью до слияния',
-        text: 'Субагенты работают в отдельных git worktree — в одной сессии 6 агентов пересобрали 5 проектов примерно за 2 часа. Без тестов, ревью диффа и проверки истории git на секреты перед публикацией ничего не попадает в main.',
+        title: 'Параллельные агенты, ревью до слияния',
+        text: 'За одну сессию — 6\u00A0агентов параллельно, каждый в своём репозитории (сайты на Astro/Hugo, PWA-клиенты, Go-бэкенд), около 2\u00A0часов работы по этапам с критериями готовности. Потом проверяю сам: тесты, сборки, авторство коммитов, поиск секретов. Внутри одного репозитория параллельные агенты получают отдельные git worktree. Без этой проверки в main ничего не попадает.',
       },
       {
         title: 'LLM внутри продукта — с ограничителями',
@@ -437,21 +460,20 @@ export const copy: Record<Lang, Copy> = {
         { kind: 'file', text: '~ internal/llm/client.go' },
         { kind: 'file', text: '+ internal/llm/budget.go' },
         { kind: 'file', text: '+ internal/llm/budget_test.go' },
-        { kind: 'ask', text: 'Изменю 3 файла. Подтверждаешь?' },
+        { kind: 'ask', text: '3 файла к изменению. Подтверждаешь?' },
         { kind: 'ok', text: 'go test ./... — ok' },
         { kind: 'ok', text: 'дифф проверен · секретов нет' },
       ],
     },
     contactTitle: 'Контакты',
     contactLead:
-      'Открыт к проектной работе и частичной занятости (до 20 ч/нед) параллельно с основной работой. До разработки 5 лет вёл городские проекты и руководил отделом из 6 человек.',
+      'Расскажите о задаче — проект, долгий контракт или работа в штат. До разработки 5\u00A0лет вёл проекты и руководил отделом из 6\u00A0человек.',
     contactItems: [
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
       { label: 'GitHub', value: 'github.com/dev-toxin', href: links.github },
       ...(links.linkedin ? [{ label: 'LinkedIn', value: links.linkedin, href: links.linkedin }] : []),
     ],
-    resumeLabel: 'Резюме (PDF)',
-    resumeNote: 'скоро',
+    resumeLabel: 'Резюме на hh.ru',
     footer: 'Антон Козырев',
   },
 };
