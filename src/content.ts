@@ -28,7 +28,7 @@ type Case = {
 
 type StackGroup = { group: string; items: string; where: LinkRef[] };
 
-export type AppId = 'zhabby' | 'jobline' | 'qworking' | 'mealhub' | 'greenfeed';
+export type AppId = 'gsr' | 'lk' | 'zhabby' | 'jobline' | 'qworking' | 'mealhub' | 'greenfeed';
 
 type App = {
   id: AppId;
@@ -37,6 +37,7 @@ type App = {
   what: string;
   role: string;
   links: LinkRef[];
+  badge?: string;
 };
 
 type ConsoleLine = { kind: 'cmd' | 'plan' | 'file' | 'ask' | 'ok'; text: string };
@@ -112,14 +113,16 @@ export const copy: Record<Lang, Copy> = {
         title: 'Commercial mobile apps',
         tag: 'Flutter · 4.5+ years',
         summary:
-          'Platforms for working with external contractors: onboarding, documents, deals, payouts and tax receipts. The code is under NDA, so this is what I did rather than the code itself.',
+          'Apps for contractors of a staffing service — GSR Rabota and Contractor Account (Личный кабинет исполнителя): onboarding, documents with SMS signing, shift booking, payouts and tax receipts. Sole mobile developer in the product team; the code is under NDA, the apps are in the stores — see Apps below.',
         facts: [
           '10 mobile apps in the stores — from greenfield launches to taking over code from other teams',
-          'Migrated a native Android (Java) app to Flutter at full feature parity and shipped it on iOS and Android; now maintaining version 3.x',
+          'GSR Rabota — built from scratch: architecture, stack, API contracts with the backend, releases',
+          'Contractor Account — migrated from native Android (Java) to Flutter at full feature parity, shipped on iOS and Android, new design; now maintaining version 3.x',
           'Feature-first Clean Architecture, Riverpod for state, API contracts co-designed with the backend team, real-time chat on Socket.IO, FCM push, Crashlytics, Remote Config',
           'Key logic covered with unit and integration tests; legacy refactoring without stopping feature work',
         ],
-        stack: 'Flutter · Dart · Riverpod · GoRouter · Dio · Socket.IO · Firebase · Drift/SQLite',
+        stack: 'Flutter · Dart · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite',
+        link: { href: '#apps', label: 'Apps and screenshots' },
       },
       {
         id: 'sitefarm',
@@ -163,8 +166,20 @@ export const copy: Record<Lang, Copy> = {
       },
     ],
     appsTitle: 'Apps I built',
-    appsLead: "Built in parallel with my main product role — I'm used to running several projects at once: separate repos, clear scopes, every app released to the stores.",
+    appsLead: "The first two are my current role. The rest were built in parallel with it — I'm used to running several projects at once: separate repos, clear scopes, every app released to the stores.",
     apps: [
+      {
+        id: 'gsr', name: 'GSR Rabota', years: '2026', badge: 'Current role',
+        what: 'New app for contractors of a staffing service: sign-up and documents, SMS signing, finding tasks and booking shifts, wallet and payouts, tax receipts for the self-employed, real-time support chat.',
+        role: 'Sole mobile developer, built from scratch: feature-first Clean Architecture on Riverpod, choice of stack, API contracts with the backend, releases. Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite.',
+        links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }],
+      },
+      {
+        id: 'lk', name: 'Contractor Account (Личный кабинет исполнителя)', years: '2025 — now', badge: 'Current role',
+        what: 'Contractor app of the same service: shift self-booking, documents with e-signing and receipts, profile and bank cards.',
+        role: 'Migrated the native Android (Java) app to Flutter, shipped it on iOS and Android with a new design; maintaining and developing it — major version 3.x, moving the architecture to Riverpod.',
+        links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }],
+      },
       {
         id: 'zhabby', name: 'Zhabby', years: '2025',
         what: 'Short-video social network that rewards activity: personal feed, video upload, points for views, likes and comments, rewards exchange.',
@@ -313,14 +328,16 @@ export const copy: Record<Lang, Copy> = {
         title: 'Коммерческие мобильные приложения',
         tag: 'Flutter · 4,5+ года',
         summary:
-          'Платформы для работы с внешними исполнителями: регистрация, документы, сделки, выплаты, налоговые чеки. Код под NDA, поэтому здесь — что я делал, а не сам код.',
+          'Приложения для исполнителей сервиса подбора персонала — GSR Работа и Личный кабинет исполнителя: регистрация, документы с подписью по SMS, запись на смены, выплаты, налоговые чеки. Единственный мобильный разработчик в продуктовой команде; код под NDA, приложения — в сторах, см. блок «Приложения» ниже.',
         facts: [
           '10\u00A0мобильных приложений в сторах — от запуска с нуля до доработки после других команд',
-          'Перенёс нативное Android-приложение (Java) на Flutter без потери функциональности и выпустил на iOS и Android; сейчас веду версию 3.x',
+          'GSR Работа — с нуля: архитектура, стек, API-контракты с бэкендом, релизы',
+          'Личный кабинет исполнителя — перенёс с нативного Android (Java) на Flutter без потери функциональности, выпустил на iOS и Android с новым дизайном; сейчас веду версию 3.x',
           'Feature-first и Clean Architecture, состояние на Riverpod, API-контракты вместе с бэкендом, чат в реальном времени на Socket.IO, push (FCM), Crashlytics, Remote Config',
           'Ключевая логика покрыта unit- и integration-тестами; рефакторинг легаси-кода без остановки разработки',
         ],
-        stack: 'Flutter · Dart · Riverpod · GoRouter · Dio · Socket.IO · Firebase · Drift/SQLite',
+        stack: 'Flutter · Dart · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite',
+        link: { href: '#apps', label: 'Приложения и скриншоты' },
       },
       {
         id: 'sitefarm',
@@ -364,8 +381,20 @@ export const copy: Record<Lang, Copy> = {
       },
     ],
     appsTitle: 'Приложения, которые я делал',
-    appsLead: 'Сделаны параллельно с основной продуктовой ролью — привык вести несколько проектов одновременно: отдельные репозитории, понятные границы задач, каждое приложение дошло до стора.',
+    appsLead: 'Первые два — моя текущая роль, остальные сделаны параллельно с ней: привык вести несколько проектов одновременно — отдельные репозитории, понятные границы задач, каждое приложение дошло до стора.',
     apps: [
+      {
+        id: 'gsr', name: 'GSR Работа', years: '2026', badge: 'Текущая роль',
+        what: 'Новое приложение для исполнителей сервиса подбора персонала: регистрация и документы, подписание по SMS, поиск заданий и запись на смены, кошелёк и выплаты, налоговые чеки самозанятых, чат с поддержкой в реальном времени.',
+        role: 'Единственный мобильный разработчик, с нуля: архитектура feature-first и Clean Architecture на Riverpod, выбор стека, API-контракты с бэкендом, релизы. Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite.',
+        links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }],
+      },
+      {
+        id: 'lk', name: 'Личный кабинет исполнителя', years: '2025 — н.\u00A0в.', badge: 'Текущая роль',
+        what: 'Приложение исполнителя того же сервиса: самозапись на смены, документы с электронной подписью и чеки, профиль и банковские карты.',
+        role: 'Перенёс нативное Android-приложение (Java) на Flutter, выпустил на iOS и Android с новым дизайном; развиваю и поддерживаю — мажорная версия 3.x, перевожу архитектуру на Riverpod.',
+        links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }],
+      },
       {
         id: 'zhabby', name: 'Zhabby', years: '2025',
         what: 'Социальная сеть коротких видео с вознаграждением за активность: персональная лента, загрузка видео, баллы за просмотры, лайки и комментарии, обмен баллов на награды.',

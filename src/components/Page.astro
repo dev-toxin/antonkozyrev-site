@@ -16,12 +16,20 @@ import mealhub2 from '../assets/apps/mealhub-2.jpg';
 import greenfeedIcon from '../assets/apps/greenfeed-icon.png';
 import greenfeed1 from '../assets/apps/greenfeed-1.jpg';
 import greenfeed2 from '../assets/apps/greenfeed-2.jpg';
+import gsrIcon from '../assets/apps/gsr-icon.png';
+import gsr1 from '../assets/apps/gsr-1.jpg';
+import gsr2 from '../assets/apps/gsr-2.jpg';
+import lkIcon from '../assets/apps/lk-icon.png';
+import lk1 from '../assets/apps/lk-1.jpg';
+import lk2 from '../assets/apps/lk-2.jpg';
 
 interface Props {
   lang: Lang;
 }
 
 const media: Record<AppId, { icon?: ImageMetadata; phones: ImageMetadata[] }> = {
+  gsr: { icon: gsrIcon, phones: [gsr1, gsr2] },
+  lk: { icon: lkIcon, phones: [lk1, lk2] },
   zhabby: { icon: zhabbyIcon, phones: [zhabby1, zhabby2] },
   jobline: { phones: [] },
   qworking: { phones: [] },
@@ -170,7 +178,7 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
                       )}
                       <div>
                         <h3>{a.name}</h3>
-                        <p class="years">{a.years} · Flutter</p>
+                        <p class="years">{a.years} · Flutter{a.badge && <span class="badge">{a.badge}</span>}</p>
                       </div>
                     </div>
                     <p>{a.what}</p>

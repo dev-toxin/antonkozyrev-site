@@ -143,6 +143,7 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; a
 .icon.mono { display: grid; place-items: center; flex: none; background: var(--grad); font: 700 1.3rem var(--f-head); color: var(--on-grad); }
 .app h3 { font-size: 1.1rem; font-weight: 600; }
 .years { margin: .1rem 0 0; font: .78rem var(--f-mono); color: var(--muted); }
+.badge { display: inline-block; margin-left: .5rem; padding: .05rem .45rem; border: 1px solid rgba(var(--acid-rgb), .55); border-radius: 3px; color: var(--acid); font: 600 .68rem var(--f-mono); text-transform: uppercase; letter-spacing: .04em; vertical-align: 1px; }
 .app p { margin: 0 0 .7rem; color: var(--text2); font-size: .95rem; }
 .app .role { color: var(--muted); }
 .app-links { margin-top: auto !important; display: flex; gap: .5rem; flex-wrap: wrap; }
