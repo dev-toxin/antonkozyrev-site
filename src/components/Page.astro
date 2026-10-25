@@ -51,6 +51,25 @@ const ogImage = new URL('/og.png', site).href;
 const isExternal = (href: string) => href.startsWith('http');
 const appsShots = t.apps.filter((a) => media[a.id].phones.length > 0);
 const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': new URL('/#person', site).href,
+  name: t.hero.name,
+  alternateName: lang === 'en' ? 'Антон Козырев' : 'Anton Kozyrev',
+  jobTitle: 'Senior Flutter Developer',
+  url: canonical,
+  image: ogImage,
+  email: `mailto:${links.email}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: lang === 'en' ? 'Kaliningrad' : 'Калининград',
+    addressCountry: 'RU',
+  },
+  sameAs: [links.github, links.telegram, links.resume].filter(Boolean),
+  knowsAbout: ['Flutter', 'Dart', 'Riverpod', 'Go', 'PostgreSQL', 'REST API', 'LLM integration'],
+  knowsLanguage: ['ru', 'en'],
+};
 ---
 
 <!doctype html>
@@ -79,6 +98,7 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
     <meta name="twitter:title" content={t.title} />
     <meta name="twitter:description" content={t.description} />
     <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
   </head>
   <body id="top">
     <a class="skip" href="#main">{lang === 'en' ? 'Skip to content' : 'К содержанию'}</a>

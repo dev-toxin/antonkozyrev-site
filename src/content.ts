@@ -11,6 +11,7 @@ export const links = {
   tapreply: 'https://www.tapreply.net',
   terroirSite: 'https://www.terroir-app.com',
   email: 'hello@antonkozyrev.dev',
+  telegram: 'https://t.me/tokc_a',
   linkedin: '',
   resume: 'https://kaliningrad.hh.ru/resume/d6422a11ff0994ce8a0039ed1f546d58714a71',
 };
@@ -290,6 +291,7 @@ export const copy: Record<Lang, Copy> = {
       "Tell me about your task — a project, a long-term contract or a full-time role. Before moving into development I spent 5 years running projects and led a department of 6.",
     contactItems: [
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
+      { label: 'Telegram', value: '@tokc_a', href: links.telegram },
       { label: 'GitHub', value: 'github.com/dev-toxin', href: links.github },
       ...(links.linkedin ? [{ label: 'LinkedIn', value: links.linkedin, href: links.linkedin }] : []),
     ],
@@ -508,6 +510,7 @@ export const copy: Record<Lang, Copy> = {
       'Расскажите о задаче — проект, долгий контракт или работа в штат. До разработки 5\u00A0лет вёл проекты и руководил отделом из 6\u00A0человек.',
     contactItems: [
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
+      { label: 'Telegram', value: '@tokc_a', href: links.telegram },
       { label: 'GitHub', value: 'github.com/dev-toxin', href: links.github },
       ...(links.linkedin ? [{ label: 'LinkedIn', value: links.linkedin, href: links.linkedin }] : []),
     ],
