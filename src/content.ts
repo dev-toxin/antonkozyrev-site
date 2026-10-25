@@ -175,7 +175,7 @@ export const copy: Record<Lang, Copy> = {
         links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }],
       },
       {
-        id: 'lk', name: 'Contractor Account (Личный кабинет исполнителя)', years: '2025 — now', badge: 'Current role',
+        id: 'lk', name: 'Contractor Account (Личный кабинет исполнителя)', years: '2025', badge: 'Current role',
         what: 'Contractor app of the same service: shift self-booking, documents with e-signing and receipts, profile and bank cards.',
         role: 'Migrated the native Android (Java) app to Flutter, shipped it on iOS and Android with a new design; maintaining and developing it — major version 3.x, moving the architecture to Riverpod.',
         links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }],
@@ -390,7 +390,7 @@ export const copy: Record<Lang, Copy> = {
         links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }],
       },
       {
-        id: 'lk', name: 'Личный кабинет исполнителя', years: '2025 — н.\u00A0в.', badge: 'Текущая роль',
+        id: 'lk', name: 'Личный кабинет исполнителя', years: '2025', badge: 'Текущая роль',
         what: 'Приложение исполнителя того же сервиса: самозапись на смены, документы с электронной подписью и чеки, профиль и банковские карты.',
         role: 'Перенёс нативное Android-приложение (Java) на Flutter, выпустил на iOS и Android с новым дизайном; развиваю и поддерживаю — мажорная версия 3.x, перевожу архитектуру на Riverpod.',
         links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }],
