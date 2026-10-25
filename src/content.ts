@@ -9,6 +9,7 @@ export const links = {
   terroir: 'https://github.com/dev-toxin/terroir-monorepo',
   sitefarm: 'https://github.com/dev-toxin/sitefarm-showcase',
   tapreply: 'https://www.tapreply.net',
+  terroirSite: 'https://www.terroir-app.com',
   email: 'hello@antonkozyrev.dev',
   linkedin: '',
   resume: 'https://kaliningrad.hh.ru/resume/d6422a11ff0994ce8a0039ed1f546d58714a71',
@@ -24,6 +25,8 @@ type Case = {
   facts: string[];
   stack: string;
   link?: LinkRef;
+  live?: LinkRef;
+  shot?: 'tapreply' | 'terroir';
 };
 
 type StackGroup = { group: string; items: string; where: LinkRef[] };
@@ -151,8 +154,10 @@ export const copy: Record<Lang, Copy> = {
           'Monthly token budget and a fallback when the LLM fails',
           '90+ tests, CI on GitHub Actions',
         ],
-        stack: 'Go · PostgreSQL/SQLite · PWA · OpenAI-compatible LLM client',
+        stack: 'Go · PostgreSQL/SQLite · PWA · OpenAI-compatible LLM client · site: Astro, EN/RU',
         link: { href: links.terroir, label: 'Code: terroir-monorepo' },
+        live: { href: links.terroirSite, label: 'Live site ↗' },
+        shot: 'terroir',
       },
       {
         id: 'tapreply',
@@ -161,8 +166,9 @@ export const copy: Record<Lang, Copy> = {
         summary:
           'AI replies to reviews from several platforms for venues, in local languages. A Go core with platform adapters: a new review platform is a new adapter, not a rewrite.',
         facts: ['Go core + platform adapters', 'Flutter / PWA client', 'PostgreSQL'],
-        stack: 'Go · Flutter · PWA · PostgreSQL',
-        link: { href: links.tapreply, label: 'tapreply.net' },
+        stack: 'Go · Flutter · PWA · PostgreSQL · site: Astro, EN/RU',
+        live: { href: links.tapreply, label: 'Live site ↗' },
+        shot: 'tapreply',
       },
     ],
     appsTitle: 'Apps I built',
@@ -366,8 +372,10 @@ export const copy: Record<Lang, Copy> = {
           'Месячный бюджет на токены и запасной сценарий при сбое LLM',
           '90+ тестов, CI на GitHub Actions',
         ],
-        stack: 'Go · PostgreSQL/SQLite · PWA · OpenAI-совместимый клиент LLM',
+        stack: 'Go · PostgreSQL/SQLite · PWA · OpenAI-совместимый клиент LLM · сайт: Astro, EN/RU',
         link: { href: links.terroir, label: 'Код: terroir-monorepo' },
+        live: { href: links.terroirSite, label: 'Сайт ↗' },
+        shot: 'terroir',
       },
       {
         id: 'tapreply',
@@ -376,8 +384,9 @@ export const copy: Record<Lang, Copy> = {
         summary:
           'AI-ответы на отзывы с нескольких площадок для заведений на локальных языках. Ядро на Go с адаптерами площадок: новая площадка — это новый адаптер, а не переписывание.',
         facts: ['Ядро на Go + адаптеры площадок', 'Клиент на Flutter / PWA', 'PostgreSQL'],
-        stack: 'Go · Flutter · PWA · PostgreSQL',
-        link: { href: links.tapreply, label: 'tapreply.net' },
+        stack: 'Go · Flutter · PWA · PostgreSQL · сайт: Astro, EN/RU',
+        live: { href: links.tapreply, label: 'Сайт ↗' },
+        shot: 'tapreply',
       },
     ],
     appsTitle: 'Приложения, которые я делал',

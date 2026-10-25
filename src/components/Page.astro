@@ -22,6 +22,10 @@ import gsr2 from '../assets/apps/gsr-2.jpg';
 import lkIcon from '../assets/apps/lk-icon.png';
 import lk1 from '../assets/apps/lk-1.jpg';
 import lk2 from '../assets/apps/lk-2.jpg';
+import tapreplyHome from '../assets/sites/tapreply-home.png';
+import terroirHome from '../assets/sites/terroir-home.png';
+
+const siteShots = { tapreply: tapreplyHome, terroir: terroirHome };
 
 interface Props {
   lang: Lang;
@@ -134,19 +138,35 @@ const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
         <div class="cases">
           {
             t.cases.map((c) => (
-              <article class="card glow" id={c.id}>
+              <article class="card glow case" id={c.id}>
                 <p class="tag">{c.tag}</p>
                 <h3>{c.title}</h3>
-                <p>{c.summary}</p>
+                <p class="summary">{c.summary}</p>
                 <ul class="facts">
                   {c.facts.map((f) => <li>{f}</li>)}
                 </ul>
                 <p class="stackline">{c.stack}</p>
-                {c.link && (
-                  <a class="more" href={c.link.href} rel="noopener">
-                    {c.link.label} →
-                  </a>
-                )}
+                <div class="case-media">
+                  {c.shot && c.live && (
+                    <a class="browser" href={c.live.href} target="_blank" rel="noopener" aria-label={c.live.label}>
+                      <span class="browser-bar" aria-hidden="true">
+                        <i></i><i></i><i></i>
+                        <span class="browser-url">{c.live.href.replace('https://', '')}</span>
+                      </span>
+                      <Image src={siteShots[c.shot]} alt={c.title} widths={[480, 720, 960]} sizes="(max-width: 900px) 92vw, 560px" loading="lazy" format="webp" />
+                    </a>
+                  )}
+                </div>
+                <div class="case-links">
+                  {c.live && (
+                    <a class="chip" href={c.live.href} target="_blank" rel="noopener">{c.live.label}</a>
+                  )}
+                  {c.link && (
+                    <a class="more" href={c.link.href} rel="noopener">
+                      {c.link.label} →
+                    </a>
+                  )}
+                </div>
               </article>
             ))
           }
