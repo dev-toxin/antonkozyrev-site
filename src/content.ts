@@ -50,7 +50,7 @@ export type Copy = {
   switchLabel: string;
   switchTitle: string;
   switchHref: string;
-  hero: { name: string; role: string; lead: string; meta: string[]; ctaPrimary: string; ctaSecondary: string };
+  hero: { name: string; role: string; lead: string; meta: string[]; stats: string[]; ctaPrimary: string; ctaSecondary: string };
   casesTitle: string;
   cases: Case[];
   appsTitle: string;
@@ -88,8 +88,9 @@ export const copy: Record<Lang, Copy> = {
       name: 'Anton Kozyrev',
       role: 'Senior Flutter Developer · Go · LLM integrations',
       lead:
-        'Flutter developer with 4.5+ years of commercial experience and 10 mobile apps behind me. For the last three years I have been the only mobile developer in a product team: architecture, stack, API contracts, releases. My own products I build end to end — Go backend, web, LLM integration, deployment.',
+        'Flutter developer with 4.5+ years of commercial mobile development. For the last three years I have been the only mobile developer in a product team: architecture, stack, API contracts, releases. My own products I build end to end — Go backend, web, LLM integration, deployment.',
       meta: ['Kaliningrad, Russia · Remote', 'Open to project and part-time work', 'Self-employed contracts'],
+      stats: ['4.5+ yrs Flutter', '10 apps shipped', 'Go + LLM'],
       ctaPrimary: 'See the work',
       ctaSecondary: 'Get in touch',
     },
@@ -277,8 +278,9 @@ export const copy: Record<Lang, Copy> = {
       name: 'Антон Козырев',
       role: 'Senior Flutter Developer · Go · LLM-интеграции',
       lead:
-        'Flutter-разработчик с 4,5+ годами коммерческого опыта и 10 мобильными приложениями. Последние три года — единственный мобильный разработчик в продуктовой команде: архитектура, стек, API-контракты, релизы. Свои продукты делаю целиком: Go-бэкенд, веб, LLM-интеграции, деплой.',
+        'Flutter-разработчик с 4,5+ годами коммерческого опыта в мобильной разработке. Последние три года — единственный мобильный разработчик в продуктовой команде: архитектура, стек, API-контракты, релизы. Свои продукты делаю целиком: Go-бэкенд, веб, LLM-интеграции, деплой.',
       meta: ['Калининград · удалённо', 'Открыт к проектной работе и подработке', 'Самозанятый'],
+      stats: ['4,5+ года во Flutter', '10 приложений в сторах', 'Go + LLM'],
       ctaPrimary: 'Смотреть проекты',
       ctaSecondary: 'Связаться',
     },

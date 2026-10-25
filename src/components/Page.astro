@@ -16,17 +16,15 @@ import mealhub2 from '../assets/apps/mealhub-2.jpg';
 import greenfeedIcon from '../assets/apps/greenfeed-icon.png';
 import greenfeed1 from '../assets/apps/greenfeed-1.jpg';
 import greenfeed2 from '../assets/apps/greenfeed-2.jpg';
-import jobline1 from '../assets/apps/jobline-1.webp';
-import qworking1 from '../assets/apps/qworking-1.webp';
 
 interface Props {
   lang: Lang;
 }
 
-const media: Record<AppId, { icon?: ImageMetadata; phones: ImageMetadata[]; wide?: ImageMetadata }> = {
+const media: Record<AppId, { icon?: ImageMetadata; phones: ImageMetadata[] }> = {
   zhabby: { icon: zhabbyIcon, phones: [zhabby1, zhabby2] },
-  jobline: { phones: [], wide: jobline1 },
-  qworking: { phones: [], wide: qworking1 },
+  jobline: { phones: [] },
+  qworking: { phones: [] },
   mealhub: { icon: mealhubIcon, phones: [mealhub1, mealhub2] },
   greenfeed: { icon: greenfeedIcon, phones: [greenfeed1, greenfeed2] },
 };
@@ -39,12 +37,15 @@ const altLang: Lang = lang === 'en' ? 'ru' : 'en';
 const altUrl = new URL(copy[altLang].path, site).href;
 const ogImage = new URL('/og.png', site).href;
 const isExternal = (href: string) => href.startsWith('http');
+const appsShots = t.apps.filter((a) => media[a.id].phones.length > 0);
+const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
 ---
 
 <!doctype html>
-<html lang={t.htmlLang}>
+<html lang={t.htmlLang} data-theme="soft">
   <head>
     <meta charset="utf-8" />
+    <script is:inline>(function(){try{var t=new URLSearchParams(location.search).get('theme');if(t&&/^(soft|magenta|acid|blade)$/.test(t))document.documentElement.dataset.theme=t;}catch(e){}})();</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{t.title}</title>
     <meta name="description" content={t.description} />
@@ -94,6 +95,9 @@ const isExternal = (href: string) => href.startsWith('http');
           <ul class="meta">
             {t.hero.meta.map((m) => <li>{m}</li>)}
           </ul>
+          <ul class="stats">
+            {t.hero.stats.map((m) => <li>{m}</li>)}
+          </ul>
           <div class="cta">
             <a class="btn primary" href="#work">{t.hero.ctaPrimary}</a>
             <a class="btn" href="#contact">{t.hero.ctaSecondary}</a>
@@ -131,21 +135,16 @@ const isExternal = (href: string) => href.startsWith('http');
         <p class="sub">{t.appsLead}</p>
         <div class="apps">
           {
-            t.apps.map((a) => {
+            appsShots.map((a) => {
               const m = media[a.id];
               return (
                 <article class="app glow">
-                  <div class={`shots ${m.wide ? 'wide' : ''}`}>
+                  <div class="shots">
                     {m.phones.map((img, i) => (
                       <div class={`phone p${i}`}>
                         <Image src={img} alt={`${a.name} — ${lang === 'en' ? 'screenshot' : 'скриншот'} ${i + 1}`} widths={[200, 300]} sizes="(max-width: 640px) 40vw, 150px" format="webp" quality={70} loading="lazy" />
                       </div>
                     ))}
-                    {m.wide && (
-                      <div class="screen">
-                        <Image src={m.wide} alt={`${a.name} — ${lang === 'en' ? 'product screen' : 'экран продукта'}`} widths={[400, 755]} sizes="(max-width: 640px) 90vw, 420px" format="webp" quality={72} loading="lazy" />
-                      </div>
-                    )}
                   </div>
                   <div class="app-body">
                     <div class="app-head">
@@ -172,6 +171,26 @@ const isExternal = (href: string) => href.startsWith('http');
             })
           }
         </div>
+        {appsCompact.length > 0 && (
+          <div class="apps-more">
+            {appsCompact.map((a) => (
+              <article class="app compact glow">
+                <span class="icon mono" aria-hidden="true">{a.name.slice(0, 1)}</span>
+                <div class="compact-body">
+                  <h3>{a.name}</h3>
+                  <p class="years">{a.years} · Flutter</p>
+                  <p>{a.what}</p>
+                  <p class="role">{a.role}</p>
+                  <p class="app-links">
+                    {a.links.map((l) => (
+                      <a class="chip" href={l.href} rel="noopener">{l.label} ↗</a>
+                    ))}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       <section id="ai" class="wrap section">
