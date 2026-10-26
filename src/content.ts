@@ -1,6 +1,6 @@
 // Site copy. Source of every fact: Anton's notebook (06 Карьера: resume, LinkedIn draft,
 // cover letters, portfolio plan). Do not add numbers or skills that are not there.
-// Empty link = not rendered (linkedin until the profile is ready; resume = hh.ru URL from Anton).
+// Empty link = not rendered (resume = hh.ru URL from Anton).
 
 export type Lang = 'en' | 'ru';
 
@@ -12,7 +12,7 @@ export const links = {
   terroirSite: 'https://www.terroir-app.com',
   email: 'hello@antonkozyrev.dev',
   telegram: 'https://t.me/tokc_a',
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/tokc/',
   resume: 'https://kaliningrad.hh.ru/resume/d6422a11ff0994ce8a0039ed1f546d58714a71',
 };
 
@@ -294,7 +294,7 @@ export const copy: Record<Lang, Copy> = {
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
       { label: 'Telegram', value: '@tokc_a', href: links.telegram },
       { label: 'GitHub', value: 'github.com/dev-toxin', href: links.github },
-      ...(links.linkedin ? [{ label: 'LinkedIn', value: links.linkedin, href: links.linkedin }] : []),
+      ...(links.linkedin ? [{ label: 'LinkedIn', value: 'linkedin.com/in/tokc', href: links.linkedin }] : []),
     ],
     resumeLabel: 'Résumé on hh.ru',
     footer: 'Anton Kozyrev',
@@ -514,7 +514,7 @@ export const copy: Record<Lang, Copy> = {
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
       { label: 'Telegram', value: '@tokc_a', href: links.telegram },
       { label: 'GitHub', value: 'github.com/dev-toxin', href: links.github },
-      ...(links.linkedin ? [{ label: 'LinkedIn', value: links.linkedin, href: links.linkedin }] : []),
+      ...(links.linkedin ? [{ label: 'LinkedIn', value: 'linkedin.com/in/tokc', href: links.linkedin }] : []),
     ],
     resumeLabel: 'Резюме на hh.ru',
     footer: 'Антон Козырев',
