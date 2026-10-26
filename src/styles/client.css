@@ -86,6 +86,7 @@
 .c-form label span { font-size: .85rem; color: var(--text2); }
 .c-form .wide { grid-column: 1 / -1; }
 .c-form input,
+.c-form select,
 .c-form textarea {
   font: inherit;
   color: var(--text);
@@ -95,6 +96,7 @@
   padding: .7rem .8rem;
 }
 .c-form input:focus,
+.c-form select:focus,
 .c-form textarea:focus { outline: 2px solid var(--acid); outline-offset: 1px; border-color: transparent; }
 .c-form ::placeholder { color: #6f7a8e; }
 .c-submit { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; }
@@ -113,3 +115,15 @@
   .c-hero { padding-top: 6rem; }
   .c-form { grid-template-columns: 1fr; }
 }
+
+/* full-spectrum additions */
+.c-proof { display: flex; flex-wrap: wrap; gap: .3rem .9rem; margin-top: auto !important; padding-top: .5rem; font-family: var(--f-mono); font-size: .78rem; }
+.c-proof a { color: var(--acid); text-decoration: none; border-bottom: 1px dotted rgba(var(--acid-rgb), .5); }
+.c-proof a:hover { color: var(--acid-hi); }
+.c-small { margin-top: 1.4rem; color: var(--text); font-weight: 600; }
+.c-small + .c-legal { margin-top: .5rem; }
+.c-kind { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--acid); }
+.c-ex .browser { margin: 0 0 .4rem; }
+@media (min-width: 900px) { .c-examples { grid-template-columns: repeat(3, 1fr); } }
+.c-form select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 1.1rem) 52%, calc(100% - .8rem) 52%; background-size: .3rem .3rem; background-repeat: no-repeat; padding-right: 2rem; }
+.c-form select option { color: #111; }

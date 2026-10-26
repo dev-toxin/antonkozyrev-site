@@ -109,7 +109,7 @@ export const copy: Record<Lang, Copy> = {
         { title: 'LLM features with guardrails', text: 'Budget limits, fact-checking and fallbacks: the model does not invent data and does not burn the budget.' },
       ],
       format: "Part-time project, long-term contract or a full-time role — tell me about the task, and I'll come back with a clear plan and estimate.",
-      clientLink: { href: '/custom-app-development/', label: 'Custom app development for your business' },
+      clientLink: { href: '/custom-development/', label: 'Custom development' },
     },
     casesTitle: 'Selected work',
     cases: [
@@ -329,7 +329,7 @@ export const copy: Record<Lang, Copy> = {
         { title: 'LLM-фичи с ограничителями', text: 'Лимит бюджета, проверка фактов и запасной сценарий: модель не выдумывает данные и не сжигает бюджет.' },
       ],
       format: 'Проект, долгий контракт или работа в штат — расскажите о задаче, а я вернусь с понятным планом и оценкой.',
-      clientLink: { href: '/ru/razrabotka-prilozheniy-kaliningrad/', label: 'Разработка приложений на заказ для бизнеса' },
+      clientLink: { href: '/ru/razrabotka-na-zakaz-kaliningrad/', label: 'Разработка на заказ' },
     },
     casesTitle: 'Проекты',
     cases: [

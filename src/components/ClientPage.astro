@@ -5,7 +5,11 @@ import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/global.css';
 import '../styles/client.css';
 import { links, copy, type Lang } from '../content';
+import { Image } from 'astro:assets';
 import { client } from '../client';
+import tapreplyHome from '../assets/sites/tapreply-home.png';
+import terroirHome from '../assets/sites/terroir-home.png';
+const siteShots = { tapreply: tapreplyHome, terroir: terroirHome };
 
 interface Props {
   lang: Lang;
@@ -32,7 +36,7 @@ const serviceLd = {
   email: `mailto:${links.email}`,
   areaServed: c.areaServed.map((name) => ({ '@type': 'Place', name })),
   availableLanguage: ['ru', 'en'],
-  serviceType: c.serviceName,
+  serviceType: c.serviceTypes,
   provider: {
     '@type': 'Person',
     '@id': new URL('/#person', site).href,
@@ -116,6 +120,13 @@ const faqLd = {
             <article class="c-card">
               <h3>{s.title}</h3>
               <p>{s.text}</p>
+              {s.proof && (
+                <p class="c-proof">
+                  {s.proof.map((p) => (
+                    <a href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.label}</a>
+                  ))}
+                </p>
+              )}
             </article>
           ))}
         </div>
@@ -132,18 +143,29 @@ const faqLd = {
             </li>
           ))}
         </ol>
+        <p class="c-small">{c.small}</p>
         <p class="c-legal">{c.legal}</p>
       </section>
 
       <section id="examples" class="wrap section">
         <h2>{c.examplesTitle}</h2>
         <p class="sub">{c.examplesLead}</p>
-        <div class="c-grid">
+        <div class="c-grid c-examples">
           {c.examples.map((e) => (
-            <article class="c-card">
+            <article class={`c-card c-ex c-ex-${e.kind}`}>
+              {e.kind === 'site' && (
+                <a class="browser" href={e.href} target="_blank" rel="noopener" aria-label={`${e.name} — ${e.label}`}>
+                  <span class="browser-bar" aria-hidden="true">
+                    <i></i><i></i><i></i>
+                    <span class="browser-url">{e.href.replace('https://', '')}</span>
+                  </span>
+                  <Image src={siteShots[e.shot]} alt={e.name} widths={[480, 720]} sizes="(max-width: 900px) 92vw, 420px" loading="lazy" format="webp" />
+                </a>
+              )}
+              <span class="c-kind">{e.kind === 'site' ? (lang === 'en' ? 'Website' : 'Сайт') : e.kind === 'app' ? (lang === 'en' ? 'Mobile app' : 'Мобильное приложение') : (lang === 'en' ? 'Go · AI pipeline' : 'Go · ИИ-конвейер')}</span>
               <h3>{e.name}</h3>
               <p>{e.text}</p>
-              <p><a class="chip" href={e.href} target="_blank" rel="noopener">App Store ↗</a></p>
+              <p><a class="chip" href={e.href} target="_blank" rel="noopener">{e.label}</a></p>
             </article>
           ))}
         </div>
@@ -174,6 +196,13 @@ const faqLd = {
             <label>
               <span>{c.form.contact}</span>
               <input name="contact" placeholder={c.form.contactHint} required />
+            </label>
+            <label class="wide">
+              <span>{c.form.kind}</span>
+              <select name="kind" required>
+                <option value="" disabled selected>—</option>
+                {c.form.kinds.map((k) => <option value={k}>{k}</option>)}
+              </select>
             </label>
             <label class="wide">
               <span>{c.form.task}</span>
@@ -209,7 +238,7 @@ const faqLd = {
         if (!form.reportValidity()) return;
         const data = new FormData(form);
         const labels = Array.from(form.querySelectorAll('label > span')).map((s) => s.textContent ?? '');
-        const values = ['name', 'contact', 'task', 'deadline'].map((k) => String(data.get(k) ?? '').trim());
+        const values = ['name', 'contact', 'kind', 'task', 'deadline'].map((k) => String(data.get(k) ?? '').trim());
         const body = values.map((v, i) => `${labels[i]}: ${v || '—'}`).join('\n\n');
         const href = `mailto:${form.dataset.to}?subject=${encodeURIComponent(form.dataset.subject ?? '')}&body=${encodeURIComponent(body)}`;
         window.location.href = href;
