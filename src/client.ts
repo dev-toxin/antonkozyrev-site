@@ -8,7 +8,7 @@ import { links, type Lang } from './content';
 type Item = { title: string; text: string; proof?: { href: string; label: string }[] };
 
 export type Example =
-  | { kind: 'app'; name: string; text: string; href: string; label: string }
+  | { kind: 'app'; app: 'gsr' | 'lk' | 'zhabby'; name: string; text: string; href: string; label: string }
   | { kind: 'site'; name: string; text: string; href: string; label: string; shot: 'tapreply' | 'terroir' }
   | { kind: 'code'; name: string; text: string; href: string; label: string };
 
@@ -136,9 +136,9 @@ export const client: Record<Lang, ClientCopy> = {
     examples: [
       { kind: 'site', name: 'TapReply', text: `Сайт продукта: ответы на${NB}отзывы гостей на${NB}языке гостя. Astro, EN/RU.`, href: links.tapreply, label: 'Сайт ↗', shot: 'tapreply' },
       { kind: 'site', name: 'Terroir', text: `Сайт продукта: личный винный помощник с${NB}памятью. Astro, EN/RU.`, href: links.terroirSite, label: 'Сайт ↗', shot: 'terroir' },
-      { kind: 'app', name: 'GSR Работа', text: 'Приложение для исполнителей сервиса подбора персонала: документы, подписание по SMS, запись на смены, выплаты, чат. С нуля, единственный мобильный разработчик.', href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store ↗' },
-      { kind: 'app', name: 'Личный кабинет исполнителя', text: 'Перенос нативного Android-приложения на Flutter, выпуск на iOS, развитие версии 3.x.', href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store ↗' },
-      { kind: 'app', name: 'Zhabby', text: 'Социальная сеть коротких видео с вознаграждением за активность.', href: 'https://apps.apple.com/ru/app/id6758106499', label: 'App Store ↗' },
+      { kind: 'app', app: 'gsr', name: 'GSR Работа', text: 'Приложение для исполнителей сервиса подбора персонала: документы, подписание по SMS, запись на смены, выплаты, чат. С нуля, единственный мобильный разработчик.', href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store ↗' },
+      { kind: 'app', app: 'lk', name: 'Личный кабинет исполнителя', text: 'Перенос нативного Android-приложения на Flutter, выпуск на iOS, развитие версии 3.x.', href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store ↗' },
+      { kind: 'app', app: 'zhabby', name: 'Zhabby', text: 'Социальная сеть коротких видео с вознаграждением за активность.', href: 'https://apps.apple.com/ru/app/id6758106499', label: 'App Store ↗' },
       { kind: 'code', name: 'sitefarm', text: `Конвейер на Go: открытые данные → тексты через языковую модель → автоматическая проверка фактов → готовый сайт. Около 2${NB}100${NB}страниц в пилоте.`, href: links.sitefarm, label: 'Код на GitHub ↗' },
     ],
     examplesMore: 'Все приложения со скриншотами',
@@ -246,9 +246,9 @@ export const client: Record<Lang, ClientCopy> = {
     examples: [
       { kind: 'site', name: 'TapReply', text: "Product site: replies to guest reviews in the guest's language. Astro, EN/RU.", href: links.tapreply, label: 'Live site ↗', shot: 'tapreply' },
       { kind: 'site', name: 'Terroir', text: 'Product site: a personal wine assistant with memory. Astro, EN/RU.', href: links.terroirSite, label: 'Live site ↗', shot: 'terroir' },
-      { kind: 'app', name: 'GSR Rabota', text: 'App for contractors of a staffing service: documents, SMS signing, shift booking, payouts, chat. Built from scratch as the sole mobile developer.', href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store ↗' },
-      { kind: 'app', name: 'Contractor Account', text: 'Migrated a native Android app to Flutter, shipped it on iOS, developing version 3.x.', href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store ↗' },
-      { kind: 'app', name: 'Zhabby', text: 'A short-video social network that rewards activity.', href: 'https://apps.apple.com/ru/app/id6758106499', label: 'App Store ↗' },
+      { kind: 'app', app: 'gsr', name: 'GSR Rabota', text: 'App for contractors of a staffing service: documents, SMS signing, shift booking, payouts, chat. Built from scratch as the sole mobile developer.', href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store ↗' },
+      { kind: 'app', app: 'lk', name: 'Contractor Account', text: 'Migrated a native Android app to Flutter, shipped it on iOS, developing version 3.x.', href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store ↗' },
+      { kind: 'app', app: 'zhabby', name: 'Zhabby', text: 'A short-video social network that rewards activity.', href: 'https://apps.apple.com/ru/app/id6758106499', label: 'App Store ↗' },
       { kind: 'code', name: 'sitefarm', text: 'A Go pipeline: open data → texts from a language model → automated fact-checking → a ready site. About 2,100 pages in the pilot.', href: links.sitefarm, label: 'Code on GitHub ↗' },
     ],
     examplesMore: 'All apps with screenshots',
