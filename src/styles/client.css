@@ -11,6 +11,7 @@
 .client h2 { color: var(--text); }
 .c-hero { padding: 7.5rem 0 2.5rem; }
 .c-hero .lead { max-width: 62ch; color: var(--text2); }
+.c-hero .c-meet { margin-top: .6rem; color: var(--acid); font-family: var(--f-mono); font-size: .9rem; }
 .c-hero .cta { margin-top: 1.6rem; }
 
 .c-grid {

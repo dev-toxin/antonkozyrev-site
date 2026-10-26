@@ -329,7 +329,7 @@ export const copy: Record<Lang, Copy> = {
         { title: 'LLM-фичи с ограничителями', text: 'Лимит бюджета, проверка фактов и запасной сценарий: модель не выдумывает данные и не сжигает бюджет.' },
       ],
       format: 'Проект, долгий контракт или работа в штат — расскажите о задаче, а я вернусь с понятным планом и оценкой.',
-      clientLink: { href: '/ru/razrabotka-na-zakaz-kaliningrad/', label: 'Разработка на заказ' },
+      clientLink: { href: '/ru/razrabotka-saytov-i-prilozheniy-kaliningrad/', label: 'Разработка на заказ' },
     },
     casesTitle: 'Проекты',
     cases: [

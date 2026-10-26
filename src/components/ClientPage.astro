@@ -104,6 +104,7 @@ const faqLd = {
         <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{c.eyebrow}</p>
         <h1>{c.h1}</h1>
         <p class="lead">{c.lead}</p>
+        {c.meet && <p class="c-meet">{c.meet}</p>}
         <ul class="stats">
           {c.meta.map((m) => <li>{m}</li>)}
         </ul>

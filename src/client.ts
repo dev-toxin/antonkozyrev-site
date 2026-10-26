@@ -22,6 +22,7 @@ export type ClientCopy = {
   eyebrow: string;
   h1: string;
   lead: string;
+  meet?: string;
   meta: string[];
   ctaPrimary: string;
   ctaSecondary: string;
@@ -68,27 +69,23 @@ const NB = '\u00A0';
 export const client: Record<Lang, ClientCopy> = {
   ru: {
     htmlLang: 'ru',
-    path: '/ru/razrabotka-na-zakaz-kaliningrad/',
+    path: '/ru/razrabotka-saytov-i-prilozheniy-kaliningrad/',
     altPath: '/custom-development/',
     homePath: '/ru/',
-    title: 'Разработка на заказ в Калининграде — приложения, сайты, сервисы и ИИ',
-    description: `Разработчик полного цикла в Калининграде: мобильные приложения для iOS и Android, сайты и PWA, внутренние сервисы и автоматизация, бэкенд на Go, интеграция ИИ. 4,5+${NB}года коммерческой разработки, 10${NB}приложений в сторах.`,
+    title: 'Разработка сайтов и приложений в Калининграде — сайты, мобильные приложения, автоматизация и ИИ',
+    description: `Создание и разработка сайтов, мобильных и веб-приложений, автоматизация бизнеса в Калининграде и области. 4,5+${NB}года опыта, 10${NB}приложений в сторах.`,
     eyebrow: 'Калининград и область · удалённо по России',
-    h1: `Разработка на заказ в${NB}Калининграде: приложения, сайты и${NB}сервисы`,
-    lead: `Разработчик полного цикла: мобильные приложения, сайты и веб-приложения, внутренние сервисы, бэкенд и${NB}интеграция ИИ. Беру задачу от идеи до запуска и поддержки — и${NB}большой проект, и${NB}небольшую доработку.`,
+    h1: `Разработка сайтов и${NB}приложений в${NB}Калининграде`,
+    lead: `Создаю сайты, мобильные и веб-приложения, автоматизирую процессы бизнеса, подключаю ИИ и${NB}пишу бэкенд. Беру задачу от идеи до запуска и поддержки — и${NB}большой проект, и${NB}небольшую доработку.`,
+    meet: `Можно встретиться в${NB}Калининграде или работать удалённо.`,
     meta: [`4,5+${NB}года коммерческой разработки`, `10${NB}приложений в сторах`, `3${NB}своих сайта онлайн`],
     ctaPrimary: 'Описать задачу',
     ctaSecondary: 'Посмотреть работы',
     servicesTitle: 'Что делаю',
     services: [
       {
-        title: 'Мобильные приложения',
-        text: 'Одно приложение на Flutter для iOS и Android: экраны по макетам, работа с API, push-уведомления, аналитика, публикация в сторах.',
-        proof: [{ href: '/ru/#apps', label: `10${NB}приложений в сторах` }],
-      },
-      {
         title: 'Сайты и лендинги',
-        text: 'Быстрые статические сайты на Astro и Hugo: несколько языков, базовая настройка для поисковиков, домен и хостинг.',
+        text: 'Сайт компании или организации, корпоративный сайт, лендинг под продукт или акцию. Быстрые статические сайты на Astro и Hugo: несколько языков, базовая настройка для поисковиков, домен и хостинг.',
         proof: [
           { href: links.tapreply, label: 'tapreply.net' },
           { href: links.terroirSite, label: 'terroir-app.com' },
@@ -96,19 +93,19 @@ export const client: Record<Lang, ClientCopy> = {
         ],
       },
       {
+        title: 'Мобильные приложения',
+        text: 'Одно приложение на Flutter для iOS и Android: экраны по макетам, работа с API, push-уведомления, аналитика, публикация в сторах.',
+        proof: [{ href: '/ru/#apps', label: `10${NB}приложений в сторах` }],
+      },
+      {
         title: 'Веб-приложения и PWA',
         text: 'Приложение, которое работает в браузере и ставится на телефон как обычное, — без публикации в сторах. Подходит для внутренних инструментов и первых версий продукта.',
         proof: [{ href: '/ru/#terroir', label: 'PWA в Terroir и TapReply' }],
       },
       {
-        title: 'Внутренние сервисы и автоматизация',
-        text: 'Админки, учёт, отчёты, интеграции между системами, перенос процессов из таблиц и переписки в понятный сервис.',
+        title: 'Автоматизация бизнеса и внутренние сервисы',
+        text: 'Автоматизация бизнес-процессов: админки, учёт, отчёты, чат-боты, интеграции между системами, перенос процессов из таблиц и переписки в понятный сервис.',
         proof: [{ href: links.sitefarm, label: 'конвейер обработки данных на Go' }],
-      },
-      {
-        title: 'Бэкенд и API на Go',
-        text: 'REST API на Go с PostgreSQL, автоматические проверки и сборка на GitHub Actions — основа для приложения, сайта или сервиса.',
-        proof: [{ href: links.terroir, label: 'код Terroir' }],
       },
       {
         title: 'Интеграция ИИ',
@@ -117,6 +114,11 @@ export const client: Record<Lang, ClientCopy> = {
           { href: '/ru/#sitefarm', label: 'sitefarm' },
           { href: '/ru/#terroir', label: 'Terroir' },
         ],
+      },
+      {
+        title: 'Бэкенд и API на Go',
+        text: 'REST API на Go с PostgreSQL, автоматические проверки и сборка на GitHub Actions — основа для приложения, сайта или сервиса.',
+        proof: [{ href: links.terroir, label: 'код Terroir' }],
       },
     ],
     processTitle: 'Как работаю',
@@ -143,8 +145,9 @@ export const client: Record<Lang, ClientCopy> = {
     faqTitle: 'Частые вопросы',
     faq: [
       { q: 'Сколько стоит и сколько времени займёт работа?', a: 'Зависит от задачи: объёма, интеграций, нужен ли бэкенд. Честную оценку даю после брифа — вместе с планом, что входит в первую версию.' },
-      { q: 'Можно ли заказать небольшую доработку?', a: 'Да. Исправить ошибку, добавить функцию, подключить интеграцию, обновить сайт — берусь и за такие задачи. Сначала разбираюсь в том, что уже есть, и говорю, сколько это займёт.' },
       { q: 'Делаете ли вы сайты?', a: 'Да: лендинги, сайты компаний и продуктов, многоязычные сайты. Делаю быстрые статические сайты, настраиваю домен, хостинг и базу для поисковиков.' },
+      { q: 'Можно ли заказать небольшую доработку?', a: 'Да. Исправить ошибку, добавить функцию, подключить интеграцию, обновить сайт — берусь и за такие задачи. Сначала разбираюсь в том, что уже есть, и говорю, сколько это займёт.' },
+      { q: 'Можно ли встретиться лично?', a: 'Да, в Калининграде — обсудить задачу и показать результат. Остальное время работаем удалённо: созвоны, чат, демо по ссылке.' },
       { q: 'Можно ли подключить ИИ к нашему процессу?', a: 'Да, если задача это позволяет: ответы на типовые вопросы, обработка и проверка текстов, разбор заявок. Ставлю лимит бюджета и проверку ответов, а если ИИ для задачи не подходит — говорю об этом честно.' },
       { q: 'Опубликуете приложение в сторах?', a: 'Да: App Store, Google Play и RuStore — опыт публикации есть. Аккаунты разработчика лучше оформить на вас — тогда приложение принадлежит вам.' },
       { q: 'Кому принадлежит код?', a: 'Вам. Код хранится в вашем репозитории, права передаются по договору. Если нужно, подпишу NDA.' },
@@ -157,28 +160,28 @@ export const client: Record<Lang, ClientCopy> = {
       contact: 'Как с вами связаться',
       contactHint: 'Email или Telegram',
       kind: 'Что нужно сделать',
-      kinds: ['Мобильное приложение', 'Сайт', 'Веб-приложение или PWA', 'Внутренний сервис или автоматизация', 'Интеграция ИИ', 'Доработка существующего', 'Другое'],
+      kinds: ['Сайт', 'Мобильное приложение', 'Веб-приложение или PWA', 'Автоматизация или внутренний сервис', 'Интеграция ИИ', 'Доработка существующего', 'Другое'],
       task: 'Задача',
       taskHint: 'Что нужно, для кого, что уже есть',
       deadline: 'Желаемый срок',
       deadlineHint: 'Например: к весне, не горит',
       submit: 'Отправить письмом',
       note: `Откроется почта с готовым письмом на ${links.email} — останется нажать «Отправить».`,
-      subject: 'Задача: разработка на заказ',
+      subject: 'Задача: разработка',
     },
     orWrite: 'Или напишите напрямую',
     switchLabel: 'EN',
     switchTitle: 'English version',
     backHome: 'Главная',
     areaServed: ['Калининград', 'Калининградская область', 'Россия'],
-    serviceName: 'Разработка на заказ: приложения, сайты, сервисы и ИИ',
-    serviceTypes: ['Разработка мобильных приложений', 'Разработка сайтов', 'Веб-приложения и PWA', 'Внутренние сервисы и автоматизация', 'Бэкенд и API на Go', 'Интеграция ИИ'],
+    serviceName: 'Разработка сайтов и приложений в Калининграде',
+    serviceTypes: ['Разработка сайтов', 'Разработка мобильных приложений', 'Веб-приложения и PWA', 'Автоматизация бизнеса', 'Интеграция ИИ', 'Бэкенд и API на Go'],
     footer: 'Антон Козырев',
   },
   en: {
     htmlLang: 'en',
     path: '/custom-development/',
-    altPath: '/ru/razrabotka-na-zakaz-kaliningrad/',
+    altPath: '/ru/razrabotka-saytov-i-prilozheniy-kaliningrad/',
     homePath: '/',
     title: 'Custom software development — apps, websites, services and AI · Anton Kozyrev',
     description: 'Full-cycle developer: iOS and Android apps, websites and PWAs, internal tools and automation, Go backends, AI integration. 4.5+ years of commercial development, 10 apps in the stores. Remote, worldwide.',
@@ -191,11 +194,6 @@ export const client: Record<Lang, ClientCopy> = {
     servicesTitle: 'What I do',
     services: [
       {
-        title: 'Mobile apps',
-        text: 'One Flutter app for iOS and Android: screens from your designs, API integration, push notifications, analytics, store release.',
-        proof: [{ href: '/#apps', label: '10 apps in the stores' }],
-      },
-      {
         title: 'Websites and landing pages',
         text: 'Fast static sites on Astro and Hugo: several languages, search-engine basics, domain and hosting set up.',
         proof: [
@@ -203,6 +201,11 @@ export const client: Record<Lang, ClientCopy> = {
           { href: links.terroirSite, label: 'terroir-app.com' },
           { href: '/', label: 'this site' },
         ],
+      },
+      {
+        title: 'Mobile apps',
+        text: 'One Flutter app for iOS and Android: screens from your designs, API integration, push notifications, analytics, store release.',
+        proof: [{ href: '/#apps', label: '10 apps in the stores' }],
       },
       {
         title: 'Web apps and PWAs',
@@ -215,17 +218,17 @@ export const client: Record<Lang, ClientCopy> = {
         proof: [{ href: links.sitefarm, label: 'data pipeline in Go' }],
       },
       {
-        title: 'Backends and APIs in Go',
-        text: 'REST APIs in Go with PostgreSQL, automated checks and builds on GitHub Actions — the base for an app, a site or a service.',
-        proof: [{ href: links.terroir, label: 'Terroir code' }],
-      },
-      {
         title: 'AI integration',
         text: 'Chat assistants, generating and checking texts, processing data with language models — with budget limits and answer checks so the model does not make things up.',
         proof: [
           { href: '/#sitefarm', label: 'sitefarm' },
           { href: '/#terroir', label: 'Terroir' },
         ],
+      },
+      {
+        title: 'Backends and APIs in Go',
+        text: 'REST APIs in Go with PostgreSQL, automated checks and builds on GitHub Actions — the base for an app, a site or a service.',
+        proof: [{ href: links.terroir, label: 'Terroir code' }],
       },
     ],
     processTitle: 'How I work',
@@ -252,8 +255,8 @@ export const client: Record<Lang, ClientCopy> = {
     faqTitle: 'FAQ',
     faq: [
       { q: 'How much does it cost and how long does it take?', a: 'It depends on the task: scope, integrations, whether a backend is needed. I give an honest estimate after the brief, together with a plan for the first version.' },
-      { q: 'Can I order a small improvement?', a: 'Yes. Fixing a bug, adding a feature, connecting an integration, updating a site — I take on tasks like that too. First I look at what already exists and tell you how long it will take.' },
       { q: 'Do you build websites?', a: 'Yes: landing pages, company and product sites, multilingual sites. I build fast static sites and set up the domain, hosting and search-engine basics.' },
+      { q: 'Can I order a small improvement?', a: 'Yes. Fixing a bug, adding a feature, connecting an integration, updating a site — I take on tasks like that too. First I look at what already exists and tell you how long it will take.' },
       { q: 'Can you add AI to our process?', a: 'Yes, if the task allows it: answering typical questions, processing and checking texts, sorting requests. I set a budget limit and answer checks — and if AI is not a good fit, I say so.' },
       { q: 'Will you publish the app in the stores?', a: 'Yes: App Store, Google Play and RuStore — I have published in all three. Developer accounts are best registered to you — then the app is yours.' },
       { q: 'Who owns the code?', a: 'You do. The code lives in your repository and the rights are transferred under the contract. I can sign an NDA if needed.' },
@@ -266,7 +269,7 @@ export const client: Record<Lang, ClientCopy> = {
       contact: 'How to reach you',
       contactHint: 'Email or Telegram',
       kind: 'What do you need',
-      kinds: ['Mobile app', 'Website', 'Web app or PWA', 'Internal tool or automation', 'AI integration', 'Improving an existing product', 'Other'],
+      kinds: ['Website', 'Mobile app', 'Web app or PWA', 'Automation or internal tool', 'AI integration', 'Improving an existing product', 'Other'],
       task: 'Task',
       taskHint: 'What is needed, for whom, what already exists',
       deadline: 'Desired timeline',
@@ -281,7 +284,7 @@ export const client: Record<Lang, ClientCopy> = {
     backHome: 'Home',
     areaServed: ['Worldwide'],
     serviceName: 'Custom software development: apps, websites, services and AI',
-    serviceTypes: ['Mobile app development', 'Website development', 'Web apps and PWAs', 'Internal tools and automation', 'Backend and API development in Go', 'AI integration'],
+    serviceTypes: ['Website development', 'Mobile app development', 'Web apps and PWAs', 'Business automation', 'AI integration', 'Backend and API development in Go'],
     footer: 'Anton Kozyrev',
   },
 };
