@@ -56,7 +56,7 @@ export type Copy = {
   switchTitle: string;
   switchHref: string;
   hero: { name: string; role: string; lead: string; meta: string[]; stats: string[]; ctaPrimary: string; ctaSecondary: string };
-  help: { title: string; nav: string; items: { title: string; text: string }[]; format: string };
+  help: { title: string; nav: string; items: { title: string; text: string }[]; format: string; clientLink: { href: string; label: string } };
   casesTitle: string;
   cases: Case[];
   appsTitle: string;
@@ -109,6 +109,7 @@ export const copy: Record<Lang, Copy> = {
         { title: 'LLM features with guardrails', text: 'Budget limits, fact-checking and fallbacks: the model does not invent data and does not burn the budget.' },
       ],
       format: "Part-time project, long-term contract or a full-time role — tell me about the task, and I'll come back with a clear plan and estimate.",
+      clientLink: { href: '/custom-development/', label: 'Custom development' },
     },
     casesTitle: 'Selected work',
     cases: [
@@ -328,6 +329,7 @@ export const copy: Record<Lang, Copy> = {
         { title: 'LLM-фичи с ограничителями', text: 'Лимит бюджета, проверка фактов и запасной сценарий: модель не выдумывает данные и не сжигает бюджет.' },
       ],
       format: 'Проект, долгий контракт или работа в штат — расскажите о задаче, а я вернусь с понятным планом и оценкой.',
+      clientLink: { href: '/ru/razrabotka-saytov-i-prilozheniy-kaliningrad/', label: 'Разработка на заказ' },
     },
     casesTitle: 'Проекты',
     cases: [

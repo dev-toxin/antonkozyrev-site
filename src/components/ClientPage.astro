@@ -1,0 +1,249 @@
+---
+import '@fontsource-variable/unbounded/wght.css';
+import '@fontsource-variable/manrope/wght.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import '../styles/global.css';
+import '../styles/client.css';
+import { links, copy, type Lang } from '../content';
+import { Image } from 'astro:assets';
+import { client } from '../client';
+import tapreplyHome from '../assets/sites/tapreply-home.png';
+import terroirHome from '../assets/sites/terroir-home.png';
+const siteShots = { tapreply: tapreplyHome, terroir: terroirHome };
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = client[lang];
+const home = copy[lang];
+const site = Astro.site ?? new URL('https://antonkozyrev.dev');
+const canonical = new URL(c.path, site).href;
+const altUrl = new URL(c.altPath, site).href;
+const altLang: Lang = lang === 'en' ? 'ru' : 'en';
+const ogImage = new URL('/og.png', site).href;
+const appsHref = `${c.homePath}#apps`;
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': canonical + '#service',
+  name: c.serviceName,
+  description: c.description,
+  url: canonical,
+  image: ogImage,
+  email: `mailto:${links.email}`,
+  areaServed: c.areaServed.map((name) => ({ '@type': 'Place', name })),
+  availableLanguage: ['ru', 'en'],
+  serviceType: c.serviceTypes,
+  provider: {
+    '@type': 'Person',
+    '@id': new URL('/#person', site).href,
+    name: home.hero.name,
+    jobTitle: 'Senior Flutter Developer',
+    url: new URL(c.homePath, site).href,
+    sameAs: [links.github, links.telegram, links.resume].filter(Boolean),
+  },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: c.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<!doctype html>
+<html lang={c.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{c.title}</title>
+    <meta name="description" content={c.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={c.htmlLang} href={canonical} />
+    <link rel="alternate" hreflang={client[altLang].htmlLang} href={altUrl} />
+    <link rel="alternate" hreflang="x-default" href={new URL(client.en.path, site).href} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#04060d" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={c.title} />
+    <meta property="og:description" content={c.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'ru_RU'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  </head>
+  <body id="top" class="client">
+    <a class="skip" href="#main">{lang === 'en' ? 'Skip to content' : 'К содержанию'}</a>
+    <div class="bg" aria-hidden="true"><span class="grid"></span></div>
+    <header class="bar">
+      <div class="wrap bar-inner">
+        <a class="logo" href={c.homePath} aria-label={home.hero.name}><span>AK</span></a>
+        <nav aria-label={lang === 'en' ? 'Sections' : 'Разделы'}>
+          <a href={c.homePath}>{c.backHome}</a>
+          <a href="#services" class="hide-s">{c.servicesTitle}</a>
+          <a href="#process" class="hide-s">{c.processTitle}</a>
+          <a href="#faq" class="hide-s">{c.faqTitle}</a>
+          <a href="#brief">{c.formTitle}</a>
+          <a class="lang" href={c.altPath} hreflang={client[altLang].htmlLang} lang={client[altLang].htmlLang} title={c.switchTitle}>{c.switchLabel}</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="wrap c-hero">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{c.eyebrow}</p>
+        <h1>{c.h1}</h1>
+        <p class="lead">{c.lead}</p>
+        {c.meet && <p class="c-meet">{c.meet}</p>}
+        <ul class="stats">
+          {c.meta.map((m) => <li>{m}</li>)}
+        </ul>
+        <div class="cta">
+          <a class="btn primary" href="#brief">{c.ctaPrimary}</a>
+          <a class="btn" href="#examples">{c.ctaSecondary}</a>
+        </div>
+      </section>
+
+      <section id="services" class="wrap section">
+        <h2>{c.servicesTitle}</h2>
+        <div class="c-grid c-services">
+          {c.services.map((s) => (
+            <article class="c-card">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+              {s.proof && (
+                <p class="c-proof">
+                  {s.proof.map((p) => (
+                    <a href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.label}</a>
+                  ))}
+                </p>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="process" class="wrap section">
+        <h2>{c.processTitle}</h2>
+        <ol class="c-steps">
+          {c.process.map((p, i) => (
+            <li>
+              <span class="c-step">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="c-small">{c.small}</p>
+        <p class="c-legal">{c.legal}</p>
+      </section>
+
+      <section id="examples" class="wrap section">
+        <h2>{c.examplesTitle}</h2>
+        <p class="sub">{c.examplesLead}</p>
+        <div class="c-grid c-examples">
+          {c.examples.map((e) => (
+            <article class={`c-card c-ex c-ex-${e.kind}`}>
+              {e.kind === 'site' && (
+                <a class="browser" href={e.href} target="_blank" rel="noopener" aria-label={`${e.name} — ${e.label}`}>
+                  <span class="browser-bar" aria-hidden="true">
+                    <i></i><i></i><i></i>
+                    <span class="browser-url">{e.href.replace('https://', '')}</span>
+                  </span>
+                  <Image src={siteShots[e.shot]} alt={e.name} widths={[480, 720]} sizes="(max-width: 900px) 92vw, 420px" loading="lazy" format="webp" />
+                </a>
+              )}
+              <span class="c-kind">{e.kind === 'site' ? (lang === 'en' ? 'Website' : 'Сайт') : e.kind === 'app' ? (lang === 'en' ? 'Mobile app' : 'Мобильное приложение') : (lang === 'en' ? 'Go · AI pipeline' : 'Go · ИИ-конвейер')}</span>
+              <h3>{e.name}</h3>
+              <p>{e.text}</p>
+              <p><a class="chip" href={e.href} target="_blank" rel="noopener">{e.label}</a></p>
+            </article>
+          ))}
+        </div>
+        <p class="sub"><a href={appsHref}>{c.examplesMore} →</a></p>
+      </section>
+
+      <section id="faq" class="wrap section">
+        <h2>{c.faqTitle}</h2>
+        <div class="c-faq">
+          {c.faq.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section id="brief" class="wrap section">
+        <div class="c-brief">
+          <h2>{c.formTitle}</h2>
+          <p class="sub">{c.formLead}</p>
+          <form class="c-form" id="brief-form" data-to={links.email} data-subject={c.form.subject} action={`mailto:${links.email}`} method="post" enctype="text/plain">
+            <label>
+              <span>{c.form.name}</span>
+              <input name="name" autocomplete="name" required />
+            </label>
+            <label>
+              <span>{c.form.contact}</span>
+              <input name="contact" placeholder={c.form.contactHint} required />
+            </label>
+            <label class="wide">
+              <span>{c.form.kind}</span>
+              <select name="kind" required>
+                <option value="" disabled selected>—</option>
+                {c.form.kinds.map((k) => <option value={k}>{k}</option>)}
+              </select>
+            </label>
+            <label class="wide">
+              <span>{c.form.task}</span>
+              <textarea name="task" rows="5" placeholder={c.form.taskHint} required></textarea>
+            </label>
+            <label class="wide">
+              <span>{c.form.deadline}</span>
+              <input name="deadline" placeholder={c.form.deadlineHint} />
+            </label>
+            <div class="wide c-submit">
+              <button class="btn primary" type="submit">{c.form.submit}</button>
+              <p class="c-note">{c.form.note}</p>
+            </div>
+          </form>
+          <div class="c-direct">
+            <span class="label">{c.orWrite}</span>
+            <a href={`mailto:${links.email}`}>{links.email}</a>
+            <a href={links.telegram} target="_blank" rel="noopener">Telegram @tokc_a</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap foot">
+      <span>© {new Date().getFullYear()} {c.footer}</span>
+      <a href={c.altPath} hreflang={client[altLang].htmlLang}>{c.switchTitle}</a>
+    </footer>
+
+    <script>
+      const form = document.getElementById('brief-form') as HTMLFormElement | null;
+      form?.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        if (!form.reportValidity()) return;
+        const data = new FormData(form);
+        const labels = Array.from(form.querySelectorAll('label > span')).map((s) => s.textContent ?? '');
+        const values = ['name', 'contact', 'kind', 'task', 'deadline'].map((k) => String(data.get(k) ?? '').trim());
+        const body = values.map((v, i) => `${labels[i]}: ${v || '—'}`).join('\n\n');
+        const href = `mailto:${form.dataset.to}?subject=${encodeURIComponent(form.dataset.subject ?? '')}&body=${encodeURIComponent(body)}`;
+        window.location.href = href;
+      });
+    </script>
+  </body>
+</html>
