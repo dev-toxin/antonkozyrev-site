@@ -210,7 +210,7 @@ const faqLd = {
                   </div>
                 </div>
                 <p class="what">{e.text}</p>
-                <p class="app-links"><a class="chip" href={e.href} target="_blank" rel="noopener">{e.label}</a></p>
+                <p class="app-links"><a class="chip" href={e.href} target="_blank" rel="noopener">{e.label}</a>{(e.more ?? []).map((l) => (<a class="chip" href={l.href} target="_blank" rel="noopener">{l.label}</a>))}</p>
               </article>
             );
           })}

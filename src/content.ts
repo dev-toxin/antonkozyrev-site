@@ -180,13 +180,13 @@ export const copy: Record<Lang, Copy> = {
         id: 'gsr', name: 'GSR Rabota', years: '2026', badge: 'Current role',
         what: 'New app for contractors of a staffing service: sign-up and documents, SMS signing, finding tasks and booking shifts, wallet and payouts, tax receipts for the self-employed, real-time support chat.',
         role: 'Sole mobile developer, built from scratch: feature-first Clean Architecture on Riverpod, choice of stack, API contracts with the backend, releases. Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite.',
-        links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }],
+        links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=ru.gsrrabota.mobile', label: 'Google Play' }],
       },
       {
         id: 'lk', name: 'Contractor Account (Личный кабинет исполнителя)', years: '2025', badge: 'Current role',
         what: 'Contractor app of the same service: shift self-booking, documents with e-signing and receipts, profile and bank cards.',
         role: 'Migrated the native Android (Java) app to Flutter, shipped it on iOS and Android with a new design; maintaining and developing it — major version 3.x, moving the architecture to Riverpod.',
-        links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }],
+        links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=com.crystalglaive.employee', label: 'Google Play' }, { href: 'https://www.rustore.ru/catalog/app/com.crystalglaive.employee', label: 'RuStore' }],
       },
       {
         id: 'zhabby', name: 'Zhabby', years: '2025',
@@ -400,13 +400,13 @@ export const copy: Record<Lang, Copy> = {
         id: 'gsr', name: 'GSR Работа', years: '2026', badge: 'Текущая роль',
         what: 'Новое приложение для исполнителей сервиса подбора персонала: регистрация и документы, подписание по SMS, поиск заданий и запись на смены, кошелёк и выплаты, налоговые чеки самозанятых, чат с поддержкой в реальном времени.',
         role: 'Единственный мобильный разработчик, с нуля: архитектура feature-first и Clean Architecture на Riverpod, выбор стека, API-контракты с бэкендом, релизы. Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite.',
-        links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }],
+        links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=ru.gsrrabota.mobile', label: 'Google Play' }],
       },
       {
         id: 'lk', name: 'Личный кабинет исполнителя', years: '2025', badge: 'Текущая роль',
         what: 'Приложение исполнителя того же сервиса: самозапись на смены, документы с электронной подписью и чеки, профиль и банковские карты.',
         role: 'Перенёс нативное Android-приложение (Java) на Flutter, выпустил на iOS и Android с новым дизайном; развиваю и поддерживаю — мажорная версия 3.x, перевожу архитектуру на Riverpod.',
-        links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }],
+        links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=com.crystalglaive.employee', label: 'Google Play' }, { href: 'https://www.rustore.ru/catalog/app/com.crystalglaive.employee', label: 'RuStore' }],
       },
       {
         id: 'zhabby', name: 'Zhabby', years: '2025',
