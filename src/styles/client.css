@@ -60,7 +60,7 @@
   color: var(--text2);
 }
 
-.c-faq { margin-top: 1.2rem; display: grid; gap: .6rem; max-width: 820px; }
+.c-faq { margin-top: 1.2rem; display: grid; gap: .6rem; }
 .c-faq details {
   background: var(--panel);
   border: 1px solid rgba(255,255,255,.08);
@@ -161,3 +161,39 @@
 .c-tech { margin-top: .4rem !important; color: var(--text2); font-size: .78rem; letter-spacing: .01em; }
 .c-hero .cta .btn.ghost { background: transparent; border-color: transparent; color: var(--text2); }
 .c-hero .cta .btn.ghost:hover { color: var(--text); }
+
+/* Первый экран: текст слева, карточка этапов справа (как консоль на главной). */
+.c-hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 3rem; align-items: center; }
+.c-hero-text { min-width: 0; }
+/* Метрики — по ширине текста, без линий на всю ширину. */
+.c-hero .stats { display: inline-flex; flex-wrap: wrap; width: auto; max-width: 100%; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.c-hero .stats li { padding: .7rem 1.1rem .7rem 0; margin-right: 1.1rem; }
+.c-flow { border: 1px solid #1E2638; border-radius: 12px; background: #0F1520; padding: 1.3rem 1.4rem 1.2rem; box-shadow: none; }
+.c-flow-title { margin: 0 0 1rem; font: 600 .78rem var(--f-text); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.c-flow-steps { list-style: none; margin: 0; padding: 0; position: relative; }
+.c-flow-steps::before { content: ""; position: absolute; left: 5px; top: .5rem; bottom: .5rem; width: 1px; background: #222B3D; }
+.c-flow-step { position: relative; display: grid; grid-template-columns: 11px 1fr; column-gap: .9rem; padding: .45rem 0; }
+.c-flow-dot { grid-row: 1 / span 2; margin-top: .35rem; width: 11px; height: 11px; border-radius: 50%; background: #0F1520; border: 2px solid #4C6FFF; position: relative; z-index: 1; }
+.c-flow-name { color: var(--text); font-weight: 700; font-size: .98rem; }
+.c-flow-hint { color: var(--muted); font-size: .86rem; line-height: 1.4; }
+.c-flow-note { margin: .9rem 0 0; padding-top: .9rem; border-top: 1px solid #1E2638; color: var(--text2); font-size: .86rem; display: flex; align-items: center; gap: .5rem; }
+.c-flow.anim .c-flow-step { opacity: 0; transform: translateY(6px); }
+.c-flow.anim.on .c-flow-step { opacity: 1; transform: none; transition: opacity .35s ease, transform .35s ease; transition-delay: calc(var(--i) * 140ms); }
+@media (max-width: 900px) {
+  .c-hero { grid-template-columns: 1fr; gap: 1.8rem; }
+  .c-flow { max-width: 520px; }
+}
+@media (max-width: 640px) {
+  .c-hero .stats { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; }
+  .c-flow { padding: 1rem 1.1rem; }
+  .c-flow-step { padding: .3rem 0; }
+  .c-flow-hint { font-size: .8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c-flow.anim .c-flow-step { opacity: 1; transform: none; transition: none; }
+}
+/* Метрики в одну строку на десктопе: компактнее отступы и шрифт. */
+@media (min-width: 901px) {
+  .c-hero .stats { flex-wrap: nowrap; }
+  .c-hero .stats li { white-space: nowrap; font-size: .82rem; padding: .65rem .8rem .65rem 0; margin-right: .8rem; }
+}

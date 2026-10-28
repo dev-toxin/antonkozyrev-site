@@ -122,18 +122,33 @@ const faqLd = {
 
     <main id="main">
       <section class="wrap c-hero">
-        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{c.eyebrow}</p>
-        <h1>{c.h1}</h1>
-        <p class="lead">{c.lead}</p>
-        {c.meet && <p class="c-meet">{c.meet}</p>}
-        <ul class="stats">
-          {c.meta.map((m) => <li>{m}</li>)}
-        </ul>
-        <div class="cta">
-          <a class="btn primary" href="#brief">{c.ctaPrimary}</a>
-          <a class="btn" href={links.telegram} target="_blank" rel="noopener"><Icon name="send" />{c.ctaTelegram}</a>
-          <a class="btn ghost" href="#examples">{c.ctaSecondary} →</a>
+        <div class="c-hero-text">
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{c.eyebrow}</p>
+          <h1>{c.h1}</h1>
+          <p class="lead">{c.lead}</p>
+          {c.meet && <p class="c-meet">{c.meet}</p>}
+          <ul class="stats">
+            {c.meta.map((m) => <li>{m}</li>)}
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href="#brief">{c.ctaPrimary}</a>
+            <a class="btn" href={links.telegram} target="_blank" rel="noopener"><Icon name="send" />{c.ctaTelegram}</a>
+            <a class="btn ghost" href="#examples">{c.ctaSecondary} →</a>
+          </div>
         </div>
+        <aside class="c-flow" aria-label={c.flow.title}>
+          <p class="c-flow-title">{c.flow.title}</p>
+          <ol class="c-flow-steps">
+            {c.flow.steps.map((st, i) => (
+              <li class="c-flow-step" style={`--i:${i}`}>
+                <span class="c-flow-dot" aria-hidden="true"></span>
+                <span class="c-flow-name">{st.name}</span>
+                <span class="c-flow-hint">{st.hint}</span>
+              </li>
+            ))}
+          </ol>
+          <p class="c-flow-note"><span class="dot" aria-hidden="true"></span>{c.flow.note}</p>
+        </aside>
       </section>
 
       <section id="services" class="wrap section">
@@ -288,6 +303,20 @@ const faqLd = {
       <a href={c.altPath} hreflang={client[altLang].htmlLang}>{c.switchTitle}</a>
     </footer>
 
+    <script>
+      // Этапы в карточке справа проявляются один раз, когда карточка видна.
+      // Без поддержки IntersectionObserver или при «уменьшить движение» — сразу видны все.
+      const flow = document.querySelector<HTMLElement>('.c-flow');
+      if (flow && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+        flow.classList.add('anim');
+        const io = new IntersectionObserver((entries) => {
+          if (!entries.some((e) => e.isIntersecting)) return;
+          io.disconnect();
+          flow.classList.add('on');
+        }, { threshold: 0.3 });
+        io.observe(flow);
+      }
+    </script>
     <script>
       const form = document.getElementById('brief-form') as HTMLFormElement | null;
       form?.addEventListener('submit', (ev) => {

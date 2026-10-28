@@ -27,6 +27,8 @@ export type ClientCopy = {
   ctaPrimary: string;
   ctaSecondary: string;
   ctaTelegram: string;
+  /** Карточка справа в первом экране: этапы работы одним взглядом. */
+  flow: { title: string; note: string; steps: { name: string; hint: string }[] };
   servicesTitle: string;
   services: Item[];
   processTitle: string;
@@ -83,6 +85,17 @@ export const client: Record<Lang, ClientCopy> = {
     ctaPrimary: 'Обсудить задачу',
     ctaSecondary: 'Посмотреть работы',
     ctaTelegram: 'Написать в Telegram',
+    flow: {
+      title: 'Как пойдёт работа',
+      note: 'Оценка — бесплатно · оплата поэтапно',
+      steps: [
+        { name: 'Заявка', hint: 'письмо, Telegram или форма' },
+        { name: 'Оценка', hint: 'план первой версии и сроки' },
+        { name: 'Этапы', hint: 'показываю работающий результат' },
+        { name: 'Запуск', hint: 'стор, домен, хостинг' },
+        { name: 'Поддержка', hint: 'исправления и новые функции' },
+      ],
+    },
     servicesTitle: 'Что делаю',
     services: [
       {
@@ -211,6 +224,17 @@ export const client: Record<Lang, ClientCopy> = {
     ctaPrimary: 'Discuss a project',
     ctaSecondary: 'See my work',
     ctaTelegram: 'Message on Telegram',
+    flow: {
+      title: 'How the work goes',
+      note: 'Free estimate · pay per stage',
+      steps: [
+        { name: 'Request', hint: 'email, Telegram or the form' },
+        { name: 'Estimate', hint: 'first-version plan and timing' },
+        { name: 'Stages', hint: 'I demo working results' },
+        { name: 'Launch', hint: 'stores, your domain, hosting' },
+        { name: 'Support', hint: 'fixes and new features' },
+      ],
+    },
     servicesTitle: 'What I do',
     services: [
       {
