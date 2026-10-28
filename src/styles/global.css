@@ -354,6 +354,8 @@ h2 { font-weight: 800; }
 .about { display: grid; grid-template-columns: 160px 1fr; gap: 1.6rem; align-items: center; }
 .about img { width: 160px; height: 160px; object-fit: cover; border-radius: 16px; border: 1px solid var(--line); }
 .hire { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+/* Ссылки GitHub / LinkedIn / hh.ru — отдельная группа под кнопками, не прилипает к ним */
+.hire + .contacts { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line, #222B3D); }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; gap: 1.6rem; padding: 5rem 0 3rem; }
   .hero .console { max-height: 280px; overflow: hidden; }
