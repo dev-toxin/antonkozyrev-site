@@ -223,7 +223,7 @@ const personLd = {
                   </div>
                   <p class="what">{a.what}</p>
                   <p class="role">{a.role}</p>
-                  {a.stackNote && <p class="stackline">{a.stackNote}</p>}
+                  <p class="stackline">{a.stackNote ?? ''}</p>
                   <p class="app-links">
                     {a.links.map((l) => (
                       <a class="chip" href={l.href} rel="noopener">{l.label} ↗</a>

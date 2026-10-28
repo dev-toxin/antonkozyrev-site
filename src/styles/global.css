@@ -148,8 +148,10 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; a
 
 /* apps */
 .apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(330px, 100%), 1fr)); gap: 1.2rem; }
-/* card = 5 rows shared across the row via subgrid: shots / head / what / role / links */
-.app { overflow: hidden; display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
+/* card = 6 rows shared across the row via subgrid: shots / head / what / role / stack / links.
+   Every card renders all 6 children (empty .stackline collapses), otherwise the 6th child
+   lands in an implicit row on top of the stack line. */
+.app { overflow: hidden; display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0; }
 .app > :not(.shots) { padding-inline: 1.4rem; }
 .shots { height: 250px; position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 1rem; padding-top: 2.6rem; background: radial-gradient(ellipse at 50% 120%, rgba(var(--c2-rgb),.35), transparent 60%), linear-gradient(180deg, rgba(var(--c1-rgb),.08), transparent); border-bottom: 1px solid var(--line); overflow: hidden; }
 .phone { width: 128px; border-radius: 20px 20px 0 0; padding: 6px 6px 0; background: var(--phone-bg); border: 1px solid rgba(var(--c2-rgb),.5); border-bottom: 0; box-shadow: 0 0 22px rgba(var(--glow-rgb),.35); overflow: hidden; }
@@ -169,6 +171,8 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; a
 .badge.corner { position: absolute; top: .7rem; left: .8rem; z-index: 2; background: rgba(4, 6, 13, .82); }
 .app p { margin: 0 0 .7rem; color: var(--text2); font-size: .95rem; }
 .app .role { color: var(--muted); }
+.app > .stackline { margin: 0 0 .9rem; overflow-wrap: anywhere; }
+.app > .stackline:empty { margin: 0; padding: 0; }
 .app-links { margin: 0 !important; padding-bottom: 1.5rem; display: flex; gap: .5rem; flex-wrap: wrap; align-self: end; }
 @supports not (grid-template-rows: subgrid) {
   .app { display: flex; flex-direction: column; }
