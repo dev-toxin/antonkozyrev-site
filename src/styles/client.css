@@ -156,3 +156,8 @@
 .c-form input:focus, .c-form select:focus, .c-form textarea:focus { outline-color: var(--blue); }
 .c-brief { background: var(--panel); border-color: var(--line); }
 @media (min-width: 900px) { .c-services { grid-template-columns: repeat(3, 1fr); } }
+
+/* 2026-10-28: технологии мелкой строкой под описанием услуги */
+.c-tech { margin-top: .4rem !important; color: var(--text2); font-size: .78rem; letter-spacing: .01em; }
+.c-hero .cta .btn.ghost { background: transparent; border-color: transparent; color: var(--text2); }
+.c-hero .cta .btn.ghost:hover { color: var(--text); }

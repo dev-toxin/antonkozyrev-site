@@ -84,7 +84,7 @@ export const copy: Record<Lang, Copy> = {
   en: {
     htmlLang: 'en',
     path: '/',
-    title: 'Anton Kozyrev — Senior Flutter Developer · Go · LLM integrations',
+    title: 'Anton Kozyrev — Senior Flutter Developer · Go · LLM Integrations',
     description:
       'Senior Flutter developer: 4.5+ years of commercial mobile development, sole mobile developer behind three products. Go backends and LLM features with guardrails. Open to projects and full-time offers.',
     nav: { cases: 'Work', apps: 'Apps', stack: 'Stack', ai: 'AI workflow', contact: 'Contact' },
@@ -93,12 +93,12 @@ export const copy: Record<Lang, Copy> = {
     switchHref: '/ru/',
     hero: {
       name: 'Anton Kozyrev',
-      role: 'Senior Flutter Developer · Go · LLM integrations',
+      role: 'Senior Flutter Developer · Go · LLM Integrations',
       lead:
         "Flutter developer with 4.5+ years of commercial mobile development. For the last three years I've been the sole mobile developer behind three products: architecture, stack, API contracts, releases. I build my own products end to end — Go backend, web, LLM integration, deployment.",
       meta: ['Kaliningrad, Russia · Remote', 'Open to projects and full-time offers'],
-      stats: ['4.5+ yrs Flutter', '10 apps in the stores', '3 products solo'],
-      ctaPrimary: 'See the work',
+      stats: ['4.5+ yrs Flutter', '10 apps in the stores', '3 products as sole mobile dev'],
+      ctaPrimary: 'See my work',
       ctaSecondary: 'Get in touch',
       ctaResume: 'Résumé PDF',
       resumePdf: '/resume/anton-kozyrev-resume-en.pdf',
@@ -106,7 +106,7 @@ export const copy: Record<Lang, Copy> = {
       statsNum: [
         { n: 4.5, dec: 1, suffix: '+', label: 'yrs Flutter' },
         { n: 10, suffix: '', label: 'apps in the stores' },
-        { n: 3, suffix: '', label: 'products solo' },
+        { n: 3, suffix: '', label: 'products as sole mobile dev' },
       ],
     },
     help: {
@@ -118,7 +118,7 @@ export const copy: Record<Lang, Copy> = {
         { title: 'Go backend and MVP API', text: 'REST API in Go with PostgreSQL and CI on GitHub Actions — enough to launch a product and validate the idea.' },
         { title: 'LLM features with guardrails', text: 'Budget limits, fact-checking and fallbacks: the model does not invent data and does not burn the budget.' },
       ],
-      format: "Part-time project, long-term contract or a full-time role — tell me about the task, and I'll come back with a clear plan and estimate.",
+      format: "A one-off project, a long-term contract or a full-time role — tell me what you need, and I'll come back with a clear plan and an estimate.",
       clientLink: { href: '/custom-development/', label: 'Custom development' },
     },
     casesTitle: 'Selected work',
@@ -128,12 +128,12 @@ export const copy: Record<Lang, Copy> = {
         title: 'Commercial mobile apps',
         tag: 'Flutter · 4.5+ years',
         summary:
-          'Apps for contractors of a staffing service — GSR Rabota and Contractor Account (Личный кабинет исполнителя): onboarding, documents with SMS signing, shift booking, payouts and tax receipts. Sole mobile developer in the product team; the code is under NDA, the apps are in the stores — see Apps below.',
+          'Apps for contractors of a staffing service — GSR Rabota and Contractor Portal: onboarding, documents with SMS signing, shift booking, payouts and tax receipts. Sole mobile developer on the product team; the code is under NDA, the apps are in the stores — see Apps below.',
         facts: [
           '10 mobile apps in the stores — from greenfield launches to taking over code from other teams',
           'GSR Rabota — built from scratch: architecture, stack, API contracts with the backend, releases',
-          'Contractor Account — migrated from native Android (Java) to Flutter at full feature parity, shipped on iOS and Android, new design; now maintaining version 3.x',
-          'Feature-first Clean Architecture, Riverpod for state, API contracts co-designed with the backend team, real-time chat on Socket.IO, FCM push, Crashlytics, Remote Config',
+          'Contractor Portal — migrated from native Android (Java) to Flutter with full feature parity, shipped on iOS and Android, new design; now maintaining and developing version 3.x',
+          'Feature-first Clean Architecture, Riverpod for state, API contracts co-designed with the backend team, real-time chat on Socket.IO, FCM push notifications, Crashlytics, Remote Config',
           'Key logic covered with unit and integration tests; legacy refactoring without stopping feature work',
         ],
         stack: 'Flutter · Dart · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite',
@@ -150,7 +150,7 @@ export const copy: Record<Lang, Copy> = {
           'Numbers come from the data, never from the model; a second model fact-checks every text',
           '42 of 50 pages (84%) passed the automated fact check in the pilot run; a rejected page gets one automatic retry, and if it fails again it goes to a manual review queue and is never published',
           'Budget guard: the model is not called if the worst case would exceed the monthly limit',
-          'Models compared on the real task — a reasoning model spent the whole token limit on reasoning and returned no answer, so it was rejected',
+          'I benchmarked models on the actual task: one reasoning model burned its whole token limit on reasoning and returned nothing, so I dropped it',
         ],
         stack: 'Go · Yandex AI Studio (gpt-oss-120b) · Hugo · Cloudflare',
         link: { href: links.sitefarm, label: 'Code: sitefarm-showcase' },
@@ -176,7 +176,7 @@ export const copy: Record<Lang, Copy> = {
         title: 'TapReply — replies to customer reviews',
         tag: 'B2B SaaS · in development',
         summary:
-          'AI replies to reviews from several platforms for venues, in local languages. A Go core with platform adapters: a new review platform is a new adapter, not a rewrite.',
+          'AI-drafted replies to customer reviews across several platforms, for restaurants and other venues, in local languages. A Go core with platform adapters: a new review platform is a new adapter, not a rewrite.',
         facts: ['Go core + platform adapters', 'Flutter / PWA client', 'PostgreSQL'],
         stack: 'Go · Flutter · PWA · PostgreSQL · site: Astro, EN/RU',
         live: { href: links.tapreply, label: 'Live site ↗' },
@@ -184,37 +184,37 @@ export const copy: Record<Lang, Copy> = {
       },
     ],
     appsTitle: 'Apps I built',
-    appsLead: "The first two are my current role. The rest were built in parallel with it — I'm used to running several projects at once: separate repos, clear scopes, every app released to the stores.",
+    appsLead: "The first two are from my current job. I built the rest alongside it — separate repos, clear scopes, every app shipped to the stores.",
     apps: [
       {
-        id: 'gsr', name: 'GSR Rabota', years: '2026', badge: 'Current role',
+        id: 'gsr', name: 'GSR Rabota', years: '2026', badge: 'Current job',
         what: 'New app for contractors of a staffing service: sign-up and documents, SMS signing, finding tasks and booking shifts, wallet and payouts, tax receipts for the self-employed, real-time support chat.',
         role: 'Sole mobile developer, built from scratch: architecture, stack, API contracts with the backend, releases.',
         stackNote: 'Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite',
         links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=ru.gsrrabota.mobile', label: 'Google Play' }],
       },
       {
-        id: 'lk', name: 'Contractor Account (Личный кабинет исполнителя)', years: '2025', badge: 'Current role',
-        what: 'Contractor app of the same service: shift self-booking, documents with e-signing and receipts, profile and bank cards.',
-        role: 'Migrated native Android (Java) to Flutter and shipped it on iOS and Android; now leading version 3.x.',
+        id: 'lk', name: 'Contractor Portal', years: '2025', badge: 'Current job',
+        what: 'Contractor app of the same service: shift self-booking, documents with e-signing and receipts, profile and bank cards. In the stores as «Личный кабинет исполнителя».',
+        role: 'Migrated native Android (Java) to Flutter and shipped it on iOS and Android; now maintaining and developing version 3.x.',
         links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=com.crystalglaive.employee', label: 'Google Play' }, { href: 'https://www.rustore.ru/catalog/app/com.crystalglaive.employee', label: 'RuStore' }],
       },
       {
         id: 'zhabby', name: 'Zhabby', years: '2025',
         what: 'Short-video social network that rewards activity: personal feed, video upload, points for views, likes and comments, rewards exchange.',
-        role: 'Second developer on the team: built every screen from Figma designs, connected API requests and state management in several sections. Published on the App Store and Google Play.',
+        role: 'Second developer on the team: built every screen from Figma designs, wired up API calls and state management in several sections. Published on the App Store and Google Play.',
         links: [{ href: 'https://apps.apple.com/ru/app/id6758106499', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=com.metaparadox.zhabby', label: 'Google Play' }, { href: 'https://zhabby.info/', label: 'zhabby.info' }],
       },
       {
         id: 'jobline', name: 'Jobline', years: '2023–2024',
-        what: 'Platform for working with external contractors: contractor onboarding, documents and receipts, payouts with tax (NPD) withholding.',
+        what: 'Platform for working with external contractors: contractor onboarding, documents and receipts, payouts with tax withholding for self-employed contractors.',
         role: 'Built the mobile app from scratch.',
         links: [{ href: 'https://teleport.run/projects/jobline', label: 'Case study' }, { href: 'https://jobline.one/', label: 'jobline.one' }],
       },
       {
         id: 'qworking', name: 'Q-Working', years: '2023–2024',
         what: 'Service that finds contractors, handles deals and pays them.',
-        role: 'Built the worker mobile app from scratch: onboarding, profile and services, orders and payouts.',
+        role: 'Built the contractor app from scratch: onboarding, profile and services, orders and payouts.',
         links: [{ href: 'https://teleport.run/projects/q-working', label: 'Case study' }],
       },
       {
@@ -225,13 +225,13 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         id: 'greenfeed', name: 'GreenFeed', years: '2022–2023',
-        what: 'Feed product catalog and animal diet calculator for farmers.',
+        what: 'Animal feed catalog and feed-ration calculator for farmers.',
         role: 'Second developer: UI from Figma, state management, REST API integration, bug fixing and feature work.',
         links: [{ href: 'https://apps.apple.com/ru/app/greenfeed/id6453763960', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=ru.gwco.feed', label: 'Google Play' }],
       },
     ],
     stackTitle: 'Stack',
-    stackLead: 'Each skill points to where it is used — not a tag cloud.',
+    stackLead: "Each skill links to where I've used it — not a tag cloud.",
     stack: [
       {
         group: 'Mobile',
@@ -268,18 +268,18 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         title: 'Parallel agents, review before merge',
-        text: 'One session: 6 agents in parallel, each in its own repo (Astro/Hugo sites, PWA clients, Go backend), ~2 hours of staged work with acceptance criteria. Then I review: tests, builds, commit authorship, secret scan. Within one repo, parallel agents get separate git worktrees. Nothing lands in main without this review.',
+        text: 'In one session I ran six agents in parallel, each in its own repo (Astro/Hugo sites, PWA clients, Go backend), ~2 hours of staged work with acceptance criteria. Then I review: tests, builds, commit authorship, secret scan. Within one repo, parallel agents get separate git worktrees. Nothing lands in main without this review.',
       },
       {
         title: 'LLMs inside the product, with guardrails',
-        text: 'In sitefarm texts are generated through Yandex AI Studio and checked by a second model; in Terroir code picks the data and every answer is validated against the database. Both have hard monthly budgets.',
+        text: 'In sitefarm, texts are generated through Yandex AI Studio and checked by a second model; in Terroir, the code selects the data and every answer is validated against the database. Both have hard monthly budgets.',
       },
     ],
     toolsTitle: 'Agent toolchain',
     tools: [
       { name: 'Veai', note: 'daily driver', main: true },
-      { name: 'Cursor', note: 'used' },
-      { name: 'GitHub Copilot', note: 'used' },
+      { name: 'Cursor', note: 'also used' },
+      { name: 'GitHub Copilot', note: 'also used' },
       { name: 'Claude Code', note: 'same workflow' },
       { name: 'OpenAI Codex', note: 'same workflow' },
     ],
@@ -295,17 +295,17 @@ export const copy: Record<Lang, Copy> = {
         { kind: 'file', text: '+ internal/llm/budget_test.go' },
         { kind: 'ask', text: '3 files to change. Approve?' },
         { kind: 'ok', text: 'go test ./... — ok' },
-        { kind: 'ok', text: 'diff reviewed · secrets scan clean' },
+        { kind: 'ok', text: 'diff reviewed · secret scan clean' },
       ],
     },
     about: {
       title: 'About',
-      text: 'Senior Flutter developer from Kaliningrad. Before moving into development I spent 5 years running projects and led a department of 6 — so I start from the business task, not from the code. Today: mobile apps on Flutter, backends in Go and LLM features with guardrails.',
+      text: 'Senior Flutter developer from Kaliningrad. Before moving into development, I spent five years managing projects and led a six-person department — so I start from the business problem, not the code. Today: mobile apps in Flutter, Go backends and LLM features with guardrails.',
       photoAlt: 'Anton Kozyrev',
     },
     contactTitle: 'Contact',
     contactLead:
-      "Tell me about your task — a project, a long-term contract or a full-time role. Before moving into development I spent 5 years running projects and led a department of 6.",
+      'Tell me what you need — a project, a long-term contract or a full-time role.',
     contactItems: [
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
       { label: 'Telegram', value: '@tokc_a', href: links.telegram },
@@ -320,16 +320,16 @@ export const copy: Record<Lang, Copy> = {
     path: '/ru/',
     title: 'Антон Козырев — Senior Flutter Developer · Go · LLM-интеграции',
     description:
-      'Senior Flutter-разработчик: 4,5+\u00A0года коммерческой мобильной разработки, единственный мобильный разработчик трёх продуктов. Go-бэкенд и LLM-фичи с ограничителями. Открыт к проектам и предложениям о работе.',
-    nav: { cases: 'Проекты', apps: 'Приложения', stack: 'Стек', ai: 'Работа с AI', contact: 'Контакты' },
+      'Senior Flutter-разработчик: 4,5+\u00A0года коммерческой мобильной разработки, единственный мобильный разработчик трёх продуктов. Бэкенд на Go и функции на LLM с ограничителями. Открыт к проектам и предложениям о работе.',
+    nav: { cases: 'Проекты', apps: 'Приложения', stack: 'Стек', ai: 'Работа с ИИ', contact: 'Контакты' },
     switchLabel: 'EN',
     switchTitle: 'English version',
     switchHref: '/',
     hero: {
       name: 'Антон Козырев',
-      role: 'Senior Flutter Developer · Go · LLM-интеграции',
+      role: 'Senior Flutter · Go · LLM',
       lead:
-        'Flutter-разработчик, 4,5+\u00A0года коммерческой мобильной разработки. Последние три года — единственный мобильный разработчик трёх продуктов: архитектура, стек, API-контракты, релизы. Свои продукты делаю целиком: Go-бэкенд, веб, LLM-интеграции, деплой.',
+        'Flutter-разработчик, 4,5+\u00A0года коммерческой мобильной разработки. Последние три года — единственный мобильный разработчик трёх продуктов: архитектура, стек, API-контракты, релизы. Свои продукты делаю целиком: бэкенд на Go, веб, интеграции с LLM, развёртывание.',
       meta: ['Калининград · удалённо', 'Открыт к проектам и предложениям о работе'],
       stats: ['4,5+\u00A0года Flutter', '10\u00A0приложений в сторах', '3\u00A0продукта в одиночку'],
       ctaPrimary: 'Смотреть проекты',
@@ -347,10 +347,10 @@ export const copy: Record<Lang, Copy> = {
       title: 'С чем могу помочь',
       nav: 'Услуги',
       items: [
-        { title: 'Фичи и релизы на Flutter', text: 'Новые экраны и сценарии от макета в Figma до App Store и Google Play: состояние, интеграция с API, push-уведомления, отчёты о сбоях.' },
-        { title: 'Подхват чужого Flutter-кода', text: 'Разберусь в чужой кодовой базе, проведу рефакторинг легаси-кода без остановки разработки, покрою ключевую логику тестами.' },
-        { title: 'Go-бэкенд и MVP API', text: 'REST API на Go с PostgreSQL и CI на GitHub Actions — достаточно, чтобы запустить продукт и проверить идею.' },
-        { title: 'LLM-фичи с ограничителями', text: 'Лимит бюджета, проверка фактов и запасной сценарий: модель не выдумывает данные и не сжигает бюджет.' },
+        { title: 'Новые функции и релизы на Flutter', text: 'Новые экраны и сценарии от макета в Figma до App Store и Google Play: состояние, интеграция с API, push-уведомления, отчёты о сбоях.' },
+        { title: 'Доработка чужого Flutter-кода', text: 'Разберусь в чужой кодовой базе, проведу рефакторинг старого кода без остановки разработки, покрою ключевую логику тестами.' },
+        { title: 'Бэкенд на Go и API для MVP', text: 'REST API на Go с PostgreSQL и CI на GitHub Actions — достаточно, чтобы запустить продукт и проверить идею.' },
+        { title: 'Функции на LLM с ограничителями', text: 'Лимит бюджета, проверка фактов и запасной сценарий: модель не выдумывает данные и не сжигает бюджет.' },
       ],
       format: 'Проект, долгий контракт или работа в штат — расскажите о задаче, а я вернусь с понятным планом и оценкой.',
       clientLink: { href: '/ru/razrabotka-saytov-i-prilozheniy-kaliningrad/', label: 'Разработка на заказ' },
@@ -367,8 +367,8 @@ export const copy: Record<Lang, Copy> = {
           '10\u00A0мобильных приложений в сторах — от запуска с нуля до доработки после других команд',
           'GSR Работа — с нуля: архитектура, стек, API-контракты с бэкендом, релизы',
           'Личный кабинет исполнителя — перенёс с нативного Android (Java) на Flutter без потери функциональности, выпустил на iOS и Android с новым дизайном; сейчас веду версию 3.x',
-          'Feature-first и Clean Architecture, состояние на Riverpod, API-контракты вместе с бэкендом, чат в реальном времени на Socket.IO, push (FCM), Crashlytics, Remote Config',
-          'Ключевая логика покрыта unit- и integration-тестами; рефакторинг легаси-кода без остановки разработки',
+          'Feature-first и Clean Architecture, состояние на Riverpod, API-контракты вместе с бэкендом, чат в реальном времени на Socket.IO, push-уведомления (FCM), Crashlytics, Remote Config',
+          'Ключевая логика покрыта модульными и интеграционными тестами; рефакторинг старого кода без остановки разработки',
         ],
         stack: 'Flutter · Dart · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite',
         link: { href: '#apps', label: 'Приложения и скриншоты' },
@@ -410,7 +410,7 @@ export const copy: Record<Lang, Copy> = {
         title: 'TapReply — ответы на отзывы',
         tag: 'B2B SaaS · в разработке',
         summary:
-          'AI-ответы на отзывы с нескольких площадок для заведений на локальных языках. Ядро на Go с адаптерами площадок: новая площадка — это новый адаптер, а не переписывание.',
+          'Ответы на отзывы гостей с нескольких площадок для ресторанов и других заведений — их готовит ИИ, на языке гостя. Ядро на Go с адаптерами площадок: новая площадка — это новый адаптер, а не переписывание.',
         facts: ['Ядро на Go + адаптеры площадок', 'Клиент на Flutter / PWA', 'PostgreSQL'],
         stack: 'Go · Flutter · PWA · PostgreSQL · сайт: Astro, EN/RU',
         live: { href: links.tapreply, label: 'Сайт ↗' },
@@ -418,17 +418,17 @@ export const copy: Record<Lang, Copy> = {
       },
     ],
     appsTitle: 'Приложения, которые я делал',
-    appsLead: 'Первые два — моя текущая роль, остальные сделаны параллельно с ней: привык вести несколько проектов одновременно — отдельные репозитории, понятные границы задач, каждое приложение дошло до стора.',
+    appsLead: 'Первые два — с моей текущей работы, остальные сделаны параллельно: отдельные репозитории, понятные границы задач, каждое приложение дошло до стора.',
     apps: [
       {
-        id: 'gsr', name: 'GSR Работа', years: '2026', badge: 'Текущая роль',
+        id: 'gsr', name: 'GSR Работа', years: '2026', badge: 'Текущая работа',
         what: 'Новое приложение для исполнителей сервиса подбора персонала: регистрация и документы, подписание по SMS, поиск заданий и запись на смены, кошелёк и выплаты, налоговые чеки самозанятых, чат с поддержкой в реальном времени.',
         role: 'Единственный мобильный разработчик, с нуля: архитектура, стек, API-контракты с бэкендом, релизы.',
         stackNote: 'Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite',
         links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=ru.gsrrabota.mobile', label: 'Google Play' }],
       },
       {
-        id: 'lk', name: 'Личный кабинет исполнителя', years: '2025', badge: 'Текущая роль',
+        id: 'lk', name: 'Личный кабинет исполнителя', years: '2025', badge: 'Текущая работа',
         what: 'Приложение исполнителя того же сервиса: самозапись на смены, документы с электронной подписью и чеки, профиль и банковские карты.',
         role: 'Перенёс нативное Android-приложение (Java) на Flutter, выпустил на iOS и Android; веду версию 3.x.',
         links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=com.crystalglaive.employee', label: 'Google Play' }, { href: 'https://www.rustore.ru/catalog/app/com.crystalglaive.employee', label: 'RuStore' }],
@@ -468,7 +468,7 @@ export const copy: Record<Lang, Copy> = {
     stackLead: 'У каждого навыка — ссылка на то, где он применён, а не облако тегов.',
     stack: [
       {
-        group: 'Мобайл',
+        group: 'Мобильная разработка',
         items: 'Flutter, Dart, Riverpod, GoRouter, Dio, Socket.IO, Firebase (FCM, Crashlytics, Remote Config), Drift/SQLite',
         where: [{ href: '#mobile', label: 'Коммерческие приложения' }, { href: '#tapreply', label: 'TapReply' }],
       },
@@ -489,16 +489,16 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         group: 'Архитектура и качество',
-        items: 'Clean Architecture, feature-first, unit- и integration-тесты, легаси-код',
+        items: 'Clean Architecture, feature-first, модульные и интеграционные тесты, работа со старым кодом',
         where: [{ href: '#mobile', label: 'Коммерческие приложения' }, { href: links.terroir, label: 'тесты Terroir' }],
       },
     ],
-    aiTitle: 'Как я работаю с AI-агентами',
+    aiTitle: 'Как я работаю с ИИ-агентами',
     aiLead: 'На агента можно переложить объём работы, но не ответственность за результат.',
     ai: [
       {
         title: 'Агент в IDE, сначала план',
-        text: 'Основной ежедневный инструмент — Veai (AI-агент для IDE JetBrains), в IntelliJ. Он читает проект, правит код, запускает тесты и команды. Сначала план и декомпозиция, потом код; у агента память о проекте, мои навыки (skills) и правила. Работал также с Cursor и GitHub Copilot; Claude Code и OpenAI Codex устроены по тому же агентному циклу — план → дифф → тесты, — так что переключаюсь между ними без проблем.',
+        text: 'Основной ежедневный инструмент — Veai (ИИ-агент для IDE JetBrains), в IntelliJ. Он читает проект, правит код, запускает тесты и команды. Сначала план и декомпозиция, потом код; у агента память о проекте, мои навыки (skills) и правила. Работал также с Cursor и GitHub Copilot; Claude Code и OpenAI Codex устроены по тому же агентному циклу — план → дифф → тесты, — так что переключаюсь между ними без проблем.',
       },
       {
         title: 'Параллельные агенты, ревью до слияния',
@@ -534,12 +534,12 @@ export const copy: Record<Lang, Copy> = {
     },
     about: {
       title: 'Обо мне',
-      text: 'Senior Flutter-разработчик из\u00A0Калининграда. До разработки 5\u00A0лет вёл проекты и руководил отделом из 6\u00A0человек — поэтому начинаю с задачи бизнеса, а не с кода. Сейчас: мобильные приложения на Flutter, бэкенды на Go и LLM-фичи с ограничителями.',
+      text: 'Senior Flutter-разработчик из\u00A0Калининграда. До разработки 5\u00A0лет вёл проекты и руководил отделом из 6\u00A0человек — поэтому начинаю с задачи бизнеса, а не с кода. Сейчас: мобильные приложения на Flutter, бэкенды на Go и функции на LLM с ограничителями.',
       photoAlt: 'Антон Козырев',
     },
     contactTitle: 'Контакты',
     contactLead:
-      'Расскажите о задаче — проект, долгий контракт или работа в штат. До разработки 5\u00A0лет вёл проекты и руководил отделом из 6\u00A0человек.',
+      'Расскажите о задаче — проект, долгий контракт или работа в штат.',
     contactItems: [
       { label: 'Email', value: links.email, href: `mailto:${links.email}` },
       { label: 'Telegram', value: '@tokc_a', href: links.telegram },

@@ -372,18 +372,22 @@ const personLd = {
           const dec = Number(el.dataset.dec ?? 0);
           el.textContent = v.toLocaleString(lang, { minimumFractionDigits: dec, maximumFractionDigits: dec }) + (el.dataset.suffix ?? '');
         };
-        nums.forEach((el) => fmt(el, 0));
         const io = new IntersectionObserver((entries) => {
           if (!entries.some((e) => e.isIntersecting)) return;
           io.disconnect();
-          const t0 = performance.now();
+          // Отсчёт начинается с первого кадра: если кадры не идут (фоновая вкладка, скриншотер),
+          // на странице остаются итоговые значения из HTML, а не нули.
+          let t0 = -1;
           const step = (now: number) => {
+            if (t0 < 0) t0 = now;
             const k = Math.min(1, (now - t0) / 800);
             const e = 1 - Math.pow(1 - k, 3);
             nums.forEach((el) => fmt(el, Number(el.dataset.count) * e));
             if (k < 1) requestAnimationFrame(step);
           };
           requestAnimationFrame(step);
+          // Страховка: если анимация не дошла до конца (вкладка в фоне, медленный кадр) — показать итоговые значения.
+          setTimeout(() => nums.forEach((el) => fmt(el, Number(el.dataset.count))), 1200);
         }, { threshold: 0.4 });
         io.observe(nums[0].closest('.stats')!);
       }

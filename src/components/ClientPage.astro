@@ -131,7 +131,8 @@ const faqLd = {
         </ul>
         <div class="cta">
           <a class="btn primary" href="#brief">{c.ctaPrimary}</a>
-          <a class="btn" href="#examples">{c.ctaSecondary}</a>
+          <a class="btn" href={links.telegram} target="_blank" rel="noopener"><Icon name="send" />{c.ctaTelegram}</a>
+          <a class="btn ghost" href="#examples">{c.ctaSecondary} →</a>
         </div>
       </section>
 
@@ -143,6 +144,7 @@ const faqLd = {
               {s.icon && <span class="svc-icon" aria-hidden="true"><Icon name={s.icon} /></span>}
               <h3>{s.title}</h3>
               <p>{s.text}</p>
+              {s.tech && <p class="c-tech">{s.tech}</p>}
               {s.proof && (
                 <p class="c-proof">
                   {s.proof.map((p) => (
