@@ -16,7 +16,7 @@
 
 .c-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
   gap: 1rem;
   margin-top: 1.2rem;
 }
@@ -79,11 +79,12 @@
 }
 .c-form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* minmax(0, …): колонка не раздвигается по самому длинному варианту в <select> */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1rem;
   margin-top: 1.2rem;
 }
-.c-form label { display: flex; flex-direction: column; gap: .35rem; }
+.c-form label { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
 .c-form label span { font-size: .85rem; color: var(--text2); }
 .c-form .wide { grid-column: 1 / -1; }
 .c-form input,
@@ -95,6 +96,10 @@
   border: 1px solid rgba(255,255,255,.14);
   border-radius: var(--r);
   padding: .7rem .8rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .c-form input:focus,
 .c-form select:focus,
@@ -114,7 +119,7 @@
 
 @media (max-width: 640px) {
   .c-hero { padding-top: 6rem; }
-  .c-form { grid-template-columns: 1fr; }
+  .c-form { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* full-spectrum additions */

@@ -147,7 +147,7 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; a
 }
 
 /* apps */
-.apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1.2rem; }
+.apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(330px, 100%), 1fr)); gap: 1.2rem; }
 /* card = 5 rows shared across the row via subgrid: shots / head / what / role / links */
 .app { overflow: hidden; display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
 .app > :not(.shots) { padding-inline: 1.4rem; }

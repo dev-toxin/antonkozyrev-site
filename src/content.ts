@@ -97,7 +97,7 @@ export const copy: Record<Lang, Copy> = {
       lead:
         "Flutter developer with 4.5+ years of commercial mobile development. For the last three years I've been the sole mobile developer behind three products: architecture, stack, API contracts, releases. I build my own products end to end — Go backend, web, LLM integration, deployment.",
       meta: ['Kaliningrad, Russia · Remote', 'Open to projects and full-time offers'],
-      stats: ['4.5+ yrs Flutter', '10 apps in the stores', '3 products as sole mobile dev'],
+      stats: ['4.5+ yrs Flutter', '10 mobile apps', '3 products as sole mobile dev'],
       ctaPrimary: 'See my work',
       ctaSecondary: 'Get in touch',
       ctaResume: 'Résumé PDF',
@@ -105,7 +105,7 @@ export const copy: Record<Lang, Copy> = {
       ctaOrder: 'Discuss a project',
       statsNum: [
         { n: 4.5, dec: 1, suffix: '+', label: 'yrs Flutter' },
-        { n: 10, suffix: '', label: 'apps in the stores' },
+        { n: 10, suffix: '', label: 'mobile apps' },
         { n: 3, suffix: '', label: 'products as sole mobile dev' },
       ],
     },
@@ -130,7 +130,7 @@ export const copy: Record<Lang, Copy> = {
         summary:
           'Apps for contractors of a staffing service — GSR Rabota and Contractor Portal: onboarding, documents with SMS signing, shift booking, payouts and tax receipts. Sole mobile developer on the product team; the code is under NDA, the apps are in the stores — see Apps below.',
         facts: [
-          '10 mobile apps in the stores — from greenfield launches to taking over code from other teams',
+          '10 mobile apps — from greenfield launches to taking over code from other teams',
           'GSR Rabota — built from scratch: architecture, stack, API contracts with the backend, releases',
           'Contractor Portal — migrated from native Android (Java) to Flutter with full feature parity, shipped on iOS and Android, new design; now maintaining and developing version 3.x',
           'Feature-first Clean Architecture, Riverpod for state, API contracts co-designed with the backend team, real-time chat on Socket.IO, FCM push notifications, Crashlytics, Remote Config',
@@ -331,7 +331,7 @@ export const copy: Record<Lang, Copy> = {
       lead:
         'Flutter-разработчик, 4,5+\u00A0года коммерческой мобильной разработки. Последние три года — единственный мобильный разработчик трёх продуктов: архитектура, стек, API-контракты, релизы. Свои продукты делаю целиком: бэкенд на Go, веб, интеграции с LLM, развёртывание.',
       meta: ['Калининград · удалённо', 'Открыт к проектам и предложениям о работе'],
-      stats: ['4,5+\u00A0года Flutter', '10\u00A0приложений в сторах', '3\u00A0продукта в одиночку'],
+      stats: ['4,5+\u00A0года Flutter', '10\u00A0мобильных приложений', '3\u00A0продукта — единственный мобильный разработчик'],
       ctaPrimary: 'Смотреть проекты',
       ctaSecondary: 'Связаться',
       ctaResume: 'Резюме PDF',
@@ -339,8 +339,8 @@ export const copy: Record<Lang, Copy> = {
       ctaOrder: 'Обсудить задачу',
       statsNum: [
         { n: 4.5, dec: 1, suffix: '+', label: 'года Flutter' },
-        { n: 10, suffix: '', label: 'приложений в сторах' },
-        { n: 3, suffix: '', label: 'продукта в одиночку' },
+        { n: 10, suffix: '', label: 'мобильных приложений' },
+        { n: 3, suffix: '', label: 'продукта — единственный мобильный разработчик' },
       ],
     },
     help: {
@@ -364,7 +364,7 @@ export const copy: Record<Lang, Copy> = {
         summary:
           'Приложения для исполнителей сервиса подбора персонала — GSR Работа и Личный кабинет исполнителя: регистрация, документы с подписью по SMS, запись на смены, выплаты, налоговые чеки. Единственный мобильный разработчик в продуктовой команде; код под NDA, приложения — в сторах, см. блок «Приложения» ниже.',
         facts: [
-          '10\u00A0мобильных приложений в сторах — от запуска с нуля до доработки после других команд',
+          '10\u00A0мобильных приложений — от запуска с нуля до доработки после других команд',
           'GSR Работа — с нуля: архитектура, стек, API-контракты с бэкендом, релизы',
           'Личный кабинет исполнителя — перенёс с нативного Android (Java) на Flutter без потери функциональности, выпустил на iOS и Android с новым дизайном; сейчас веду версию 3.x',
           'Feature-first и Clean Architecture, состояние на Riverpod, API-контракты вместе с бэкендом, чат в реальном времени на Socket.IO, push-уведомления (FCM), Crashlytics, Remote Config',

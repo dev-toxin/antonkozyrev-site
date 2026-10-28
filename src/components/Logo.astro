@@ -1,14 +1,9 @@
 ---
-// Знак личного бренда «AK»: строгая лигатура — A и K делят общий вертикальный штрих,
-// ровная толщина, прямые углы (по мотивам mark-ak-dark, 2026-10-28). Цвет — акцент палитры A.
-interface Props { size?: number }
-const { size = 30 } = Astro.props;
+// Знак личного бренда «AK» — ровно форма референса mark-ak (Alice AI ART, 2026-10-28),
+// перекрашенная в акцент палитры #4C6FFF, фон прозрачный. PNG: 1x не нужен — шапка 32 px,
+// поэтому базовый файл 64 px (retina 2x) и 96 px для 3x.
+interface Props { height?: number }
+const { height = 32 } = Astro.props;
+const width = Math.round((97 / 64) * height);
 ---
-<svg class="mark" width={size} height={size} viewBox="20 19 62 62" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-  <g fill="#4C6FFF">
-    <path fill-rule="evenodd" d="M23.5 68.4 38 31.3h7.5L56 68.4h-7.2L46 59.6H33l-3 8.8zM36.5 53.8h6.5L40 44.4z"/>
-    <path d="M51.3 31.3h6.3v33.9L51.3 43z"/>
-    <path d="M57.6 45.5 70.4 31.3h8.2L62.4 50.6z"/>
-    <path d="m60.2 49.2 4.6-4.9 14 24.1h-8.2z"/>
-  </g>
-</svg>
+<img class="mark" src="/logo-ak.png" srcset="/logo-ak.png 2x, /logo-ak@3x.png 3x" width={width} height={height} alt="" decoding="async" />
