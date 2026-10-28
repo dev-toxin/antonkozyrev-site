@@ -1,6 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6a00"/><stop offset="1" stop-color="#fcee0a"/></linearGradient></defs>
-  <path d="M0 0H64V52L52 64H0Z" fill="#04060d"/>
-  <path d="M3 3H61V50.8L50.8 61H3Z" fill="none" stroke="url(#g)" stroke-width="3"/>
-  <text x="32" y="41" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#00f0ff">AK</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#0B0F17"/><g fill="none" stroke="#4C6FFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" transform="translate(1.6 1.6) scale(.9)"><path d="M2.8 27 9.4 5.2 16 27"/><path d="M5.6 19.6h7.6"/><path d="M20.6 5.2V27"/><path d="M29.2 5.2 20.6 17.4"/><path d="M23.9 12.9 29.2 27"/></g></svg>

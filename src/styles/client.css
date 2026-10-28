@@ -143,3 +143,16 @@
 .c-ex-code .c-ex-links { align-self: flex-start; }
 .c-form select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 1.1rem) 52%, calc(100% - .8rem) 52%; background-size: .3rem .3rem; background-repeat: no-repeat; padding-right: 2rem; }
 .c-form select option { color: #111; }
+
+/* ===== REDESIGN A — страница для заказчиков, 2026-10-28: та же палитра, без жёлтого и неона ===== */
+.client .c-hero .c-meet, .c-step, .c-legal, .c-direct .label, .c-proof, .c-kind { font-family: var(--f-text); }
+.client .c-hero .c-meet { color: var(--text2); }
+.c-card, .c-faq details { border-color: var(--line); }
+.c-card:hover { border-color: #33405A; }
+.c-step, .c-kind { color: var(--blue); font-weight: 700; }
+.c-proof a { color: var(--acid-hi); border-bottom-color: rgba(76,111,255,.45); }
+.c-faq details[open] summary { color: var(--text); }
+.c-form input, .c-form select, .c-form textarea { background: #0E131D; border-color: var(--line); }
+.c-form input:focus, .c-form select:focus, .c-form textarea:focus { outline-color: var(--blue); }
+.c-brief { background: var(--panel); border-color: var(--line); }
+@media (min-width: 900px) { .c-services { grid-template-columns: repeat(3, 1fr); } }

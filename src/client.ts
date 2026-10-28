@@ -5,7 +5,7 @@
 
 import { links, type Lang } from './content';
 
-type Item = { title: string; text: string; proof?: { href: string; label: string }[] };
+type Item = { title: string; text: string; icon?: string; proof?: { href: string; label: string }[] };
 
 export type Example =
   | { kind: 'app'; app: 'gsr' | 'lk' | 'zhabby'; name: string; text: string; href: string; label: string; more?: { href: string; label: string }[] }
@@ -79,12 +79,13 @@ export const client: Record<Lang, ClientCopy> = {
     lead: `Создаю сайты, мобильные и веб-приложения, автоматизирую процессы бизнеса, подключаю ИИ и${NB}пишу бэкенд. Беру задачу от идеи до запуска и поддержки — и${NB}большой проект, и${NB}небольшую доработку.`,
     meet: `Можно встретиться в${NB}Калининграде или работать удалённо.`,
     meta: [`4,5+${NB}года коммерческой разработки`, `10${NB}приложений в сторах`, `3${NB}своих сайта онлайн`],
-    ctaPrimary: 'Описать задачу',
+    ctaPrimary: 'Обсудить задачу',
     ctaSecondary: 'Посмотреть работы',
     servicesTitle: 'Что делаю',
     services: [
       {
         title: 'Сайты и лендинги',
+        icon: 'globe',
         text: 'Сайт компании или организации, корпоративный сайт, лендинг под продукт или акцию. Быстрые статические сайты на Astro и Hugo: несколько языков, базовая настройка для поисковиков, домен и хостинг.',
         proof: [
           { href: links.tapreply, label: 'tapreply.net' },
@@ -94,22 +95,26 @@ export const client: Record<Lang, ClientCopy> = {
       },
       {
         title: 'Мобильные приложения',
+        icon: 'smartphone',
         text: 'Одно приложение на Flutter для iOS и Android: экраны по макетам, работа с API, push-уведомления, аналитика, публикация в сторах.',
         proof: [{ href: '/ru/#apps', label: `10${NB}приложений в сторах` }],
       },
       {
         title: 'Веб-приложения и PWA',
+        icon: 'app-window',
         text: 'Приложение, которое работает в браузере и ставится на телефон как обычное, — без публикации в сторах. Подходит для внутренних инструментов и первых версий продукта.',
         proof: [{ href: '/ru/#terroir', label: 'PWA в Terroir и TapReply' }],
       },
       {
         title: 'Автоматизация бизнеса и внутренние сервисы',
+        icon: 'workflow',
         text: 'Автоматизация бизнес-процессов: админки, учёт, отчёты, чат-боты, интеграции между системами, перенос процессов из таблиц и переписки в понятный сервис.',
         proof: [{ href: links.sitefarm, label: 'конвейер обработки данных на Go' }],
       },
       {
-        title: 'Интеграция ИИ',
-        text: 'Чат-ассистенты, генерация и проверка текстов, обработка данных языковыми моделями — с лимитом бюджета и проверкой ответов, чтобы модель не выдумывала.',
+        title: 'Чат-боты и ИИ для бизнеса',
+        icon: 'bot',
+        text: 'Telegram-боты и чат-ассистенты, генерация и проверка текстов, обработка данных языковыми моделями — с лимитом бюджета и проверкой ответов, чтобы модель не выдумывала.',
         proof: [
           { href: '/ru/#sitefarm', label: 'sitefarm' },
           { href: '/ru/#terroir', label: 'Terroir' },
@@ -117,8 +122,14 @@ export const client: Record<Lang, ClientCopy> = {
       },
       {
         title: 'Бэкенд и API на Go',
+        icon: 'server',
         text: 'REST API на Go с PostgreSQL, автоматические проверки и сборка на GitHub Actions — основа для приложения, сайта или сервиса.',
         proof: [{ href: links.terroir, label: 'код Terroir' }],
+      },
+      {
+        title: 'Интеграции с 1С и учётными системами',
+        icon: 'cable',
+        text: 'Обмен данными между сайтом, приложением или ботом и 1С через REST и HTTP-сервисы: выгрузки, заказы, остатки, документы.',
       },
     ],
     processTitle: 'Как работаю',
@@ -189,12 +200,13 @@ export const client: Record<Lang, ClientCopy> = {
     h1: 'Custom software development: apps, websites and services',
     lead: 'A full-cycle developer: mobile apps, websites and web apps, internal tools, backends and AI integration. I take a task from idea to launch and support — a large project or a small fix.',
     meta: ['4.5+ yrs of commercial development', '10 apps in the stores', '3 own websites live'],
-    ctaPrimary: 'Describe your task',
+    ctaPrimary: 'Discuss a project',
     ctaSecondary: 'See the work',
     servicesTitle: 'What I do',
     services: [
       {
         title: 'Websites and landing pages',
+        icon: 'globe',
         text: 'Fast static sites on Astro and Hugo: several languages, search-engine basics, domain and hosting set up.',
         proof: [
           { href: links.tapreply, label: 'tapreply.net' },
@@ -204,22 +216,26 @@ export const client: Record<Lang, ClientCopy> = {
       },
       {
         title: 'Mobile apps',
+        icon: 'smartphone',
         text: 'One Flutter app for iOS and Android: screens from your designs, API integration, push notifications, analytics, store release.',
         proof: [{ href: '/#apps', label: '10 apps in the stores' }],
       },
       {
         title: 'Web apps and PWAs',
+        icon: 'app-window',
         text: 'An app that runs in the browser and installs on a phone like a native one — no store release needed. Good for internal tools and first product versions.',
         proof: [{ href: '/#terroir', label: 'PWAs in Terroir and TapReply' }],
       },
       {
         title: 'Internal tools and automation',
+        icon: 'workflow',
         text: 'Admin panels, record keeping, reports, integrations between systems, moving processes from spreadsheets and chats into a clear service.',
         proof: [{ href: links.sitefarm, label: 'data pipeline in Go' }],
       },
       {
-        title: 'AI integration',
-        text: 'Chat assistants, generating and checking texts, processing data with language models — with budget limits and answer checks so the model does not make things up.',
+        title: 'Chatbots and AI for business',
+        icon: 'bot',
+        text: 'Telegram bots and chat assistants, generating and checking texts, processing data with language models — with budget limits and answer checks so the model does not make things up.',
         proof: [
           { href: '/#sitefarm', label: 'sitefarm' },
           { href: '/#terroir', label: 'Terroir' },
@@ -227,8 +243,14 @@ export const client: Record<Lang, ClientCopy> = {
       },
       {
         title: 'Backends and APIs in Go',
+        icon: 'server',
         text: 'REST APIs in Go with PostgreSQL, automated checks and builds on GitHub Actions — the base for an app, a site or a service.',
         proof: [{ href: links.terroir, label: 'Terroir code' }],
+      },
+      {
+        title: 'Integrations with 1C and accounting systems',
+        icon: 'cable',
+        text: 'Data exchange between a website, an app or a bot and 1C via REST and HTTP services: exports, orders, stock, documents.',
       },
     ],
     processTitle: 'How I work',

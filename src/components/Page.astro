@@ -1,11 +1,17 @@
 ---
-// proto-a: Unbounded не используется
 import '@fontsource-variable/manrope/wght.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/global.css';
 import { Image } from 'astro:assets';
 import { copy, links, type Lang, type AppId } from '../content';
 import AgentConsole from './AgentConsole.astro';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import antonPhoto from '../assets/anton.webp';
+import artSitefarm from '../assets/art/case-sitefarm.jpg';
+import artMobile from '../assets/art/case-mobile.jpg';
+const caseArt: Record<string, ImageMetadata> = { sitefarm: artSitefarm, mobile: artMobile };
+const helpIcons = ['smartphone', 'code', 'server', 'bot'];
 
 import zhabbyIcon from '../assets/apps/zhabby-icon.png';
 import zhabby1 from '../assets/apps/zhabby-1.jpg';
@@ -102,14 +108,13 @@ const personLd = {
   </head>
   <body id="top">
     <a class="skip" href="#main">{lang === 'en' ? 'Skip to content' : 'К содержанию'}</a>
-    <div class="bg" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="grid"></span></div>
-    <header class="bar">
+        <header class="bar">
       <div class="wrap bar-inner">
-        <a class="logo" href={t.path} aria-label={t.hero.name}><span>AK</span></a>
+        <a class="logo" href={t.path} aria-label={t.hero.name}><Logo /><span class="logo-name hide-s">{t.hero.name}</span></a>
         <nav aria-label={lang === 'en' ? 'Sections' : 'Разделы'}>
-          <a href="#help" class="hide-s">{t.help.nav}</a>
           <a href="#work">{t.nav.cases}</a>
           <a href="#apps">{t.nav.apps}</a>
+          <a href="#help" class="hide-s">{t.help.nav}</a>
           <a href="#ai" class="hide-s">{t.nav.ai}</a>
           <a href="#stack" class="hide-s">{t.nav.stack}</a>
           <a href="#contact">{t.nav.contact}</a>
@@ -127,42 +132,34 @@ const personLd = {
           <ul class="meta">
             {t.hero.meta.map((m) => <li>{m}</li>)}
           </ul>
-          <ul class="stats">
-            {t.hero.stats.map((m) => <li>{m}</li>)}
-          </ul>
           <div class="cta">
-            <a class="btn primary" href="#work">{t.hero.ctaPrimary}</a>
-            <a class="btn" href="#contact">{t.hero.ctaSecondary}</a>
+            <a class="btn primary" href={t.hero.resumePdf} target="_blank" rel="noopener"><Icon name="file-text" />{t.hero.ctaResume}</a>
+            <a class="btn" href={links.telegram} target="_blank" rel="noopener"><Icon name="send" />Telegram</a>
+            <a class="btn ghost" href={t.help.clientLink.href}>{t.hero.ctaOrder} →</a>
           </div>
+          <ul class="stats" aria-label={t.hero.stats.join(' · ')}>
+            {t.hero.statsNum.map((m) => (
+              <li><b data-count={m.n} data-dec={m.dec ?? 0} data-suffix={m.suffix}>{m.n.toLocaleString(lang === 'en' ? 'en-US' : 'ru-RU', { minimumFractionDigits: m.dec ?? 0 })}{m.suffix}</b><span>{m.label}</span></li>
+            ))}
+          </ul>
         </div>
         <AgentConsole c={t.console} />
       </section>
 
-      <section id="help" class="wrap section">
-        <h2><span class="num">01</span>{t.help.title}</h2>
-        <div class="cases">
-          {
-            t.help.items.map((h) => (
-              <article class="card glow">
-                <h3>{h.title}</h3>
-                <p>{h.text}</p>
-              </article>
-            ))
-          }
-        </div>
-        <p class="sub">{t.help.format} <a href="#contact">{t.hero.ctaSecondary} →</a></p>
-        <p class="sub"><a class="chip" href={t.help.clientLink.href}>{t.help.clientLink.label} →</a></p>
-      </section>
-
       <section id="work" class="wrap section">
-        <h2><span class="num">02</span>{t.casesTitle}</h2>
+        <h2><span class="num">01</span>{t.casesTitle}</h2>
         <div class="cases">
           {
             t.cases.map((c) => (
               <article class="card glow case" id={c.id}>
-                <p class="tag">{c.tag}</p>
-                <h3>{c.title}</h3>
-                <p class="summary">{c.summary}</p>
+                <div class="case-head">
+                  <div>
+                    <p class="tag">{c.tag}</p>
+                    <h3>{c.title}</h3>
+                    <p class="summary">{c.summary}</p>
+                  </div>
+                  {caseArt[c.id] && <Image class="case-art" src={caseArt[c.id]} alt="" widths={[320, 640]} sizes="(max-width: 900px) 92vw, 320px" format="webp" loading="lazy" />}
+                </div>
                 <ul class="facts">
                   {c.facts.map((f) => <li>{f}</li>)}
                 </ul>
@@ -195,7 +192,7 @@ const personLd = {
       </section>
 
       <section id="apps" class="wrap section">
-        <h2><span class="num">03</span>{t.appsTitle}</h2>
+        <h2><span class="num">02</span>{t.appsTitle}</h2>
         <p class="sub">{t.appsLead}</p>
         <div class="apps">
           {
@@ -224,6 +221,7 @@ const personLd = {
                   </div>
                   <p class="what">{a.what}</p>
                   <p class="role">{a.role}</p>
+                  {a.stackNote && <p class="stackline">{a.stackNote}</p>}
                   <p class="app-links">
                     {a.links.map((l) => (
                       <a class="chip" href={l.href} rel="noopener">{l.label} ↗</a>
@@ -254,6 +252,23 @@ const personLd = {
             ))}
           </div>
         )}
+      </section>
+
+      <section id="help" class="wrap section">
+        <h2><span class="num">03</span>{t.help.title}</h2>
+        <div class="cases">
+          {
+            t.help.items.map((h, i) => (
+              <article class="card glow">
+                <span class="svc-icon" aria-hidden="true"><Icon name={helpIcons[i % helpIcons.length]} /></span>
+                <h3>{h.title}</h3>
+                <p>{h.text}</p>
+              </article>
+            ))
+          }
+        </div>
+        <p class="sub">{t.help.format} <a href="#contact">{t.hero.ctaSecondary} →</a></p>
+        <p class="sub"><a class="btn primary" href={t.help.clientLink.href}>{t.hero.ctaOrder} →</a></p>
       </section>
 
       <section id="ai" class="wrap section">
@@ -305,14 +320,28 @@ const personLd = {
         </dl>
       </section>
 
+      <section id="about" class="wrap section">
+        <div class="about">
+          <Image src={antonPhoto} alt={t.about.photoAlt} width={160} height={160} format="webp" loading="lazy" />
+          <div>
+            <h2>{t.about.title}</h2>
+            <p class="sub">{t.about.text}</p>
+          </div>
+        </div>
+      </section>
+
       <section id="contact" class="wrap section">
         <div class="contact glow">
           <h2><span class="num">06</span>{t.contactTitle}</h2>
           <p class="sub">{t.contactLead}</p>
-          <a class="btn primary big" href={`mailto:${links.email}`}>{links.email}</a>
+          <div class="hire">
+            <a class="btn primary" href={t.hero.resumePdf} target="_blank" rel="noopener"><Icon name="file-text" />{t.hero.ctaResume}</a>
+            <a class="btn" href={links.telegram} target="_blank" rel="noopener"><Icon name="send" />Telegram @tokc_a</a>
+            <a class="btn" href={`mailto:${links.email}`}><Icon name="mail" />{links.email}</a>
+          </div>
           <ul class="contacts">
             {
-              t.contactItems.filter((c) => c.label !== 'Email').map((c) => (
+              t.contactItems.filter((c) => c.label !== 'Email' && c.label !== 'Telegram').map((c) => (
                 <li>
                   <span class="label">{c.label}</span>
                   <a href={c.href} rel={isExternal(c.href) ? 'noopener' : undefined}>{c.value}</a>
@@ -334,5 +363,30 @@ const personLd = {
       <span>© {new Date().getFullYear()} {t.footer}</span>
       <a href={t.switchHref} hreflang={copy[altLang].htmlLang}>{t.switchTitle}</a>
     </footer>
+    <script>
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const nums = Array.from(document.querySelectorAll<HTMLElement>('.stats b[data-count]'));
+      if (!reduce && 'IntersectionObserver' in window && nums.length) {
+        const lang = document.documentElement.lang === 'en' ? 'en-US' : 'ru-RU';
+        const fmt = (el: HTMLElement, v: number) => {
+          const dec = Number(el.dataset.dec ?? 0);
+          el.textContent = v.toLocaleString(lang, { minimumFractionDigits: dec, maximumFractionDigits: dec }) + (el.dataset.suffix ?? '');
+        };
+        nums.forEach((el) => fmt(el, 0));
+        const io = new IntersectionObserver((entries) => {
+          if (!entries.some((e) => e.isIntersecting)) return;
+          io.disconnect();
+          const t0 = performance.now();
+          const step = (now: number) => {
+            const k = Math.min(1, (now - t0) / 800);
+            const e = 1 - Math.pow(1 - k, 3);
+            nums.forEach((el) => fmt(el, Number(el.dataset.count) * e));
+            if (k < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }, { threshold: 0.4 });
+        io.observe(nums[0].closest('.stats')!);
+      }
+    </script>
   </body>
 </html>

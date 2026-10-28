@@ -1,5 +1,4 @@
 ---
-// proto-a: Unbounded не используется
 import '@fontsource-variable/manrope/wght.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/global.css';
@@ -7,6 +6,8 @@ import '../styles/client.css';
 import { links, copy, type Lang } from '../content';
 import { Image } from 'astro:assets';
 import { client } from '../client';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
 import tapreplyHome from '../assets/sites/tapreply-home.png';
 import terroirHome from '../assets/sites/terroir-home.png';
 const siteShots = { tapreply: tapreplyHome, terroir: terroirHome };
@@ -92,7 +93,7 @@ const faqLd = {
     <link rel="alternate" hreflang="x-default" href={new URL(client.en.path, site).href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#04060d" />
+    <meta name="theme-color" content="#0B0F17" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={c.title} />
     <meta property="og:description" content={c.description} />
@@ -105,10 +106,9 @@ const faqLd = {
   </head>
   <body id="top" class="client">
     <a class="skip" href="#main">{lang === 'en' ? 'Skip to content' : 'К содержанию'}</a>
-    <div class="bg" aria-hidden="true"><span class="grid"></span></div>
     <header class="bar">
       <div class="wrap bar-inner">
-        <a class="logo" href={c.homePath} aria-label={home.hero.name}><span>AK</span></a>
+        <a class="logo" href={c.homePath} aria-label={home.hero.name}><Logo /><span class="logo-name hide-s">{home.hero.name}</span></a>
         <nav aria-label={lang === 'en' ? 'Sections' : 'Разделы'}>
           <a href={c.homePath}>{c.backHome}</a>
           <a href="#services" class="hide-s">{c.servicesTitle}</a>
@@ -140,6 +140,7 @@ const faqLd = {
         <div class="c-grid c-services">
           {c.services.map((s) => (
             <article class="c-card">
+              {s.icon && <span class="svc-icon" aria-hidden="true"><Icon name={s.icon} /></span>}
               <h3>{s.title}</h3>
               <p>{s.text}</p>
               {s.proof && (

@@ -6,7 +6,7 @@ const { c } = Astro.props;
 const prefix: Record<string, string> = { cmd: '›', plan: '◆', file: ' ', ask: '?', ok: '✓' };
 ---
 
-<figure class="console" aria-label={c.title}>
+<figure class="console" aria-label={c.title} data-console>
   <div class="console-bar">
     <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
     <span class="console-title">{c.title}</span>
@@ -29,3 +29,25 @@ const prefix: Record<string, string> = { cmd: '›', plan: '◆', file: ' ', ask
     <li class="ln caret" style={`--i:${c.lines.length}`} aria-hidden="true"><span class="pfx">›</span><span class="cur"></span></li>
   </ol>
 </figure>
+
+<script>
+  // Консоль печатает сценарий один раз, когда видна; курсор после — выключен.
+  const box = document.querySelector<HTMLElement>('[data-console]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (box && !reduce && 'IntersectionObserver' in window) {
+    const lines = Array.from(box.querySelectorAll<HTMLElement>('.ln'));
+    box.classList.add('typing');
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      const per = Math.min(650, 5000 / Math.max(1, lines.length));
+      lines.forEach((ln, i) => setTimeout(() => {
+        ln.classList.add('on');
+        if (i === lines.length - 1) box.classList.add('done');
+      }, 300 + i * per));
+    }, { threshold: 0.3 });
+    io.observe(box);
+  } else if (box) {
+    box.classList.add('done');
+  }
+</script>

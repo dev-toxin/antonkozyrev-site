@@ -1,0 +1,15 @@
+---
+// Иконки Lucide (lucide-static, лицензия ISC) — встраиваются в HTML на этапе сборки, без внешних запросов.
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+interface Props { name: string }
+const { name } = Astro.props;
+const require = createRequire(import.meta.url);
+const file = require.resolve(`lucide-static/icons/${name}.svg`);
+const svg = fs.readFileSync(file, 'utf-8')
+  .replace(/<!--[\s\S]*?-->/g, '')
+  .replace(/\s(width|height)="24"/g, '')
+  .replace('stroke-width="2"', 'stroke-width="1.5"')
+  .replace('<svg', '<svg aria-hidden="true" focusable="false"');
+---
+<Fragment set:html={svg} />

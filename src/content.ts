@@ -40,6 +40,7 @@ type App = {
   years: string;
   what: string;
   role: string;
+  stackNote?: string;
   links: LinkRef[];
   badge?: string;
 };
@@ -55,7 +56,8 @@ export type Copy = {
   switchLabel: string;
   switchTitle: string;
   switchHref: string;
-  hero: { name: string; role: string; lead: string; meta: string[]; stats: string[]; ctaPrimary: string; ctaSecondary: string };
+  hero: { name: string; role: string; lead: string; meta: string[]; stats: string[]; ctaPrimary: string; ctaSecondary: string; ctaResume: string; resumePdf: string; ctaOrder: string; statsNum: { n: number; dec?: number; suffix: string; label: string }[] };
+  about: { title: string; text: string; photoAlt: string };
   help: { title: string; nav: string; items: { title: string; text: string }[]; format: string; clientLink: { href: string; label: string } };
   casesTitle: string;
   cases: Case[];
@@ -98,6 +100,14 @@ export const copy: Record<Lang, Copy> = {
       stats: ['4.5+ yrs Flutter', '10 apps in the stores', '3 products solo'],
       ctaPrimary: 'See the work',
       ctaSecondary: 'Get in touch',
+      ctaResume: 'Résumé PDF',
+      resumePdf: '/resume/anton-kozyrev-resume-en.pdf',
+      ctaOrder: 'Discuss a project',
+      statsNum: [
+        { n: 4.5, dec: 1, suffix: '+', label: 'yrs Flutter' },
+        { n: 10, suffix: '', label: 'apps in the stores' },
+        { n: 3, suffix: '', label: 'products solo' },
+      ],
     },
     help: {
       title: 'What I can help with',
@@ -179,13 +189,14 @@ export const copy: Record<Lang, Copy> = {
       {
         id: 'gsr', name: 'GSR Rabota', years: '2026', badge: 'Current role',
         what: 'New app for contractors of a staffing service: sign-up and documents, SMS signing, finding tasks and booking shifts, wallet and payouts, tax receipts for the self-employed, real-time support chat.',
-        role: 'Sole mobile developer, built from scratch: feature-first Clean Architecture on Riverpod, choice of stack, API contracts with the backend, releases. Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite.',
+        role: 'Sole mobile developer, built from scratch: architecture, stack, API contracts with the backend, releases.',
+        stackNote: 'Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite',
         links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=ru.gsrrabota.mobile', label: 'Google Play' }],
       },
       {
         id: 'lk', name: 'Contractor Account (Личный кабинет исполнителя)', years: '2025', badge: 'Current role',
         what: 'Contractor app of the same service: shift self-booking, documents with e-signing and receipts, profile and bank cards.',
-        role: 'Migrated the native Android (Java) app to Flutter, shipped it on iOS and Android with a new design; maintaining and developing it — major version 3.x, moving the architecture to Riverpod.',
+        role: 'Migrated native Android (Java) to Flutter and shipped it on iOS and Android; now leading version 3.x.',
         links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=com.crystalglaive.employee', label: 'Google Play' }, { href: 'https://www.rustore.ru/catalog/app/com.crystalglaive.employee', label: 'RuStore' }],
       },
       {
@@ -287,6 +298,11 @@ export const copy: Record<Lang, Copy> = {
         { kind: 'ok', text: 'diff reviewed · secrets scan clean' },
       ],
     },
+    about: {
+      title: 'About',
+      text: 'Senior Flutter developer from Kaliningrad. Before moving into development I spent 5 years running projects and led a department of 6 — so I start from the business task, not from the code. Today: mobile apps on Flutter, backends in Go and LLM features with guardrails.',
+      photoAlt: 'Anton Kozyrev',
+    },
     contactTitle: 'Contact',
     contactLead:
       "Tell me about your task — a project, a long-term contract or a full-time role. Before moving into development I spent 5 years running projects and led a department of 6.",
@@ -318,6 +334,14 @@ export const copy: Record<Lang, Copy> = {
       stats: ['4,5+\u00A0года Flutter', '10\u00A0приложений в сторах', '3\u00A0продукта в одиночку'],
       ctaPrimary: 'Смотреть проекты',
       ctaSecondary: 'Связаться',
+      ctaResume: 'Резюме PDF',
+      resumePdf: '/resume/anton-kozyrev-resume-ru.pdf',
+      ctaOrder: 'Обсудить задачу',
+      statsNum: [
+        { n: 4.5, dec: 1, suffix: '+', label: 'года Flutter' },
+        { n: 10, suffix: '', label: 'приложений в сторах' },
+        { n: 3, suffix: '', label: 'продукта в одиночку' },
+      ],
     },
     help: {
       title: 'С чем могу помочь',
@@ -399,13 +423,14 @@ export const copy: Record<Lang, Copy> = {
       {
         id: 'gsr', name: 'GSR Работа', years: '2026', badge: 'Текущая роль',
         what: 'Новое приложение для исполнителей сервиса подбора персонала: регистрация и документы, подписание по SMS, поиск заданий и запись на смены, кошелёк и выплаты, налоговые чеки самозанятых, чат с поддержкой в реальном времени.',
-        role: 'Единственный мобильный разработчик, с нуля: архитектура feature-first и Clean Architecture на Riverpod, выбор стека, API-контракты с бэкендом, релизы. Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite.',
+        role: 'Единственный мобильный разработчик, с нуля: архитектура, стек, API-контракты с бэкендом, релизы.',
+        stackNote: 'Flutter · Riverpod · GoRouter · Dio · Socket.IO · Firebase · AppMetrica · Drift/SQLite',
         links: [{ href: 'https://apps.apple.com/ru/app/id6771076516', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=ru.gsrrabota.mobile', label: 'Google Play' }],
       },
       {
         id: 'lk', name: 'Личный кабинет исполнителя', years: '2025', badge: 'Текущая роль',
         what: 'Приложение исполнителя того же сервиса: самозапись на смены, документы с электронной подписью и чеки, профиль и банковские карты.',
-        role: 'Перенёс нативное Android-приложение (Java) на Flutter, выпустил на iOS и Android с новым дизайном; развиваю и поддерживаю — мажорная версия 3.x, перевожу архитектуру на Riverpod.',
+        role: 'Перенёс нативное Android-приложение (Java) на Flutter, выпустил на iOS и Android; веду версию 3.x.',
         links: [{ href: 'https://apps.apple.com/ru/app/id6748441402', label: 'App Store' }, { href: 'https://play.google.com/store/apps/details?id=com.crystalglaive.employee', label: 'Google Play' }, { href: 'https://www.rustore.ru/catalog/app/com.crystalglaive.employee', label: 'RuStore' }],
       },
       {
@@ -506,6 +531,11 @@ export const copy: Record<Lang, Copy> = {
         { kind: 'ok', text: 'go test ./... — ok' },
         { kind: 'ok', text: 'дифф проверен · секретов нет' },
       ],
+    },
+    about: {
+      title: 'Обо мне',
+      text: 'Senior Flutter-разработчик из\u00A0Калининграда. До разработки 5\u00A0лет вёл проекты и руководил отделом из 6\u00A0человек — поэтому начинаю с задачи бизнеса, а не с кода. Сейчас: мобильные приложения на Flutter, бэкенды на Go и LLM-фичи с ограничителями.',
+      photoAlt: 'Антон Козырев',
     },
     contactTitle: 'Контакты',
     contactLead:
