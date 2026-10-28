@@ -1,4 +1,14 @@
 ---
-// Личный знак «AK» (не AnKo): геометрический, по мотивам наброска Alice AI ART, 2026-10-28.
+// Знак личного бренда «AK»: строгая лигатура — A и K делят общий вертикальный штрих,
+// ровная толщина, прямые углы (по мотивам mark-ak-dark, 2026-10-28). Цвет — акцент палитры A.
+interface Props { size?: number }
+const { size = 30 } = Astro.props;
 ---
-<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--blue)"><path d="M2.8 27 9.4 5.2 16 27"/><path d="M5.6 19.6h7.6"/><path d="M20.6 5.2V27"/><path d="M29.2 5.2 20.6 17.4"/><path d="M23.9 12.9 29.2 27"/></svg>
+<svg class="mark" width={size} height={size} viewBox="20 19 62 62" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#4C6FFF">
+    <path fill-rule="evenodd" d="M23.5 68.4 38 31.3h7.5L56 68.4h-7.2L46 59.6H33l-3 8.8zM36.5 53.8h6.5L40 44.4z"/>
+    <path d="M51.3 31.3h6.3v33.9L51.3 43z"/>
+    <path d="M57.6 45.5 70.4 31.3h8.2L62.4 50.6z"/>
+    <path d="m60.2 49.2 4.6-4.9 14 24.1h-8.2z"/>
+  </g>
+</svg>
