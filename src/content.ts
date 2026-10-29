@@ -8,6 +8,7 @@ export const links = {
   github: 'https://github.com/dev-toxin',
   terroir: 'https://github.com/dev-toxin/terroir-monorepo',
   sitefarm: 'https://github.com/dev-toxin/sitefarm-showcase',
+  frostSite: 'https://localfrostdates.com',
   tapreply: 'https://www.tapreply.net',
   terroirSite: 'https://www.terroir-app.com',
   email: 'hello@antonkozyrev.dev',
@@ -27,7 +28,7 @@ type Case = {
   stack: string;
   link?: LinkRef;
   live?: LinkRef;
-  shot?: 'tapreply' | 'terroir';
+  shot?: 'tapreply' | 'terroir' | 'sitefarm';
 };
 
 type StackGroup = { group: string; items: string; where: LinkRef[] };
@@ -146,14 +147,18 @@ export const copy: Record<Lang, Copy> = {
         summary:
           'A Go pipeline that turns open data into a content site: collect data (NOAA, PRISM) → generate text with an LLM → fact-check with a second model → build a static site.',
         facts: [
-          'Pilot of ~2,100 pages; generation costs about 0.5 RUB (under one US cent) per page',
+          'Live since 2026-10-29: 2,088 pages for US weather stations, built on NOAA 1991–2020 data',
+          'The whole corpus, including regenerations and revisions, cost about 9,200 RUB at list price, roughly 4–5 RUB (about 5 US cents) per page',
           'Numbers come from the data, never from the model; a second model fact-checks every text',
-          '42 of 50 pages (84%) passed the automated fact check in the pilot run; a rejected page gets one automatic retry, and if it fails again it goes to a manual review queue and is never published',
+          'Deterministic checks run before the reviewer model (dates, 10/50/90% probabilities, made-up people); they cut the main error class, an average date presented as the frost date, from 37% to 0%',
+          'The final prompt passed the fact check on 90% of pages (27 of 30) in a trial run; a page that fails is never published: it gets one automatic retry, then goes to a manual review queue',
           'Budget guard: the model is not called if the worst case would exceed the monthly limit',
           'I benchmarked models on the actual task: one reasoning model burned its whole token limit on reasoning and returned nothing, so I dropped it',
         ],
-        stack: 'Go · Yandex AI Studio (gpt-oss-120b) · Hugo · Cloudflare',
+        stack: 'Go · Yandex AI Studio (gpt-oss-120b) · Hugo · Cloudflare Pages',
         link: { href: links.sitefarm, label: 'Code: sitefarm-showcase' },
+        live: { href: links.frostSite, label: 'Live site: localfrostdates.com (US audience; may not load from Russia without VPN) ↗' },
+        shot: 'sitefarm',
       },
       {
         id: 'terroir',
@@ -380,14 +385,18 @@ export const copy: Record<Lang, Copy> = {
         summary:
           'Go-конвейер, который превращает открытые данные в контентный сайт: сбор данных (NOAA, PRISM) → генерация текстов через LLM → проверка фактов второй моделью → сборка статического сайта.',
         facts: [
-          'Пилот — около 2\u00A0100 страниц, генерация стоит примерно 0,5\u00A0₽ за страницу',
+          'Сайт опубликован 2026-10-29: 2\u00A0088 страниц метеостанций США по данным NOAA за 1991–2020 годы',
+          'Весь корпус с перегенерациями и доработками обошёлся примерно в 9\u00A0200\u00A0₽ по прайсу, то есть около 4–5\u00A0₽ (≈5 центов) за страницу',
           'Числа берутся только из данных, а не от модели; вторая модель сверяет каждый текст с фактами',
-          '42 из 50 страниц (84%) прошли автоматическую проверку фактов в пилоте; отклонённая страница получает один автоповтор, а при повторном отказе уходит в ручную очередь и не публикуется',
+          'Детерминированные проверки до проверяющей модели (даты, вероятности 10/50/90\u00A0%, выдуманные люди) убрали главный класс ошибок — путаницу «средняя дата = дата заморозка»: с 37\u00A0% до 0\u00A0%',
+          'Финальная версия промпта в пробе прошла проверку фактов на 90\u00A0% страниц (27 из 30); непрошедшая страница не публикуется: один автоповтор, затем ручная очередь',
           'Защита бюджета: модель не вызывается, если худший сценарий выходит за месячный лимит',
           'Модели сравнивал на своей задаче — рассуждающая модель потратила весь лимит токенов на рассуждения и не вернула ответа, поэтому отбракована',
         ],
-        stack: 'Go · Yandex AI Studio (gpt-oss-120b) · Hugo · Cloudflare',
+        stack: 'Go · Yandex AI Studio (gpt-oss-120b) · Hugo · Cloudflare Pages',
         link: { href: links.sitefarm, label: 'Код: sitefarm-showcase' },
+        live: { href: links.frostSite, label: 'Живой сайт: localfrostdates.com (для США; из России без VPN может не открыться) ↗' },
+        shot: 'sitefarm',
       },
       {
         id: 'terroir',
