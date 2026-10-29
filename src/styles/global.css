@@ -126,11 +126,9 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; a
 .facts li::marker { color: var(--violet); }
 .stackline { font: .8rem var(--f-mono); color: var(--muted) !important; }
 .more { font-weight: 600; text-decoration: none; }
-/* cases: 7 rows shared across a row via subgrid — tag / title / summary / facts / stack / preview / links */
-.cases { grid-auto-rows: auto; }
-.case { display: grid; grid-row: span 7; grid-template-rows: subgrid; row-gap: 0; }
-.case .summary, .case .facts { align-self: start; }
-.case .stackline { margin-bottom: 1rem; }
+/* cases: flex column, stack line pinned to the bottom so cards in a row end level */
+.case { display: flex; flex-direction: column; }
+.case .stackline { margin: auto 0 1rem; padding-top: .2rem; }
 .case-media:empty { display: none; }
 .browser { display: block; border: 1px solid rgba(var(--c2-rgb),.55); border-radius: var(--r); overflow: hidden; background: #05070d; box-shadow: 0 0 22px rgba(var(--glow-rgb),.18); margin-bottom: 1rem; text-decoration: none; transition: box-shadow .3s, border-color .3s; }
 .browser:hover { border-color: rgba(var(--acid-rgb),.8); box-shadow: 0 0 30px rgba(var(--acid-rgb),.3); }
@@ -140,11 +138,13 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; a
 .browser-bar i:nth-child(3) { background: rgba(var(--acid-rgb),.55); }
 .browser-url { margin-left: .6rem; font: .72rem var(--f-mono); color: var(--muted); }
 .browser img { display: block; width: 100%; height: auto; aspect-ratio: 1440 / 846; object-fit: cover; object-position: top; }
-.case-links { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.1rem; align-self: end; }
-@supports not (grid-template-rows: subgrid) {
-  .case { display: flex; flex-direction: column; }
-  .case .stackline { margin-top: auto; }
-}
+.case-links { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.1rem; }
+/* wide card: text and illustration on the left, facts on the right */
+.case.wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); grid-template-rows: auto 1fr auto; grid-template-areas: "head facts" "head stack" "head links"; column-gap: 2.4rem; }
+.case.wide .case-head { grid-area: head; }
+.case.wide .facts { grid-area: facts; margin-top: .2rem; }
+.case.wide .stackline { grid-area: stack; align-self: end; margin: 0 0 1rem; }
+.case.wide .case-links { grid-area: links; }
 
 /* apps */
 .apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(330px, 100%), 1fr)); gap: 1.2rem; }
@@ -350,6 +350,8 @@ h2 { font-weight: 800; }
 .case-art { display: block; width: min(40%, 320px); height: auto; border-radius: 12px; border: 1px solid var(--line); margin: .2rem 0 .4rem; }
 .case-head { display: flex; gap: 1.4rem; align-items: flex-start; justify-content: space-between; }
 .case-head > div { flex: 1; min-width: 0; }
+.case .case-head { flex-direction: column; gap: .6rem; }
+.case .case-art { width: 100%; max-width: none; aspect-ratio: 16 / 7; object-fit: cover; margin: .4rem 0 0; }
 /* иконки Lucide в карточках услуг */
 .svc-icon { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: #161E2D; border: 1px solid var(--line); color: var(--icon); margin-bottom: .2rem; transition: color .2s, border-color .2s; }
 .svc-icon svg { width: 22px; height: 22px; stroke-width: 1.5; }
@@ -365,6 +367,10 @@ h2 { font-weight: 800; }
   .hero .console { max-height: 280px; overflow: hidden; }
   .case-art { width: 100%; max-width: none; max-height: 180px; object-fit: cover; margin: 0 0 .9rem; }
   .case-head { flex-direction: column-reverse; gap: 0; }
+  .case.wide { display: flex; }
+  .case .case-head { flex-direction: column-reverse; gap: 0; }
+  .case .case-art { aspect-ratio: auto; margin: 0 0 .9rem; }
+  .case.wide .stackline { margin-top: 0; }
 }
 @media (max-width: 640px) {
   h1 { font-size: 2.4rem; }

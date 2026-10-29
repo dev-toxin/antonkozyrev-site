@@ -28,7 +28,8 @@ type Case = {
   stack: string;
   link?: LinkRef;
   live?: LinkRef;
-  shot?: 'tapreply' | 'terroir' | 'sitefarm';
+  shot?: 'tapreply' | 'terroir' | 'frost';
+  wide?: boolean;
 };
 
 type StackGroup = { group: string; items: string; where: LinkRef[] };
@@ -126,6 +127,7 @@ export const copy: Record<Lang, Copy> = {
     cases: [
       {
         id: 'mobile',
+        wide: true,
         title: 'Commercial mobile apps',
         tag: 'Flutter · 4.5+ years',
         summary:
@@ -142,23 +144,38 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         id: 'sitefarm',
-        title: 'sitefarm — data-driven site pipeline',
-        tag: 'Go · LLM · static sites',
+        title: 'sitefarm — data-driven site engine',
+        tag: 'Go · LLM · content pipeline',
         summary:
-          'A Go pipeline that turns open data into a content site: collect data (NOAA, PRISM) → generate text with an LLM → fact-check with a second model → build a static site.',
+          'A Go engine that turns open data into a content site: collect data (NOAA, PRISM) → write text with an LLM → fact-check with a second model → build a static site.',
         facts: [
-          'Live since 2026-10-29: 2,088 pages for US weather stations, built on NOAA 1991–2020 data',
-          'The whole corpus, including regenerations and revisions, cost about 9,200 RUB at list price, roughly 4–5 RUB (about 5 US cents) per page',
-          'Numbers come from the data, never from the model; a second model fact-checks every text',
-          'Deterministic checks run before the reviewer model (dates, 10/50/90% probabilities, made-up people); they cut the main error class, an average date presented as the frost date, from 37% to 0%',
-          'The final prompt passed the fact check on 90% of pages (27 of 30) in a trial run; a page that fails is never published: it gets one automatic retry, then goes to a manual review queue',
+          'Numbers come only from the data, never from the model; a second model checks every text against the facts',
+          'Deterministic checks run before the reviewer model (dates, 10/50/90% probabilities, made-up people); they cut the main error, an average date presented as the frost date, from 37% to 0%',
+          'The final prompt passed the fact check on 90% of pages (27 of 30) in a trial run; a failed page is never published: one automatic retry, then a manual review queue',
           'Budget guard: the model is not called if the worst case would exceed the monthly limit',
-          'I benchmarked models on the actual task: one reasoning model burned its whole token limit on reasoning and returned nothing, so I dropped it',
+          'Models benchmarked on the real task: a reasoning model spent its whole token limit on reasoning and returned nothing, so I dropped it',
+          'About 4–5 RUB (≈5 US cents) per page, regenerations included',
         ],
-        stack: 'Go · Yandex AI Studio (gpt-oss-120b) · Hugo · Cloudflare Pages',
+        stack: 'Go · Yandex AI Studio (gpt-oss-120b) · SQLite',
         link: { href: links.sitefarm, label: 'Code: sitefarm-showcase' },
+      },
+      {
+        id: 'frost',
+        title: 'localfrostdates.com — frost dates for US gardeners',
+        tag: 'Hugo · static site · US',
+        summary:
+          'The first site built with sitefarm: last spring and first fall frost dates for US weather stations, with odds instead of a single date.',
+        facts: [
+          'Live since 2026-10-29: 2,088 NOAA stations, 1991–2020 climate normals',
+          'Search with suggestions across ~16,800 US cities and ZIP codes, no third-party services; an accessible ARIA combobox',
+          '“Use my location” finds the nearest stations: distance is computed in the browser, coordinates never leave the device',
+          'Every station page has a year-at-a-glance chart, 10/50/90% frost probabilities and a map of nearby stations',
+          'No cookies or third-party scripts; CSP with script hashes',
+        ],
+        stack: 'Hugo · Cloudflare Pages',
+        link: { href: '#sitefarm', label: 'Engine: sitefarm' },
         live: { href: links.frostSite, label: 'Live site: localfrostdates.com (US audience; may not load from Russia without VPN) ↗' },
-        shot: 'sitefarm',
+        shot: 'frost',
       },
       {
         id: 'terroir',
@@ -256,7 +273,7 @@ export const copy: Record<Lang, Copy> = {
       {
         group: 'Web & infra',
         items: 'Astro, Hugo, PWA, Cloudflare (Pages, DNS), Linux VPS',
-        where: [{ href: '#sitefarm', label: 'sitefarm' }, { href: '#top', label: 'this site' }],
+        where: [{ href: '#frost', label: 'localfrostdates.com' }, { href: '#top', label: 'this site' }],
       },
       {
         group: 'Architecture & quality',
@@ -364,6 +381,7 @@ export const copy: Record<Lang, Copy> = {
     cases: [
       {
         id: 'mobile',
+        wide: true,
         title: 'Коммерческие мобильные приложения',
         tag: 'Flutter · 4,5+ года',
         summary:
@@ -380,23 +398,38 @@ export const copy: Record<Lang, Copy> = {
       },
       {
         id: 'sitefarm',
-        title: 'sitefarm — конвейер сайтов на данных',
-        tag: 'Go · LLM · статические сайты',
+        title: 'sitefarm — движок сайтов на данных',
+        tag: 'Go · LLM · конвейер контента',
         summary:
-          'Go-конвейер, который превращает открытые данные в контентный сайт: сбор данных (NOAA, PRISM) → генерация текстов через LLM → проверка фактов второй моделью → сборка статического сайта.',
+          'Движок на Go, который превращает открытые данные в контентный сайт: сбор данных (NOAA, PRISM) → тексты через LLM → проверка фактов второй моделью → сборка статического сайта.',
         facts: [
-          'Сайт опубликован 2026-10-29: 2\u00A0088 страниц метеостанций США по данным NOAA за 1991–2020 годы',
-          'Весь корпус с перегенерациями и доработками обошёлся примерно в 9\u00A0200\u00A0₽ по прайсу, то есть около 4–5\u00A0₽ (≈5 центов) за страницу',
           'Числа берутся только из данных, а не от модели; вторая модель сверяет каждый текст с фактами',
-          'Детерминированные проверки до проверяющей модели (даты, вероятности 10/50/90\u00A0%, выдуманные люди) убрали главный класс ошибок — путаницу «средняя дата = дата заморозка»: с 37\u00A0% до 0\u00A0%',
+          'Детерминированные проверки до проверяющей модели (даты, вероятности 10/50/90\u00A0%, выдуманные люди) убрали главную ошибку — путаницу «средняя дата = дата заморозка»: с 37\u00A0% до 0\u00A0%',
           'Финальная версия промпта в пробе прошла проверку фактов на 90\u00A0% страниц (27 из 30); непрошедшая страница не публикуется: один автоповтор, затем ручная очередь',
           'Защита бюджета: модель не вызывается, если худший сценарий выходит за месячный лимит',
-          'Модели сравнивал на своей задаче — рассуждающая модель потратила весь лимит токенов на рассуждения и не вернула ответа, поэтому отбракована',
+          'Модели сравнивал на своей задаче: рассуждающая модель потратила весь лимит токенов на рассуждения и не вернула ответа — отбраковал',
+          'Около 4–5\u00A0₽ (≈5 центов) за страницу с учётом перегенераций',
         ],
-        stack: 'Go · Yandex AI Studio (gpt-oss-120b) · Hugo · Cloudflare Pages',
+        stack: 'Go · Yandex AI Studio (gpt-oss-120b) · SQLite',
         link: { href: links.sitefarm, label: 'Код: sitefarm-showcase' },
+      },
+      {
+        id: 'frost',
+        title: 'localfrostdates.com — даты заморозков для садоводов США',
+        tag: 'Hugo · статический сайт · США',
+        summary:
+          'Первый сайт на sitefarm: даты последних весенних и первых осенних заморозков по метеостанциям США — с вероятностями, а не одной датой.',
+        facts: [
+          'Опубликован 2026-10-29: 2\u00A0088 станций NOAA, климатические нормы 1991–2020',
+          'Поиск с подсказками по ~16\u00A0800 городам и ZIP-кодам США без внешних сервисов; поле доступно для скринридеров (ARIA combobox)',
+          '«Use my location» находит ближайшие станции: расстояние считается в браузере, координаты никуда не уходят',
+          'У каждой станции — график года, вероятности заморозков 10/50/90\u00A0% и карта соседних станций',
+          'Без cookies и сторонних скриптов, CSP по хешам скриптов',
+        ],
+        stack: 'Hugo · Cloudflare Pages',
+        link: { href: '#sitefarm', label: 'Движок: sitefarm' },
         live: { href: links.frostSite, label: 'Живой сайт: localfrostdates.com (для США; из России без VPN может не открыться) ↗' },
-        shot: 'sitefarm',
+        shot: 'frost',
       },
       {
         id: 'terroir',
@@ -494,7 +527,7 @@ export const copy: Record<Lang, Copy> = {
       {
         group: 'Веб и инфраструктура',
         items: 'Astro, Hugo, PWA, Cloudflare (Pages, DNS), Linux VPS',
-        where: [{ href: '#sitefarm', label: 'sitefarm' }, { href: '#top', label: 'этот сайт' }],
+        where: [{ href: '#frost', label: 'localfrostdates.com' }, { href: '#top', label: 'этот сайт' }],
       },
       {
         group: 'Архитектура и качество',

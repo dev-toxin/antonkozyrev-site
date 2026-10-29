@@ -32,7 +32,7 @@ import tapreplyHome from '../assets/sites/tapreply-home.png';
 import terroirHome from '../assets/sites/terroir-home.png';
 import sitefarmStation from '../assets/sites/sitefarm-station.webp';
 
-const siteShots = { tapreply: tapreplyHome, terroir: terroirHome, sitefarm: sitefarmStation };
+const siteShots = { tapreply: tapreplyHome, terroir: terroirHome, frost: sitefarmStation };
 
 interface Props {
   lang: Lang;
@@ -154,14 +154,14 @@ const personLd = {
         <div class="cases">
           {
             t.cases.map((c) => (
-              <article class="card glow case" id={c.id}>
+              <article class:list={['card glow case', { wide: c.wide }]} id={c.id}>
                 <div class="case-head">
                   <div>
                     <p class="tag">{c.tag}</p>
                     <h3>{c.title}</h3>
                     <p class="summary">{c.summary}</p>
                   </div>
-                  {caseArt[c.id] && <Image class="case-art" src={caseArt[c.id]} alt="" widths={[320, 640]} sizes="(max-width: 900px) 92vw, 320px" format="webp" loading="lazy" />}
+                  {caseArt[c.id] && <Image class="case-art" src={caseArt[c.id]} alt="" widths={[320, 640]} sizes="(max-width: 900px) 92vw, 600px" format="webp" loading="lazy" />}
                 </div>
                 <ul class="facts">
                   {c.facts.map((f) => <li>{f}</li>)}
