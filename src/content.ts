@@ -28,6 +28,7 @@ type Case = {
   stack: string;
   link?: LinkRef;
   live?: LinkRef;
+  liveNote?: string;
   shot?: 'tapreply' | 'terroir' | 'frost';
   wide?: boolean;
 };
@@ -174,7 +175,8 @@ export const copy: Record<Lang, Copy> = {
         ],
         stack: 'Hugo · Cloudflare Pages',
         link: { href: '#sitefarm', label: 'Engine: sitefarm' },
-        live: { href: links.frostSite, label: 'Live site: localfrostdates.com (US audience; may not load from Russia without VPN) ↗' },
+        live: { href: links.frostSite, label: 'Live site ↗' },
+        liveNote: 'Built for a US audience; may not load from Russia without a VPN.',
         shot: 'frost',
       },
       {
@@ -428,7 +430,8 @@ export const copy: Record<Lang, Copy> = {
         ],
         stack: 'Hugo · Cloudflare Pages',
         link: { href: '#sitefarm', label: 'Движок: sitefarm' },
-        live: { href: links.frostSite, label: 'Живой сайт: localfrostdates.com (для США; из России без VPN может не открыться) ↗' },
+        live: { href: links.frostSite, label: 'Сайт ↗' },
+        liveNote: 'Сайт для аудитории из США; из России без VPN может не открыться.',
         shot: 'frost',
       },
       {
