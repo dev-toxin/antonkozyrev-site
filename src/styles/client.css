@@ -189,7 +189,8 @@
   .c-flow { max-width: 520px; }
 }
 @media (max-width: 640px) {
-  .c-hero .stats { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; }
+  .c-hero .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; }
+  .c-hero .stats li { overflow-wrap: anywhere; hyphens: auto; }
   .c-flow { padding: 1rem 1.1rem; }
   .c-flow-step { padding: .3rem 0; }
   .c-flow-hint { font-size: .8rem; }
@@ -197,8 +198,8 @@
 @media (prefers-reduced-motion: reduce) {
   .c-flow.anim .c-flow-step { opacity: 1; transform: none; transition: none; }
 }
-/* Метрики в одну строку на десктопе: компактнее отступы и шрифт. */
+/* Метрики в три колонки по ширине текста; длинные подписи переносятся, а не лезут под карточку этапов. */
 @media (min-width: 901px) {
-  .c-hero .stats { flex-wrap: nowrap; }
-  .c-hero .stats li { white-space: nowrap; font-size: .82rem; padding: .65rem .8rem .65rem 0; margin-right: .8rem; }
+  .c-hero .stats { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; }
+  .c-hero .stats li { min-width: 0; font-size: .82rem; line-height: 1.3; padding: .65rem .8rem .65rem 0; margin-right: .8rem; }
 }
