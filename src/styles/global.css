@@ -86,7 +86,6 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); font-weight: 700; letter-spacing: -.
 /* sections */
 .section { padding: 4.5rem 0 1rem; }
 h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; align-items: baseline; gap: .9rem; }
-.num { font: 500 .85rem var(--f-mono); color: var(--acid); }
 .sub { color: var(--muted); margin: .8rem 0 2rem; max-width: 70ch; }
 .section > h2 + .cases { margin-top: 2rem; }
 .glow { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); transition: border-color .3s, box-shadow .3s; }
@@ -181,7 +180,6 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; a
 .tools li.main span { color: var(--acid); }
 .ai { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
 .ai li { padding: 1.5rem; }
-.step { font: .8rem var(--f-mono); color: var(--violet); }
 .ai h3 { font-size: 1.02rem; font-weight: 600; margin: .5rem 0 .7rem; }
 .ai p { margin: 0; color: var(--text2); font-size: .95rem; }
 
@@ -283,7 +281,6 @@ h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 800; line-height: 1.05;
 .console.typing .ln.on { opacity: 1; transition: opacity .25s ease; }
 .cur { background: var(--blue); animation: none; }
 .console.done .caret { display: none; }
-.num { font: 700 .85rem var(--f-text); color: var(--blue); }
 h2 { font-weight: 800; }
 .glow, .glow:hover { background: var(--panel); border: 1px solid var(--line); box-shadow: none; }
 .glow:hover { border-color: #33405A; }
@@ -299,21 +296,18 @@ h2 { font-weight: 800; }
 .phone img { border-radius: 12px 12px 0 0; }
 .icon { box-shadow: none; border-radius: 12px; }
 .icon.mono { background: #1A2233; color: var(--text); }
-.years, .badge, .tools-title, .tools li span, .contacts .label, .where, .step { font-family: var(--f-text); }
+.years, .badge, .tools-title, .tools li span, .contacts .label, .where { font-family: var(--f-text); }
 .badge { border-color: var(--line); color: var(--muted); }
 .chip { font: 600 .8rem var(--f-text); border-color: var(--line); color: var(--text2); border-radius: 999px; }
 .chip:hover { box-shadow: none; border-color: var(--blue); color: var(--text); }
 .tools li.main { border-color: var(--blue); box-shadow: none; }
-.step { color: var(--blue); font-weight: 700; }
 .contact { background: var(--panel); }
 :is(.logo, nav .lang, .ap, .screen, .tools li) { border-radius: 10px; }
 :is(.meta li, .chip) { border-radius: 999px; }
 /* иллюстрации кейсов — небольшие, не во всю карточку */
-.case-art { display: block; width: min(40%, 320px); height: auto; border-radius: 12px; border: 1px solid var(--line); margin: .2rem 0 .4rem; }
 .case-head { display: flex; gap: 1.4rem; align-items: flex-start; justify-content: space-between; }
 .case-head > div { flex: 1; min-width: 0; }
 .case .case-head { flex-direction: column; gap: .6rem; }
-.case .case-art { width: 100%; max-width: none; aspect-ratio: 16 / 7; object-fit: cover; margin: .4rem 0 0; }
 /* иконки Lucide в карточках услуг */
 .svc-icon { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: #161E2D; border: 1px solid var(--line); color: var(--icon); margin-bottom: .2rem; transition: color .2s, border-color .2s; }
 .svc-icon svg { width: 22px; height: 22px; stroke-width: 1.5; }
@@ -326,11 +320,8 @@ h2 { font-weight: 800; }
 .hire + .contacts { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line, #222B3D); }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; gap: 1.6rem; padding: 5rem 0 3rem; }
-  .case-art { width: 100%; max-width: none; max-height: 180px; object-fit: cover; margin: 0 0 .9rem; }
   .case-head { flex-direction: column-reverse; gap: 0; }
   .case.wide { display: flex; }
-  .case .case-head { flex-direction: column-reverse; gap: 0; }
-  .case .case-art { aspect-ratio: auto; margin: 0 0 .9rem; }
   .case.wide .stackline { margin-top: 0; }
 }
 @media (max-width: 640px) {
@@ -457,43 +448,46 @@ h3, .card h3, .app h3, .ai h3 { font-family: var(--f-head); font-weight: 600; }
 .section { padding: 5.5rem 0 1rem; }
 .section > h2 { padding-top: 1.4rem; border-top: 1px solid var(--rule); }
 
-/* Work: one lead case across the full width, the rest as an editorial list, not a grid of equal cards. */
+/* Work: an editorial list, not a grid of equal cards. Sides alternate only among cases with media
+   (classes set in Page.astro), so a text-only case spans the width instead of leaving an empty column. */
 .cases { grid-template-columns: 1fr; gap: 0; }
-#work .case.glow, #work .case.glow:hover { background: none; border: 0; border-bottom: 1px solid var(--rule); border-radius: 0; padding: 2.4rem 0; }
-#work .case { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: "head media" "facts media" "stack media" "links media" "note media"; column-gap: 3rem; align-items: start; }
-#work .case:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-areas: "media head" "media facts" "media stack" "media links" "media note"; }
+#work .case { display: grid; column-gap: 3rem; align-items: start; padding: 2.4rem 0; border-bottom: 1px solid var(--rule);
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-areas: "head facts" "head stack" "head links" "head note"; }
+#work .case.has-media { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: "head media" "facts media" "stack media" "links media" "note media"; }
+#work .case.has-media.media-left { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-areas: "media head" "media facts" "media stack" "media links" "media note"; }
 #work .case-head { grid-area: head; }
 #work .facts { grid-area: facts; }
 #work .stackline { grid-area: stack; margin: 0 0 1rem; }
 #work .case-links { grid-area: links; }
 #work .case-note { grid-area: note; margin-top: .6rem; }
 #work .case-media { grid-area: media; display: block; }
-#work .case-media:empty { display: none; }
-#work .case:has(.case-media:empty) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-areas: "head facts" "head stack" "head links" "head note"; }
-#work .case.wide { grid-template-areas: "head media" "facts media" "stack media" "links media" "note media"; grid-template-rows: none; }
+#work .case h3 { font-size: 1.4rem; line-height: 1.2; margin-bottom: .7rem; }
 #work .case.wide h3 { font-size: clamp(1.8rem, 3vw, 2.3rem); }
-.case-phones { display: flex; justify-content: center; align-items: flex-end; gap: 1.2rem; padding: 2rem 1rem 0; background: #121826; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.case-phones { display: flex; justify-content: center; align-items: flex-end; gap: 1.2rem; padding: 2rem 1rem 0; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
 .case-phones .phone { width: min(42%, 200px); }
 .case-phones .phone.p1 { transform: translateY(24px); }
 
 /* Help and AI: text columns with hairlines instead of cards. */
 #help .cases { grid-template-columns: repeat(2, 1fr); column-gap: 3rem; }
-#help .card.glow, #help .card.glow:hover { background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 1.4rem 0 1.6rem; }
+#help .svc { border-top: 1px solid var(--rule); padding: 1.4rem 0 1.6rem; }
+#help .svc h3 { font-size: 1.4rem; line-height: 1.2; margin-bottom: .7rem; }
+#help .svc p { color: var(--text2); margin: 0 0 .8rem; }
 #help .svc-icon { display: none; }
 .ai { grid-template-columns: 1fr; gap: 0; counter-reset: none; }
-.ai li.glow, .ai li.glow:hover { background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 1.4rem 0; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 3rem; }
+.ai li { background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 1.4rem 0; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 3rem; }
+.ai li::before { content: none; }
 .ai h3 { margin: 0; font-size: 1.3rem; }
 
-.contact.glow { background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 2rem 0 0; }
+.contact { border-top: 1px solid var(--rule); padding: 2rem 0 0; }
 .contact h2 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); }
 
 @media (max-width: 900px) {
-  #work .case, #work .case:nth-child(even), #work .case.wide, #work .case:has(.case-media:empty) {
+  #work .case, #work .case.has-media, #work .case.has-media.media-left {
     grid-template-columns: 1fr; grid-template-areas: "head" "media" "facts" "stack" "links" "note";
   }
   #work .case-media { margin: 1rem 0 1.4rem; }
   #help .cases { grid-template-columns: 1fr; }
-  .ai li.glow, .ai li.glow:hover { grid-template-columns: 1fr; row-gap: .5rem; }
+  .ai li { grid-template-columns: 1fr; row-gap: .5rem; }
 }
 @media (max-width: 640px) {
   h1 { font-size: 2.7rem; }

@@ -158,8 +158,12 @@ const personLd = {
         <h2>{t.casesTitle}</h2>
         <div class="cases">
           {
-            t.cases.map((c) => (
-              <article class:list={['card glow case', { wide: c.wide }]} id={c.id}>
+            t.cases.map((c, i) => {
+              const hasMedia = Boolean(casePhones[c.id] || (c.shot && c.live));
+              // Alternate sides only among cases with media, so a text-only case never leaves an empty column.
+              const mediaIndex = t.cases.slice(0, i).filter((x) => casePhones[x.id] || (x.shot && x.live)).length;
+              return (
+              <article class:list={['case', { wide: c.wide, 'has-media': hasMedia, 'media-left': hasMedia && mediaIndex % 2 === 1 }]} id={c.id}>
                 <div class="case-head">
                   <div>
                     <p class="tag">{c.tag}</p>
@@ -171,7 +175,7 @@ const personLd = {
                   {c.facts.map((f) => <li>{f}</li>)}
                 </ul>
                 <p class="stackline">{c.stack}</p>
-                <div class="case-media">
+                {hasMedia && <div class="case-media">
                   {casePhones[c.id] && (
                     <div class="case-phones">
                       {casePhones[c.id].map((ph, i) => (
@@ -192,7 +196,7 @@ const personLd = {
                       </span>
                     </a>
                   )}
-                </div>
+                </div>}
                 <div class="case-links">
                   {c.live && (
                     <a class="chip" href={c.live.href} target="_blank" rel="noopener">{c.live.label}</a>
@@ -205,7 +209,8 @@ const personLd = {
                 </div>
                 {c.liveNote && <p class="case-note">{c.liveNote}</p>}
               </article>
-            ))
+              );
+            })
           }
         </div>
       </section>
@@ -278,7 +283,7 @@ const personLd = {
         <div class="cases">
           {
             t.help.items.map((h, i) => (
-              <article class="card glow">
+              <article class="svc">
                 <span class="svc-icon" aria-hidden="true"><Icon name={helpIcons[i % helpIcons.length]} /></span>
                 <h3>{h.title}</h3>
                 <p>{h.text}</p>
@@ -304,8 +309,8 @@ const personLd = {
         <ol class="ai">
           {
             t.ai.map((a, i) => (
-              <li class="glow">
-                                <h3>{a.title}</h3>
+              <li>
+                <h3>{a.title}</h3>
                 <p>{a.text}</p>
               </li>
             ))
@@ -349,7 +354,7 @@ const personLd = {
       </section>
 
       <section id="contact" class="wrap section">
-        <div class="contact glow">
+        <div class="contact">
           <h2>{t.contactTitle}</h2>
           <p class="sub">{t.contactLead}</p>
           <div class="hire">
