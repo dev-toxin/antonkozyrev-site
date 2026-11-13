@@ -31,18 +31,6 @@ a:hover { color: var(--acid-hi); }
 .skip { position: absolute; left: -999px; top: 0; background: var(--acid); color: #000; padding: .5rem 1rem; z-index: 100; }
 .skip:focus { left: 1rem; top: 1rem; }
 
-/* background */
-.bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.orb { position: absolute; border-radius: 50%; filter: blur(110px); opacity: .45; }
-.o1 { width: 520px; height: 520px; background: var(--blue); top: -180px; left: -140px; }
-.o2 { width: 560px; height: 560px; background: var(--violet); top: 30vh; right: -220px; opacity: .3; }
-.grid {
-  position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(var(--glow-rgb),.07) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--glow-rgb),.07) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
-}
-
 /* header */
 .bar { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); background: var(--bar-bg); border-bottom: 1px solid var(--line); }
 .bar-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
@@ -58,7 +46,6 @@ nav .lang { color: var(--acid); border: 1px solid rgba(var(--acid-rgb),.5); padd
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 10px var(--acid); animation: pulse 2.4s ease-in-out infinite; }
 h1, h2, h3 { font-family: var(--f-head); line-height: 1.15; margin: 0; }
 h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); font-weight: 700; letter-spacing: -.02em; }
-.neon { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 22px rgba(var(--glow-rgb),.45)); }
 .lead { font-size: 1.12rem; color: var(--text2); max-width: 60ch; margin: 1.5rem 0; }
 .meta { list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-wrap: wrap; gap: .5rem; }
 .meta li { font: .82rem var(--f-mono); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: .3rem .8rem; background: rgba(255,255,255,.02); }
@@ -233,25 +220,13 @@ dd { margin: 0; display: flex; flex-direction: column; gap: .3rem; }
   .ln { opacity: 1; }
 }
 
-/* ===== blade: hard cyber-neon details ===== */
-.orb { filter: blur(160px); opacity: .12; }
-.grid {
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px),
-    linear-gradient(rgba(var(--c1-rgb),.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--c1-rgb),.09) 1px, transparent 1px);
-  background-size: auto, 48px 48px, 48px 48px;
-  mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.3) 100%);
-}
+/* ===== blade (2026-10): остатки, ещё влияющие на вид; перекрытое и мёртвое удалено 2026-11-13 ===== */
 :is(.logo, nav .lang, .btn, .ap, .phone, .icon, .screen, .tools li) { border-radius: 4px; }
 :is(.meta li, .stats li, .chip) { border-radius: 3px; }
 .phone { border-radius: 8px 8px 0 0; }
 .phone img { border-radius: 4px 4px 0 0; }
 .glow { border-color: rgba(var(--c1-rgb),.35); box-shadow: inset 0 1px 0 rgba(var(--c1-rgb),.25); }
 .glow:hover { border-color: var(--c2); box-shadow: 0 0 0 1px var(--c2), 0 0 18px rgba(var(--c2-rgb),.45); }
-.console { border-color: var(--c2); box-shadow: 0 0 0 1px rgba(var(--c2-rgb),.4), 0 0 24px rgba(var(--c2-rgb),.45), inset 0 0 40px rgba(var(--c1-rgb),.06); }
-.neon { filter: drop-shadow(0 0 1px rgba(var(--c2-rgb),.9)) drop-shadow(0 0 14px rgba(var(--c2-rgb),.55)); }
-.btn.primary { box-shadow: 0 0 0 1px #fcee0a, 0 0 20px rgba(252,238,10,.4); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
 .shots { background: linear-gradient(180deg, rgba(var(--c1-rgb),.07), transparent), repeating-linear-gradient(90deg, rgba(var(--c2-rgb),.06) 0 1px, transparent 1px 24px); }
 .contact { background: linear-gradient(135deg, rgba(var(--c1-rgb),.1), rgba(var(--c2-rgb),.1)), var(--panel); }
 
@@ -270,7 +245,6 @@ dd { margin: 0; display: flex; flex-direction: column; gap: .3rem; }
   --f-head: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --r: 14px;
 }
-.bg { display: none; }
 .logo { display: inline-flex; align-items: center; gap: .55rem; border: 0; box-shadow: none; padding: .3rem 0; border-radius: 0; color: var(--text); font: 700 .95rem var(--f-head); letter-spacing: -.01em; }
 .logo svg { width: 28px; height: 28px; flex: none; }
 .logo .logo-name { color: var(--text); }
@@ -281,7 +255,6 @@ nav a { font-family: var(--f-text); }
 .dot { background: var(--ok); box-shadow: none; animation: none; }
 h1, h2, h3 { letter-spacing: -.025em; }
 h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 800; line-height: 1.05; }
-.neon { background: none; color: var(--text); filter: none; -webkit-background-clip: initial; background-clip: initial; }
 .lead { font-size: 1.2rem; color: var(--text2); }
 .meta li { font: 500 .82rem var(--f-text); border-radius: 999px; background: transparent; }
 .cta { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1.6rem 0 2rem; }
@@ -353,7 +326,6 @@ h2 { font-weight: 800; }
 .hire + .contacts { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line, #222B3D); }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; gap: 1.6rem; padding: 5rem 0 3rem; }
-  .hero .console { max-height: 280px; overflow: hidden; }
   .case-art { width: 100%; max-width: none; max-height: 180px; object-fit: cover; margin: 0 0 .9rem; }
   .case-head { flex-direction: column-reverse; gap: 0; }
   .case.wide { display: flex; }
@@ -436,7 +408,7 @@ h2 { font-weight: 800; }
 @media (prefers-reduced-motion: no-preference) {
   .browser { transition: transform .35s ease, border-color .3s; }
   .browser:hover, .browser:focus-visible { transform: translateY(-3px); }
-  .browser-view img { transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
+  .browser-view img { transition: transform .5s cubic-bezier(.2,.7,.2,1); }
   .browser:hover .browser-view img, .browser:focus-visible .browser-view img { transform: scale(1.035); }
   .reveal-on .browser[data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
   .reveal-on .browser[data-reveal].in-view { opacity: 1; transform: none; }
@@ -444,3 +416,15 @@ h2 { font-weight: 800; }
   .reveal-on .browser[data-reveal].in-view .browser-view::after { animation: shot-sheen 1.4s .45s ease-out 1 both; }
 }
 @keyframes shot-sheen { 0% { opacity: 1; transform: translateX(-100%); } 100% { opacity: 1; transform: translateX(100%); } }
+
+/* Касания на телефоне — не меньше 44 px (WCAG 2.5.8 / ui-ux-pro-max). Ссылки внутри строки текста не трогаем. */
+@media (max-width: 640px) {
+  /* :where keeps specificity at zero, so .hide-s / .hide-xs still hide menu items */
+  :where(.chip, .more, nav a, nav .lang, .logo, .skip, .contacts a, .stack .where a) {
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  .cta .btn.ghost { min-height: 44px; align-items: center; }
+  nav .lang { min-width: 44px; justify-content: center; }
+  .stack .where { display: flex; flex-wrap: wrap; column-gap: .9rem; }
+  .foot a { display: inline-flex; align-items: center; min-height: 44px; }
+}

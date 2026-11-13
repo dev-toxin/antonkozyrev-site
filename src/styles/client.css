@@ -195,6 +195,11 @@
   .c-flow { padding: 1rem 1.1rem; }
   .c-flow-step { padding: .3rem 0; }
   .c-flow-hint { font-size: .8rem; }
+  /* Touch targets ≥ 44 px (WCAG 2.5.8) */
+  /* padding, not flex: flex on summary drops the disclosure marker */
+  .c-faq summary { padding-block: .7rem; }
+  .c-direct a { display: flex; align-items: center; min-height: 44px; }
+  .c-form .btn { min-height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .c-flow.anim .c-flow-step { opacity: 1; transform: none; transition: none; }
