@@ -9,7 +9,6 @@ import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import CommandPalette from './CommandPalette.astro';
 import SearchButton from './SearchButton.astro';
-import LiveMockup from './LiveMockup.astro';
 import antonPhoto from '../assets/anton.webp';
 import artSitefarm from '../assets/art/case-sitefarm.jpg';
 import artMobile from '../assets/art/case-mobile.jpg';
@@ -173,16 +172,15 @@ const personLd = {
                 </ul>
                 <p class="stackline">{c.stack}</p>
                 <div class="case-media">
-                  {c.shot && c.live && (c.shot === 'frost' || c.shot === 'terroir') && (
-                    <LiveMockup kind={c.shot} lang={lang} href={c.live.href} label={c.live.label} fallback={siteShots[c.shot]} alt={c.title} />
-                  )}
-                  {c.shot && c.live && c.shot === 'tapreply' && (
-                    <a class="browser" href={c.live.href} target="_blank" rel="noopener" aria-label={c.live.label}>
+                  {c.shot && c.live && (
+                    <a class="browser" data-reveal href={c.live.href} target="_blank" rel="noopener" aria-label={c.live.label}>
                       <span class="browser-bar" aria-hidden="true">
                         <i></i><i></i><i></i>
                         <span class="browser-url">{c.live.href.replace('https://', '')}</span>
                       </span>
-                      <Image src={siteShots[c.shot]} alt={c.title} widths={[480, 720, 960]} sizes="(max-width: 900px) 92vw, 560px" loading="lazy" format="webp" />
+                      <span class="browser-view">
+                        <Image src={siteShots[c.shot]} alt={c.title} widths={[480, 720, 960]} sizes="(max-width: 900px) 92vw, 560px" loading="lazy" format="webp" />
+                      </span>
                     </a>
                   )}
                 </div>
@@ -377,6 +375,20 @@ const personLd = {
     </footer>
     <script>
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Скриншоты проектов: класс in-view запускает появление рамки и один блик по стеклу.
+      // Без JS, без IntersectionObserver и при «уменьшить движение» кадр сразу статичный.
+      const shots = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+      if (!reduce && 'IntersectionObserver' in window && shots.length) {
+        const shotIo = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('in-view');
+            shotIo.unobserve(e.target);
+          });
+        }, { threshold: 0.25 });
+        document.documentElement.classList.add('reveal-on');
+        shots.forEach((el) => shotIo.observe(el));
+      }
       const nums = Array.from(document.querySelectorAll<HTMLElement>('.stats b[data-count]'));
       if (!reduce && 'IntersectionObserver' in window && nums.length) {
         const lang = document.documentElement.lang === 'en' ? 'en-US' : 'ru-RU';

@@ -399,7 +399,7 @@ h2 { font-weight: 800; }
 [id] { scroll-margin-top: 72px; }
 @media (max-width: 400px) { .hide-xs { display: none; } }
 
-/* ===== 2026-11-13 — сессия дизайна: ⌘K, живые мокапы, контраст кнопки =====
+/* ===== 2026-11-13 — сессия дизайна: ⌘K, анимация скриншотов проектов, контраст кнопки =====
    Кнопка: белый текст на #3D5AFE — 5,13:1 (был #4C6FFF — 4,18:1, ниже AA). --blue как цвет текста на тёмном не меняется. */
 :root { --btn-bg: #3D5AFE; }
 .btn.primary:hover { background: #3049E0; }
@@ -439,38 +439,20 @@ h2 { font-weight: 800; }
   .kbar-hint, .kbar-foot { display: none; }
 }
 
-/* Живые мокапы в карточках localfrostdates и Terroir; скриншот — запасной вариант без JS */
-.mk-link .mk-fallback { display: none; }
-html:not(.js) .mk-link .mk { display: none; }
-html:not(.js) .mk-link .mk-fallback { display: block; }
-.mk { display: grid; gap: .9rem; padding: 1.3rem; color: var(--text); text-align: left; aspect-ratio: 1440 / 846; align-content: start; overflow: hidden; }
-.mk-kicker { font: 600 .72rem var(--f-text); color: var(--muted); }
-.mk-title { font: 800 1.45rem/1.1 var(--f-head); letter-spacing: -.02em; }
-.mk-dates { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
-.mk-dates > span { display: grid; gap: .15rem; border: 1px solid var(--line); border-radius: 10px; padding: .7rem .8rem; }
-.mk-dates small { color: var(--muted); font-size: .72rem; line-height: 1.3; }
-.mk-dates b { font: 800 1.45rem var(--f-head); letter-spacing: -.02em; }
-.mk-year { position: relative; display: block; height: 8px; border-radius: 99px; background: var(--line2); overflow: hidden; }
-.mk-year span { position: absolute; top: 0; bottom: 0; }
-.mk-year .frost { background: rgba(var(--c1-rgb), .4); }
-.mk-year .grow { background: var(--ok); opacity: .7; transform-origin: left; }
-.mk-foot { display: flex; justify-content: space-between; color: var(--muted); font-size: .78rem; }
-.mk-chat { gap: .65rem; }
-.mk-example { justify-self: start; font: 600 .7rem var(--f-text); color: var(--muted); border: 1px dashed var(--line); border-radius: 99px; padding: .1rem .55rem; }
-.msg { display: block; max-width: 86%; padding: .6rem .85rem; border-radius: 14px; font-size: .86rem; line-height: 1.45; }
-.msg.out { justify-self: end; background: var(--btn-bg); color: #fff; border-bottom-right-radius: 4px; }
-.msg.in { justify-self: start; background: var(--panel); border: 1px solid var(--line); color: var(--text2); border-bottom-left-radius: 4px; }
-.mk-src { display: flex; flex-wrap: wrap; gap: .35rem; }
-.mk-src span { font-size: .7rem; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: .12rem .5rem; }
-/* Один момент движения: при появлении карточки ответ и полоса сезона «дорисовываются» (opacity/transform, без layout) */
+/* Скриншоты проектов в рамке браузера: одно появление с бликом по стеклу и мягкое приближение при наведении.
+   Только opacity и transform; без JS и при «уменьшить движение» — статичный кадр. */
+.browser-view { position: relative; display: block; overflow: hidden; }
+.browser-view img { transform-origin: 50% 0; }
+.browser-view::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.14) 50%, transparent 65%); transform: translateX(-100%); }
 @media (prefers-reduced-motion: no-preference) {
-  .js .mk[data-mk] .msg, .js .mk[data-mk] .mk-src, .js .mk[data-mk] .mk-year .grow { transition: opacity .5s ease, transform .6s ease; }
-  .js .mk[data-mk]:not(.in-view) .msg.in, .js .mk[data-mk]:not(.in-view) .mk-src { opacity: 0; transform: translateY(6px); }
-  .js .mk[data-mk]:not(.in-view) .mk-year .grow { transform: scaleX(0); }
-  .js .mk[data-mk] .msg.in { transition-delay: .35s; }
-  .js .mk[data-mk] .mk-src { transition-delay: .6s; }
+  .browser { transition: transform .35s ease, border-color .3s; }
+  .browser:hover, .browser:focus-visible { transform: translateY(-3px); }
+  .browser-view img { transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
+  .browser:hover .browser-view img, .browser:focus-visible .browser-view img { transform: scale(1.035); }
+  .reveal-on .browser[data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal-on .browser[data-reveal].in-view { opacity: 1; transform: none; }
+  .reveal-on .browser[data-reveal].in-view:hover { transform: translateY(-3px); }
+  .reveal-on .browser[data-reveal].in-view .browser-view::after { animation: shot-sheen 1.4s .45s ease-out 1 both; }
 }
-@media (max-width: 640px) {
-  .mk { aspect-ratio: auto; padding: 1rem; }
-  .mk-dates b { font-size: 1.2rem; }
-}
+@keyframes shot-sheen { 0% { opacity: 1; transform: translateX(-100%); } 100% { opacity: 1; transform: translateX(100%); } }
