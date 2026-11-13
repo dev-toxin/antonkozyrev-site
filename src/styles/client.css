@@ -124,7 +124,7 @@
 
 /* full-spectrum additions */
 .c-proof { display: flex; flex-wrap: wrap; gap: .3rem .9rem; margin-top: auto !important; padding-top: .5rem; font-family: var(--f-mono); font-size: .78rem; }
-.c-proof a { color: var(--acid); text-decoration: none; border-bottom: 1px dotted rgba(var(--acid-rgb), .5); }
+.c-proof a { color: var(--acid); text-decoration: none; border-bottom: 1px dotted rgba(var(--acid-rgb), .5); display: inline-flex; align-items: center; min-height: 44px; }
 .c-proof a:hover { color: var(--acid-hi); }
 .c-small { margin-top: 1.4rem; color: var(--text); font-weight: 600; }
 .c-small + .c-legal { margin-top: .5rem; }
@@ -211,3 +211,8 @@
 /* Redesign B: no caps labels; step numbers stay — process steps are a real sequence. */
 .c-kind, .c-flow-title { text-transform: none; letter-spacing: 0; font-family: var(--f-text); font-size: .85rem; }
 .client h1, .client h2, .client h3 { font-family: var(--f-head); }
+
+/* Touch targets on phones: every link and button at least 44 px tall (WCAG 2.5.8). */
+@media (max-width: 640px) {
+  .c-proof a, .c-direct a, .c-faq summary, .c-form .btn { min-height: 44px; display: flex; align-items: center; }
+}
