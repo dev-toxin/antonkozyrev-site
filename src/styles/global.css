@@ -428,3 +428,71 @@ h2 { font-weight: 800; }
   .stack .where { display: flex; flex-wrap: wrap; column-gap: .9rem; }
   .foot a { display: inline-flex; align-items: center; min-height: 44px; }
 }
+
+/* ===== REDESIGN B (2026-11-13): editorial, without the usual AI-site tells =====
+   Source Serif 4 (optical sizes, full Cyrillic) for headings gives the page a voice of its own;
+   IBM Plex Sans (engineering heritage, Cyrillic) for text and UI; JetBrains Mono only inside the console.
+   No section numbers, no caps labels, no arrows in link text, no counters: the console is the one expressive detail. */
+:root {
+  --f-head: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+  --f-text: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --rule: #2A3448;
+}
+body { font: 400 1.0625rem/1.65 var(--f-text); }
+h1, h2, h3 { font-family: var(--f-head); font-optical-sizing: auto; letter-spacing: -.01em; }
+h1 { font-size: clamp(2.8rem, 6.4vw, 5rem); font-weight: 600; line-height: 1; }
+.h1-role { display: block; margin-top: .9rem; font: 400 clamp(1.25rem, 2.4vw, 1.75rem)/1.25 var(--f-head); font-style: italic; color: var(--text2); letter-spacing: 0; }
+h2 { display: block; font-size: clamp(1.9rem, 3.6vw, 2.6rem); font-weight: 600; line-height: 1.1; }
+h3, .card h3, .app h3, .ai h3 { font-family: var(--f-head); font-weight: 600; }
+.card h3 { font-size: 1.4rem; line-height: 1.2; }
+.meta-line { display: flex; align-items: center; gap: .6rem; margin: 0 0 1.8rem; color: var(--muted); font-size: .95rem; }
+.tag, .eyebrow, .badge, .c-kind, .c-flow-title { text-transform: none; letter-spacing: 0; font-family: var(--f-text); }
+.tag { font-size: .9rem; font-weight: 500; color: var(--text2); }
+.stackline, .tools-title, .tools li span { font-family: var(--f-text); }
+
+/* Sections: hairline above the heading instead of numbers; lead text sits beside the heading on wide screens. */
+.section { padding: 5.5rem 0 1rem; }
+.section > h2 { padding-top: 1.4rem; border-top: 1px solid var(--rule); }
+
+/* Work: one lead case across the full width, the rest as an editorial list, not a grid of equal cards. */
+.cases { grid-template-columns: 1fr; gap: 0; }
+#work .case.glow, #work .case.glow:hover { background: none; border: 0; border-bottom: 1px solid var(--rule); border-radius: 0; padding: 2.4rem 0; }
+#work .case { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: "head media" "facts media" "stack media" "links media" "note media"; column-gap: 3rem; align-items: start; }
+#work .case:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-areas: "media head" "media facts" "media stack" "media links" "media note"; }
+#work .case-head { grid-area: head; }
+#work .facts { grid-area: facts; }
+#work .stackline { grid-area: stack; margin: 0 0 1rem; }
+#work .case-links { grid-area: links; }
+#work .case-note { grid-area: note; margin-top: .6rem; }
+#work .case-media { grid-area: media; display: block; }
+#work .case-media:empty { display: none; }
+#work .case:has(.case-media:empty) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-areas: "head facts" "head stack" "head links" "head note"; }
+#work .case.wide { grid-template-areas: "head media" "facts media" "stack media" "links media" "note media"; grid-template-rows: none; }
+#work .case.wide h3 { font-size: clamp(1.8rem, 3vw, 2.3rem); }
+.case-phones { display: flex; justify-content: center; align-items: flex-end; gap: 1.2rem; padding: 2rem 1rem 0; background: #121826; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.case-phones .phone { width: min(42%, 200px); }
+.case-phones .phone.p1 { transform: translateY(24px); }
+
+/* Help and AI: text columns with hairlines instead of cards. */
+#help .cases { grid-template-columns: repeat(2, 1fr); column-gap: 3rem; }
+#help .card.glow, #help .card.glow:hover { background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 1.4rem 0 1.6rem; }
+#help .svc-icon { display: none; }
+.ai { grid-template-columns: 1fr; gap: 0; counter-reset: none; }
+.ai li.glow, .ai li.glow:hover { background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 1.4rem 0; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 3rem; }
+.ai h3 { margin: 0; font-size: 1.3rem; }
+
+.contact.glow { background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 2rem 0 0; }
+.contact h2 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); }
+
+@media (max-width: 900px) {
+  #work .case, #work .case:nth-child(even), #work .case.wide, #work .case:has(.case-media:empty) {
+    grid-template-columns: 1fr; grid-template-areas: "head" "media" "facts" "stack" "links" "note";
+  }
+  #work .case-media { margin: 1rem 0 1.4rem; }
+  #help .cases { grid-template-columns: 1fr; }
+  .ai li.glow, .ai li.glow:hover { grid-template-columns: 1fr; row-gap: .5rem; }
+}
+@media (max-width: 640px) {
+  h1 { font-size: 2.7rem; }
+  .section { padding-top: 4rem; }
+}

@@ -1,5 +1,8 @@
 ---
-import '@fontsource-variable/manrope/wght.css';
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-sans/600.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/global.css';
 import '../styles/client.css';
@@ -147,7 +150,7 @@ const faqLd = {
           <div class="cta">
             <a class="btn primary" href="#brief">{c.ctaPrimary}</a>
             <a class="btn" href={links.telegram} target="_blank" rel="noopener"><Icon name="send" />{c.ctaTelegram}</a>
-            <a class="btn ghost" href="#examples">{c.ctaSecondary} →</a>
+            <a class="btn ghost" href="#examples">{c.ctaSecondary}</a>
           </div>
         </div>
         <aside class="c-flow" aria-label={c.flow.title}>
@@ -255,7 +258,7 @@ const faqLd = {
             <p class="c-ex-links"><a class="chip" href={e.href} target="_blank" rel="noopener">{e.label}</a></p>
           </article>
         ))}
-        <p class="sub"><a href={appsHref}>{c.examplesMore} →</a></p>
+        <p class="sub"><a href={appsHref}>{c.examplesMore}</a></p>
       </section>
 
       <section id="faq" class="wrap section">
