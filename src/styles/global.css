@@ -433,9 +433,12 @@ h2 { font-weight: 800; }
    Source Serif 4 (optical sizes, full Cyrillic) for headings gives the page a voice of its own;
    IBM Plex Sans (engineering heritage, Cyrillic) for text and UI; JetBrains Mono only inside the console.
    No section numbers, no caps labels, no arrows in link text, no counters: the console is the one expressive detail. */
+/* Metric-matched fallbacks: while the web fonts load, Georgia / Arial take the same space, so the text does not jump. */
+@font-face { font-family: 'Source Serif Fallback'; src: local('Georgia'); size-adjust: 96%; ascent-override: 102%; descent-override: 33%; line-gap-override: 0%; }
+@font-face { font-family: 'Plex Sans Fallback'; src: local('Arial'), local('Helvetica'); size-adjust: 101%; ascent-override: 101%; descent-override: 27%; line-gap-override: 0%; }
 :root {
-  --f-head: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
-  --f-text: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-head: 'Source Serif 4 Variable', 'Source Serif Fallback', Georgia, 'Times New Roman', serif;
+  --f-text: 'IBM Plex Sans', 'Plex Sans Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --rule: #2A3448;
 }
 body { font: 400 1.0625rem/1.65 var(--f-text); }
