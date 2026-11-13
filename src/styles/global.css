@@ -88,8 +88,6 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); font-weight: 700; letter-spacing: -.
 h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; align-items: baseline; gap: .9rem; }
 .sub { color: var(--muted); margin: .8rem 0 2rem; max-width: 70ch; }
 .section > h2 + .cases { margin-top: 2rem; }
-.glow { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); transition: border-color .3s, box-shadow .3s; }
-.glow:hover { border-color: rgba(var(--c2-rgb),.6); box-shadow: 0 0 30px rgba(var(--glow-rgb),.22); }
 .cases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
 .card { padding: 1.6rem; }
 .tag { font: .78rem var(--f-mono); color: var(--acid); margin: 0 0 .6rem; }
@@ -223,8 +221,6 @@ dd { margin: 0; display: flex; flex-direction: column; gap: .3rem; }
 :is(.meta li, .stats li, .chip) { border-radius: 3px; }
 .phone { border-radius: 8px 8px 0 0; }
 .phone img { border-radius: 4px 4px 0 0; }
-.glow { border-color: rgba(var(--c1-rgb),.35); box-shadow: inset 0 1px 0 rgba(var(--c1-rgb),.25); }
-.glow:hover { border-color: var(--c2); box-shadow: 0 0 0 1px var(--c2), 0 0 18px rgba(var(--c2-rgb),.45); }
 .shots { background: linear-gradient(180deg, rgba(var(--c1-rgb),.07), transparent), repeating-linear-gradient(90deg, rgba(var(--c2-rgb),.06) 0 1px, transparent 1px 24px); }
 .contact { background: linear-gradient(135deg, rgba(var(--c1-rgb),.1), rgba(var(--c2-rgb),.1)), var(--panel); }
 
@@ -282,8 +278,6 @@ h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 800; line-height: 1.05;
 .cur { background: var(--blue); animation: none; }
 .console.done .caret { display: none; }
 h2 { font-weight: 800; }
-.glow, .glow:hover { background: var(--panel); border: 1px solid var(--line); box-shadow: none; }
-.glow:hover { border-color: #33405A; }
 .tag { font: 700 .75rem var(--f-text); color: var(--acid); letter-spacing: .06em; text-transform: uppercase; }
 .facts li::marker { color: var(--blue); }
 .stackline { font: 500 .82rem var(--f-text); }
@@ -467,6 +461,28 @@ h3, .card h3, .app h3, .ai h3 { font-family: var(--f-head); font-weight: 600; }
 .case-phones .phone { width: min(42%, 200px); }
 .case-phones .phone.p1 { transform: translateY(24px); }
 
+/* Apps: an editorial list — one row per app, screenshots beside the text, hairlines instead of equal cards.
+   Named areas, so rows without some parts (client pages) still line up. */
+#apps .apps, .c-apps { display: block; }
+#apps .app, .c-apps .app { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 3rem; row-gap: 0;
+  grid-template-areas: "shots head" "shots what" "shots role" "shots stack" "shots links"; grid-template-rows: auto auto auto auto 1fr;
+  align-items: start; padding: 2.2rem 0; background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; overflow: visible; }
+#apps .app > *, .c-apps .app > * { padding-inline: 0; }
+#apps .app .shots, .c-apps .app .shots { grid-area: shots; grid-row: 1 / -1; height: 260px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding-top: 2rem; }
+#apps .app .app-head, .c-apps .app .app-head { grid-area: head; padding-top: 0; }
+#apps .app .what, .c-apps .app .what { grid-area: what; }
+#apps .app .role { grid-area: role; }
+#apps .app > .stackline { grid-area: stack; }
+#apps .app .app-links, .c-apps .app .app-links { grid-area: links; padding-bottom: 0; align-self: start; }
+#apps .app h3, .c-apps .app h3 { font-size: 1.4rem; line-height: 1.2; -webkit-line-clamp: unset; min-height: 0; display: block; }
+#apps .app p, .c-apps .app p { font-size: 1rem; }
+#apps .badge.corner { position: static; margin-left: .6rem; background: none; vertical-align: middle; }
+#apps .app .shots .badge.corner { position: absolute; top: .7rem; left: .8rem; margin: 0; }
+.apps-more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; gap: 0 3rem; margin-top: 0; }
+#apps .app.compact { display: flex; flex-direction: row; gap: 1rem; padding: 1.6rem 0; grid-template-areas: none; }
+#apps .app.compact .icon.mono { display: none; }
+#apps .app.compact h3 { font-size: 1.2rem; }
+
 /* Help and AI: text columns with hairlines instead of cards. */
 #help .cases { grid-template-columns: repeat(2, 1fr); column-gap: 3rem; }
 #help .svc { border-top: 1px solid var(--rule); padding: 1.4rem 0 1.6rem; }
@@ -487,6 +503,9 @@ h3, .card h3, .app h3, .ai h3 { font-family: var(--f-head); font-weight: 600; }
   }
   #work .case-media { margin: 1rem 0 1.4rem; }
   #help .cases { grid-template-columns: 1fr; }
+  #apps .app, .c-apps .app { grid-template-columns: 1fr; grid-template-areas: "head" "shots" "what" "role" "stack" "links"; grid-template-rows: none; }
+  #apps .app .shots, .c-apps .app .shots { grid-row: auto; margin: 1rem 0 1.2rem; }
+  .apps-more { grid-template-columns: 1fr; }
   .ai li { grid-template-columns: 1fr; row-gap: .5rem; }
 }
 @media (max-width: 640px) {

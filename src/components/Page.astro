@@ -223,7 +223,7 @@ const personLd = {
             appsShots.map((a) => {
               const m = media[a.id];
               return (
-                <article class="app glow" id={`app-${a.id}`}>
+                <article class="app" id={`app-${a.id}`}>
                   <div class="shots">
                     {a.badge && <span class="badge corner">{a.badge}</span>}
                     {m.phones.map((img, i) => (
@@ -248,7 +248,7 @@ const personLd = {
                   <p class="stackline">{a.stackNote ?? ''}</p>
                   <p class="app-links">
                     {a.links.map((l) => (
-                      <a class="chip" href={l.href} rel="noopener">{l.label} ↗</a>
+                      <a class="chip" href={l.href} rel="noopener">{l.label}</a>
                     ))}
                   </p>
                 </article>
@@ -259,7 +259,7 @@ const personLd = {
         {appsCompact.length > 0 && (
           <div class="apps-more">
             {appsCompact.map((a) => (
-              <article class="app compact glow" id={`app-${a.id}`}>
+              <article class="app compact" id={`app-${a.id}`}>
                 <span class="icon mono" aria-hidden="true">{a.name.slice(0, 1)}</span>
                 <div class="compact-body">
                   <h3>{a.name}</h3>
@@ -268,7 +268,7 @@ const personLd = {
                   <p class="role">{a.role}</p>
                   <p class="app-links">
                     {a.links.map((l) => (
-                      <a class="chip" href={l.href} rel="noopener">{l.label} ↗</a>
+                      <a class="chip" href={l.href} rel="noopener">{l.label}</a>
                     ))}
                   </p>
                 </div>

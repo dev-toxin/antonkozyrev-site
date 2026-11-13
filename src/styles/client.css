@@ -139,10 +139,8 @@
   .c-ex-site { display: flex; }
   .c-ex-site .c-ex-links { margin-top: auto !important; }
 }
-/* example apps reuse home .apps/.app cards (subgrid rows: shots / head / what / role / links); no role line here */
+/* example apps: the editorial list from the home page (global.css, «Apps: an editorial list») */
 .c-apps { margin-top: 1.2rem; }
-@media (min-width: 900px) { .c-apps { grid-template-columns: repeat(3, 1fr); } }
-.c-apps .app { grid-row: span 4; }
 .c-apps .years { white-space: normal; }
 .c-ex-code { margin-top: 1.2rem; }
 .c-ex-code .c-ex-links { align-self: flex-start; }
