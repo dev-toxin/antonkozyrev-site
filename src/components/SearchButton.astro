@@ -1,0 +1,15 @@
+---
+// Header trigger for the command palette: icon + ⌘K hint on desktop, icon only on phones
+// (there is no ⌘K on a touch keyboard).
+import Icon from './Icon.astro';
+import type { Lang } from '../content';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const label = lang === 'en' ? 'Search the site' : 'Поиск по сайту';
+---
+
+<button class="kbar-open" type="button" data-kbar-open aria-haspopup="dialog" aria-label={label} title={label}>
+  <Icon name="search" />
+  <kbd class="kbar-kbd" aria-hidden="true"><span data-kbar-mod>⌘</span>K</kbd>
+</button>

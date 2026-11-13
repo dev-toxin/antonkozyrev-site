@@ -1,0 +1,70 @@
+---
+// Product screen drawn in HTML instead of a screenshot: sharp at any size, translated with the page.
+// The screenshot stays as a fallback when scripts are off (html:not(.js)).
+// Frost data: localfrostdates.com station Asheville NC (USW00013872, NOAA 1991–2020 normals, checked 2026-10-29).
+// Terroir dialogue is illustrative and labelled as an example.
+import { Image } from 'astro:assets';
+import type { Lang } from '../content';
+
+interface Props {
+  kind: 'frost' | 'terroir';
+  lang: Lang;
+  href: string;
+  label: string;
+  fallback: ImageMetadata;
+  alt: string;
+}
+const { kind, lang, href, label, fallback, alt } = Astro.props;
+const en = lang === 'en';
+const url = href.replace('https://', '').replace(/\/$/, '');
+const f = en
+  ? { station: 'Station ASHEVILLE · USW00013872', spring: 'Last spring frost', fall: 'First fall frost', mid: 'median', season: 'Growing season 205 days', zone: 'Zone 7b', springDate: 'Apr 6', fallDate: 'Oct 31', springRange: 'Mar 20 – Apr 24', fallRange: 'Oct 17 – Nov 13' }
+  : { station: 'Станция ASHEVILLE · USW00013872', spring: 'Последний весенний заморозок', fall: 'Первый осенний заморозок', mid: 'медиана', season: 'Сезон 205 дней', zone: 'Зона 7b', springDate: '6 апр', fallDate: '31 окт', springRange: '20 мар – 24 апр', fallRange: '17 окт – 13 ноя' };
+const w = en
+  ? { example: 'Example', q: 'What should I open tonight with mushroom risotto?', a: 'From your cellar: the 2019 Pinot Noir. Earthy and light — it will not cover the mushrooms. Your Barolo needs two more years.', src: ['Cellar · 2 bottles', 'Recipe · risotto', 'Taste profile'] }
+  : { example: 'Пример', q: 'Что открыть вечером к грибному ризотто?', a: 'Из вашего погреба — Пино Нуар 2019. Землистое и лёгкое, не перебьёт грибы. Бароло пусть полежит ещё два года.', src: ['Погреб · 2 бутылки', 'Рецепт · ризотто', 'Профиль вкуса'] };
+---
+
+<a class="browser mk-link" href={href} target="_blank" rel="noopener" aria-label={label}>
+  <span class="browser-bar" aria-hidden="true">
+    <i></i><i></i><i></i>
+    <span class="browser-url">{kind === 'frost' ? `${url}/asheville-nc` : `${url}/app`}</span>
+  </span>
+  {kind === 'frost' ? (
+    <span class="mk mk-frost" data-mk>
+      <span class="mk-kicker">{f.station}</span>
+      <span class="mk-title">Asheville, NC</span>
+      <span class="mk-dates">
+        <span><small>{f.spring}</small><b>{f.springDate}</b><small>{f.mid} · {f.springRange}</small></span>
+        <span><small>{f.fall}</small><b>{f.fallDate}</b><small>{f.mid} · {f.fallRange}</small></span>
+      </span>
+      <span class="mk-year" aria-hidden="true">
+        <span class="frost" style="left:0;width:26%"></span>
+        <span class="grow" style="left:26%;width:56%"></span>
+        <span class="frost" style="left:82%;width:18%"></span>
+      </span>
+      <span class="mk-foot"><span>{f.season}</span><span>{f.zone}</span></span>
+    </span>
+  ) : (
+    <span class="mk mk-chat" data-mk>
+      <span class="mk-example">{w.example}</span>
+      <span class="msg out">{w.q}</span>
+      <span class="msg in">{w.a}</span>
+      <span class="mk-src">{w.src.map((s) => <span>{s}</span>)}</span>
+    </span>
+  )}
+  <Image class="mk-fallback" src={fallback} alt={alt} widths={[480, 720, 960]} sizes="(max-width: 900px) 92vw, 560px" loading="lazy" format="webp" />
+</a>
+
+<script>
+  // One reveal per card when it scrolls into view; without IntersectionObserver the final state shows at once.
+  const cards = document.querySelectorAll<HTMLElement>('[data-mk]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, { threshold: 0.4 });
+    cards.forEach((c) => io.observe(c));
+  } else {
+    cards.forEach((c) => c.classList.add('in-view'));
+  }
+</script>

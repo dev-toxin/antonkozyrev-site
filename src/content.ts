@@ -208,7 +208,7 @@ export const copy: Record<Lang, Copy> = {
       },
     ],
     appsTitle: 'Apps I built',
-    appsLead: "The first two are from my current job. I built the rest alongside it — separate repos, clear scopes, every app shipped to the stores.",
+    appsLead: "The first two are from my current job. The rest come from earlier roles and project work — separate repos, clear scopes, every app shipped to the stores.",
     apps: [
       {
         id: 'gsr', name: 'GSR Rabota', years: '2026', badge: 'Current job',
@@ -463,7 +463,7 @@ export const copy: Record<Lang, Copy> = {
       },
     ],
     appsTitle: 'Приложения, которые я делал',
-    appsLead: 'Первые два — с моей текущей работы, остальные сделаны параллельно: отдельные репозитории, понятные границы задач, каждое приложение дошло до стора.',
+    appsLead: 'Первые два — с текущей работы, остальные — с прошлых мест и проектной работы: отдельные репозитории, понятные границы задач, каждое приложение дошло до стора.',
     apps: [
       {
         id: 'gsr', name: 'GSR Работа', years: '2026', badge: 'Текущая работа',

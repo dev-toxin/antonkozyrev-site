@@ -398,3 +398,79 @@ h2 { font-weight: 800; }
 .hire .btn { max-width: 100%; overflow-wrap: anywhere; }
 [id] { scroll-margin-top: 72px; }
 @media (max-width: 400px) { .hide-xs { display: none; } }
+
+/* ===== 2026-11-13 — сессия дизайна: ⌘K, живые мокапы, контраст кнопки =====
+   Кнопка: белый текст на #3D5AFE — 5,13:1 (был #4C6FFF — 4,18:1, ниже AA). --blue как цвет текста на тёмном не меняется. */
+:root { --btn-bg: #3D5AFE; }
+.btn.primary:hover { background: #3049E0; }
+.ap.yes { background: var(--btn-bg); }
+
+/* Поиск в шапке: иконка + подсказка ⌘K; на телефоне только иконка, зона касания 44 px */
+.kbar-open { display: inline-flex; align-items: center; gap: .45rem; min-height: 36px; padding: .3rem .55rem; border: 1px solid var(--line); border-radius: 8px;
+  background: transparent; color: var(--muted); font: 600 .78rem var(--f-text); cursor: pointer; }
+.kbar-open:hover { color: var(--text); border-color: var(--muted); }
+.kbar-open svg { width: 16px; height: 16px; }
+.kbar-kbd { font: inherit; letter-spacing: .02em; }
+@media (max-width: 640px) {
+  .kbar-kbd { display: none; }
+  .kbar-open { min-width: 44px; min-height: 44px; justify-content: center; padding: 0; border-color: transparent; }
+  .kbar-open svg { width: 20px; height: 20px; }
+}
+
+/* Палитра команд — нативный <dialog> */
+.kbar { width: min(640px, calc(100% - 2rem)); max-height: min(560px, 80dvh); padding: 0; margin: 12vh auto auto; border: 1px solid var(--line); border-radius: 14px;
+  background: var(--panel); color: var(--text); box-shadow: 0 30px 80px -20px rgba(0,0,0,.6); overflow: hidden; }
+.kbar[open] { display: flex; flex-direction: column; }
+.kbar::backdrop { background: rgba(5,8,14,.72); }
+.kbar-head { display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+.kbar-input { flex: 1; min-width: 0; padding: 1.05rem 1.2rem; border: 0; background: transparent; color: var(--text); font: 500 1.05rem var(--f-text); }
+.kbar-input:focus-visible { outline: none; }
+.kbar-head:focus-within { box-shadow: inset 0 -2px 0 var(--acid); }
+.kbar-close { margin-right: .6rem; min-height: 44px; padding: 0 .8rem; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font: 600 .82rem var(--f-text); cursor: pointer; }
+.kbar-close:hover { color: var(--text); background: var(--line2); }
+.kbar-list { list-style: none; margin: 0; padding: .4rem; overflow: auto; }
+.kbar-list a { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 44px; padding: .55rem .8rem; border-radius: 8px; color: var(--text2); text-decoration: none; }
+.kbar-list li[aria-selected='true'] a { background: var(--line2); color: var(--text); box-shadow: inset 2px 0 0 var(--acid); }
+.kbar-hint { color: var(--muted); font-size: .82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 45%; }
+.kbar-empty { margin: 0; padding: 1rem 1.2rem; color: var(--muted); }
+.kbar-foot { margin: 0; padding: .6rem 1.2rem; border-top: 1px solid var(--line); font: 600 .75rem var(--f-text); color: var(--muted); }
+@media (max-width: 640px) {
+  .kbar { margin-top: 1rem; max-height: calc(100dvh - 2rem); }
+  .kbar-hint, .kbar-foot { display: none; }
+}
+
+/* Живые мокапы в карточках localfrostdates и Terroir; скриншот — запасной вариант без JS */
+.mk-link .mk-fallback { display: none; }
+html:not(.js) .mk-link .mk { display: none; }
+html:not(.js) .mk-link .mk-fallback { display: block; }
+.mk { display: grid; gap: .9rem; padding: 1.3rem; color: var(--text); text-align: left; aspect-ratio: 1440 / 846; align-content: start; overflow: hidden; }
+.mk-kicker { font: 600 .72rem var(--f-text); color: var(--muted); }
+.mk-title { font: 800 1.45rem/1.1 var(--f-head); letter-spacing: -.02em; }
+.mk-dates { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+.mk-dates > span { display: grid; gap: .15rem; border: 1px solid var(--line); border-radius: 10px; padding: .7rem .8rem; }
+.mk-dates small { color: var(--muted); font-size: .72rem; line-height: 1.3; }
+.mk-dates b { font: 800 1.45rem var(--f-head); letter-spacing: -.02em; }
+.mk-year { position: relative; display: block; height: 8px; border-radius: 99px; background: var(--line2); overflow: hidden; }
+.mk-year span { position: absolute; top: 0; bottom: 0; }
+.mk-year .frost { background: rgba(var(--c1-rgb), .4); }
+.mk-year .grow { background: var(--ok); opacity: .7; transform-origin: left; }
+.mk-foot { display: flex; justify-content: space-between; color: var(--muted); font-size: .78rem; }
+.mk-chat { gap: .65rem; }
+.mk-example { justify-self: start; font: 600 .7rem var(--f-text); color: var(--muted); border: 1px dashed var(--line); border-radius: 99px; padding: .1rem .55rem; }
+.msg { display: block; max-width: 86%; padding: .6rem .85rem; border-radius: 14px; font-size: .86rem; line-height: 1.45; }
+.msg.out { justify-self: end; background: var(--btn-bg); color: #fff; border-bottom-right-radius: 4px; }
+.msg.in { justify-self: start; background: var(--panel); border: 1px solid var(--line); color: var(--text2); border-bottom-left-radius: 4px; }
+.mk-src { display: flex; flex-wrap: wrap; gap: .35rem; }
+.mk-src span { font-size: .7rem; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: .12rem .5rem; }
+/* Один момент движения: при появлении карточки ответ и полоса сезона «дорисовываются» (opacity/transform, без layout) */
+@media (prefers-reduced-motion: no-preference) {
+  .js .mk[data-mk] .msg, .js .mk[data-mk] .mk-src, .js .mk[data-mk] .mk-year .grow { transition: opacity .5s ease, transform .6s ease; }
+  .js .mk[data-mk]:not(.in-view) .msg.in, .js .mk[data-mk]:not(.in-view) .mk-src { opacity: 0; transform: translateY(6px); }
+  .js .mk[data-mk]:not(.in-view) .mk-year .grow { transform: scaleX(0); }
+  .js .mk[data-mk] .msg.in { transition-delay: .35s; }
+  .js .mk[data-mk] .mk-src { transition-delay: .6s; }
+}
+@media (max-width: 640px) {
+  .mk { aspect-ratio: auto; padding: 1rem; }
+  .mk-dates b { font-size: 1.2rem; }
+}

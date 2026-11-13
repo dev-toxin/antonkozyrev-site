@@ -7,6 +7,9 @@ import { copy, links, type Lang, type AppId } from '../content';
 import AgentConsole from './AgentConsole.astro';
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
+import CommandPalette from './CommandPalette.astro';
+import SearchButton from './SearchButton.astro';
+import LiveMockup from './LiveMockup.astro';
 import antonPhoto from '../assets/anton.webp';
 import artSitefarm from '../assets/art/case-sitefarm.jpg';
 import artMobile from '../assets/art/case-mobile.jpg';
@@ -36,8 +39,6 @@ const siteShots = { tapreply: tapreplyHome, terroir: terroirHome, frost: sitefar
 
 interface Props {
   lang: Lang;
-  /** Prototype pages under /lab/: hidden from search, see /lab/. */
-  noindex?: boolean;
 }
 
 const media: Record<AppId, { icon?: ImageMetadata; phones: ImageMetadata[] }> = {
@@ -50,7 +51,7 @@ const media: Record<AppId, { icon?: ImageMetadata; phones: ImageMetadata[] }> = 
   greenfeed: { icon: greenfeedIcon, phones: [greenfeed1, greenfeed2] },
 };
 
-const { lang, noindex = false } = Astro.props;
+const { lang } = Astro.props;
 const t = copy[lang];
 const site = Astro.site ?? new URL('https://antonkozyrev.dev');
 const canonical = new URL(t.path, site).href;
@@ -84,11 +85,12 @@ const personLd = {
 <!doctype html>
 <html lang={t.htmlLang}>
   <head>
+    <script is:inline>document.documentElement.classList.add('js')</script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{t.title}</title>
     <meta name="description" content={t.description} />
-    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang={t.htmlLang} href={canonical} />
     <link rel="alternate" hreflang={copy[altLang].htmlLang} href={altUrl} />
     <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
@@ -124,6 +126,7 @@ const personLd = {
           <a href="#stack" class="hide-s">{t.nav.stack}</a>
           <a href="#contact">{t.nav.contact}</a>
           <a class="lang" href={t.switchHref} hreflang={copy[altLang].htmlLang} lang={copy[altLang].htmlLang} title={t.switchTitle}>{t.switchLabel}</a>
+          <SearchButton lang={lang} />
         </nav>
       </div>
     </header>
@@ -170,7 +173,10 @@ const personLd = {
                 </ul>
                 <p class="stackline">{c.stack}</p>
                 <div class="case-media">
-                  {c.shot && c.live && (
+                  {c.shot && c.live && (c.shot === 'frost' || c.shot === 'terroir') && (
+                    <LiveMockup kind={c.shot} lang={lang} href={c.live.href} label={c.live.label} fallback={siteShots[c.shot]} alt={c.title} />
+                  )}
+                  {c.shot && c.live && c.shot === 'tapreply' && (
                     <a class="browser" href={c.live.href} target="_blank" rel="noopener" aria-label={c.live.label}>
                       <span class="browser-bar" aria-hidden="true">
                         <i></i><i></i><i></i>
@@ -398,6 +404,6 @@ const personLd = {
         io.observe(nums[0].closest('.stats')!);
       }
     </script>
-    <slot name="lab" />
+    <CommandPalette lang={lang} altHref={t.switchHref} />
   </body>
 </html>

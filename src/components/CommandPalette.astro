@@ -1,0 +1,96 @@
+---
+// ⌘K / Ctrl+K command palette on every page: a native <dialog> and a few lines of JS.
+// Commands come from site data only; the trigger lives in the header (SearchButton).
+import { copy, links, type Lang } from '../content';
+
+interface Props {
+  lang: Lang;
+  /** The same page in the other language. */
+  altHref: string;
+}
+const { lang, altHref } = Astro.props;
+const t = copy[lang];
+const en = lang === 'en';
+const home = t.path;
+const g = en
+  ? { jump: 'Jump to', projects: 'Projects', contact: 'Contact', site: 'Site' }
+  : { jump: 'Перейти', projects: 'Проекты', contact: 'Связаться', site: 'Сайт' };
+const items = [
+  { group: g.jump, label: t.casesTitle, hint: '#work', href: `${home}#work` },
+  { group: g.jump, label: t.appsTitle, hint: '#apps', href: `${home}#apps` },
+  { group: g.jump, label: t.help.title, hint: '#help', href: `${home}#help` },
+  { group: g.jump, label: t.aiTitle, hint: '#ai', href: `${home}#ai` },
+  { group: g.jump, label: t.stackTitle, hint: '#stack', href: `${home}#stack` },
+  ...t.cases.map((c) => ({ group: g.projects, label: c.title, hint: c.tag, href: `${home}#${c.id}` })),
+  { group: g.contact, label: t.hero.ctaResume, hint: 'PDF', href: t.hero.resumePdf },
+  { group: g.contact, label: 'Telegram', hint: '@tokc_a', href: links.telegram },
+  { group: g.contact, label: 'Email', hint: links.email, href: `mailto:${links.email}` },
+  { group: g.contact, label: 'GitHub', hint: 'dev-toxin', href: links.github },
+  { group: g.site, label: t.help.clientLink.label, hint: t.help.clientLink.href, href: t.help.clientLink.href },
+  { group: g.site, label: t.switchTitle, hint: t.switchLabel, href: altHref },
+];
+const ui = en
+  ? { label: 'Search the site', placeholder: 'Search sections, projects, contacts…', empty: 'Nothing found. Try a project name or “Telegram”.', nav: '↑↓ to move · ↵ to open · esc to close', close: 'Close' }
+  : { label: 'Поиск по сайту', placeholder: 'Разделы, проекты, контакты…', empty: 'Ничего не найдено. Попробуйте название проекта или «Telegram».', nav: '↑↓ выбор · ↵ открыть · esc закрыть', close: 'Закрыть' };
+---
+
+<dialog class="kbar" data-kbar aria-label={ui.label}>
+  <div class="kbar-head">
+    <input class="kbar-input" type="text" placeholder={ui.placeholder} aria-label={ui.label} autocomplete="off" spellcheck="false"
+      role="combobox" aria-expanded="true" aria-controls="kbar-list" aria-autocomplete="list" data-kbar-input />
+    <button class="kbar-close" type="button" data-kbar-close>{ui.close}</button>
+  </div>
+  <ul class="kbar-list" id="kbar-list" role="listbox" aria-label={ui.label} data-kbar-list>
+    {items.map((it, i) => (
+      <li role="option" id={`kbar-${i}`} data-text={`${it.label} ${it.hint} ${it.group}`.toLowerCase()}>
+        <a href={it.href} tabindex="-1" {...(it.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
+          <span class="kbar-label">{it.label}</span><span class="kbar-hint">{it.group} · {it.hint}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p class="kbar-empty" data-kbar-empty role="status" hidden>{ui.empty}</p>
+  <p class="kbar-foot" aria-hidden="true">{ui.nav}</p>
+</dialog>
+
+<script>
+  const dlg = document.querySelector<HTMLDialogElement>('[data-kbar]')!;
+  const input = dlg.querySelector<HTMLInputElement>('[data-kbar-input]')!;
+  const rows = Array.from(dlg.querySelectorAll<HTMLLIElement>('[data-kbar-list] li'));
+  const empty = dlg.querySelector<HTMLElement>('[data-kbar-empty]')!;
+  const isMac = /Mac|iPhone|iPad/.test(navigator.userAgent);
+  document.querySelectorAll('[data-kbar-mod]').forEach((el) => (el.textContent = isMac ? '⌘' : 'Ctrl+'));
+  let active = 0;
+  const visible = () => rows.filter((r) => !r.hidden);
+  const mark = () => {
+    const v = visible();
+    rows.forEach((r) => r.setAttribute('aria-selected', 'false'));
+    if (!v.length) return input.removeAttribute('aria-activedescendant');
+    active = (active + v.length) % v.length;
+    v[active].setAttribute('aria-selected', 'true');
+    input.setAttribute('aria-activedescendant', v[active].id);
+    v[active].scrollIntoView({ block: 'nearest' });
+  };
+  const filter = () => {
+    const q = input.value.trim().toLowerCase();
+    rows.forEach((r) => (r.hidden = !!q && !r.dataset.text!.includes(q)));
+    empty.hidden = visible().length > 0;
+    active = 0;
+    mark();
+  };
+  const open = () => { input.value = ''; filter(); dlg.showModal(); input.focus(); };
+  document.querySelectorAll('[data-kbar-open]').forEach((b) => b.addEventListener('click', open));
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); dlg.open ? dlg.close() : open(); }
+  });
+  input.addEventListener('input', filter);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); active++; mark(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); active--; mark(); }
+    else if (e.key === 'Enter') { e.preventDefault(); visible()[active]?.querySelector('a')?.click(); }
+  });
+  rows.forEach((r) => r.addEventListener('pointermove', () => { active = visible().indexOf(r); mark(); }));
+  dlg.querySelector('[data-kbar-close]')!.addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  dlg.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => dlg.close()));
+</script>
