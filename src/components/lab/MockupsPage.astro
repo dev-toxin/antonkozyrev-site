@@ -1,0 +1,105 @@
+---
+// Live mockups prototype: product screens drawn in HTML/CSS instead of PNG screenshots —
+// crisp at any size, translated with the page, tilted slightly with a soft edge light.
+// Data: localfrostdates.com station Asheville NC (USW00013872, NOAA 1991–2020 normals, checked 2026-10-29).
+import LabShell from './LabShell.astro';
+import type { Lang } from '../../content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const en = lang === 'en';
+const t = en
+  ? {
+      title: 'Live mockups — lab',
+      h1: 'Live mockups',
+      lead: 'Product screens drawn in HTML instead of screenshots: sharp on any screen, translated together with the page, lighter than images.',
+      note: 'Prototype for the design session. Candidate places: the Terroir and localfrostdates cards in “Selected work”. Store apps keep real screenshots.',
+      frost: { site: 'localfrostdates.com', place: 'Asheville, NC', station: 'Station ASHEVILLE · USW00013872', spring: 'Last spring frost', fall: 'First fall frost', mid: 'median', range: '90% → 10% risk', season: 'growing season', days: '205 days', zone: 'Zone 7b' },
+      terroir: { site: 'Terroir', q: 'What should I open tonight with mushroom risotto?', a: 'From your cellar: the 2019 Pinot Noir. Earthy and light — it will not cover the mushrooms. Your Barolo needs two more years.', src: ['Cellar · 2 bottles', 'Recipe · risotto', 'Taste profile'] },
+    }
+  : {
+      title: 'Живые мокапы — лаборатория',
+      h1: 'Живые мокапы',
+      lead: 'Экраны продуктов, нарисованные в HTML вместо скриншотов: чёткие на любом экране, переводятся вместе со страницей, легче картинок.',
+      note: 'Прототип для сессии дизайна. Где применить: карточки Terroir и localfrostdates в «Избранных работах». У приложений из сторов остаются настоящие скриншоты.',
+      frost: { site: 'localfrostdates.com', place: 'Asheville, NC', station: 'Станция ASHEVILLE · USW00013872', spring: 'Последний весенний заморозок', fall: 'Первый осенний заморозок', mid: 'медиана', range: 'риск 90% → 10%', season: 'сезон', days: '205 дней', zone: 'Зона 7b' },
+      terroir: { site: 'Terroir', q: 'Что открыть вечером к грибному ризотто?', a: 'Из вашего погреба — Пино Нуар 2019. Землистое и лёгкое, не перебьёт грибы. Бароло пусть полежит ещё два года.', src: ['Погреб · 2 бутылки', 'Рецепт · ризотто', 'Профиль вкуса'] },
+    };
+const f = t.frost;
+---
+
+<LabShell lang={lang} title={t.title}>
+  <h1>{t.h1}</h1>
+  <p class="lead">{t.lead}</p>
+  <p class="lab-note">{t.note}</p>
+
+  <div class="mk-grid">
+    <figure class="mk mk-browser" aria-label={f.site}>
+      <div class="mk-bar"><i></i><i></i><i></i><span>{f.site}/asheville-nc</span></div>
+      <div class="mk-body">
+        <p class="mk-kicker">{f.station}</p>
+        <h3>{f.place}</h3>
+        <div class="mk-dates">
+          <div><span>{f.spring}</span><b>Apr 6</b><small>{f.mid} · Mar 20 – Apr 24 · {f.range}</small></div>
+          <div><span>{f.fall}</span><b>Oct 31</b><small>{f.mid} · Oct 17 – Nov 13</small></div>
+        </div>
+        <div class="mk-year" aria-hidden="true">
+          <span class="frost" style="left:0;width:26%"></span>
+          <span class="grow" style="left:26%;width:56%"></span>
+          <span class="frost" style="left:82%;width:18%"></span>
+        </div>
+        <p class="mk-foot"><span>{f.season}: {f.days}</span><span>{f.zone}</span></p>
+      </div>
+    </figure>
+
+    <figure class="mk mk-phone" aria-label={t.terroir.site}>
+      <div class="mk-notch" aria-hidden="true"></div>
+      <div class="mk-chat">
+        <p class="mk-app">{t.terroir.site}</p>
+        <p class="msg out">{t.terroir.q}</p>
+        <p class="msg in">{t.terroir.a}</p>
+        <ul class="mk-src">{t.terroir.src.map((s) => <li>{s}</li>)}</ul>
+        <div class="mk-input" aria-hidden="true"><span></span><b></b></div>
+      </div>
+    </figure>
+  </div>
+</LabShell>
+
+<style is:global>
+  .mk-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: center; perspective: 1600px; margin-top: 1rem; }
+  .mk { margin: 0; border: 1px solid var(--line); background: var(--panel); border-radius: 14px; overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(var(--c1-rgb), .08), 0 30px 80px -30px rgba(var(--c1-rgb), .35);
+    transform: rotateY(-8deg) rotateX(4deg); transition: transform .6s var(--ease, ease); }
+  .mk:hover { transform: none; }
+  .mk-phone { transform: rotateY(8deg) rotateX(4deg); border-radius: 34px; max-width: 320px; justify-self: center; padding: 14px; }
+  @media (prefers-reduced-motion: reduce) { .mk, .mk-phone { transform: none; transition: none; } }
+  .mk-bar { display: flex; align-items: center; gap: .4rem; padding: .6rem .8rem; background: var(--console-bg); border-bottom: 1px solid var(--line); font: .75rem var(--f-text); color: var(--muted); }
+  .mk-bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+  .mk-bar span { margin-left: .6rem; }
+  .mk-body { padding: 1.6rem; }
+  .mk-kicker { margin: 0; font: 600 .72rem var(--f-text); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .mk-body h3 { font-size: 1.6rem; margin: .3rem 0 1.2rem; }
+  .mk-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .mk-dates div { border: 1px solid var(--line); border-radius: 10px; padding: .9rem; display: grid; gap: .2rem; }
+  .mk-dates span, .mk-dates small { color: var(--muted); font-size: .78rem; }
+  .mk-dates b { font: 800 1.7rem var(--f-head); letter-spacing: -.02em; }
+  .mk-year { position: relative; height: 10px; border-radius: 99px; background: var(--line2); margin: 1.4rem 0 .6rem; overflow: hidden; }
+  .mk-year span { position: absolute; top: 0; bottom: 0; }
+  .mk-year .frost { background: rgba(var(--c1-rgb), .35); }
+  .mk-year .grow { background: var(--ok); opacity: .7; }
+  .mk-foot { display: flex; justify-content: space-between; margin: 0; color: var(--muted); font-size: .8rem; }
+  .mk-notch { width: 90px; height: 22px; border-radius: 99px; background: var(--bg); margin: 0 auto 10px; }
+  .mk-chat { background: var(--bg); border-radius: 22px; padding: 1rem; display: grid; gap: .7rem; min-height: 420px; align-content: start; }
+  .mk-app { margin: 0 0 .4rem; font: 700 .9rem var(--f-head); text-align: center; }
+  .msg { margin: 0; padding: .7rem .9rem; border-radius: 14px; font-size: .9rem; line-height: 1.45; max-width: 88%; }
+  .msg.out { justify-self: end; background: var(--blue); color: #fff; border-bottom-right-radius: 4px; }
+  .msg.in { background: var(--panel); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .mk-src { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
+  .mk-src li { font-size: .72rem; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: .15rem .55rem; }
+  .mk-input { margin-top: auto; display: flex; gap: .5rem; align-items: center; border: 1px solid var(--line); border-radius: 99px; padding: .5rem .6rem .5rem 1rem; }
+  .mk-input span { flex: 1; height: 8px; border-radius: 99px; background: var(--line2); }
+  .mk-input b { width: 24px; height: 24px; border-radius: 50%; background: var(--blue); }
+  @media (max-width: 900px) { .mk-grid { grid-template-columns: 1fr; } .mk, .mk-phone { transform: none; } }
+</style>

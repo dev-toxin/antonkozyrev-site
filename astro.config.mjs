@@ -10,6 +10,8 @@ export default defineConfig({
   build: { inlineStylesheets: 'always' },
   integrations: [
     sitemap({
+      // /lab/ — design prototypes, noindex
+      filter: (page) => !page.includes('/lab/'),
       i18n: {
         defaultLocale: 'en',
         locales: { en: 'en', ru: 'ru' },

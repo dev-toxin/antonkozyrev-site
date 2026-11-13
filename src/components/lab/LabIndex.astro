@@ -1,0 +1,35 @@
+---
+import LabShell from './LabShell.astro';
+import type { Lang } from '../../content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const en = lang === 'en';
+const base = en ? '/lab/' : '/ru/lab/';
+const items = en
+  ? [
+      { href: 'kbar/', k: '⌘K palette', v: 'The home page with a command palette: press ⌘K / Ctrl+K or the button in the corner.' },
+      { href: 'now/', k: 'Now', v: 'What I ship, build and learn this month — a living page instead of a blog.' },
+      { href: 'mockups/', k: 'Live mockups', v: 'Product screens in HTML with a slight tilt and edge light instead of PNG screenshots.' },
+      { href: 'light/', k: 'Light theme', v: 'The home page in a light palette (same layout).' },
+      { href: 'light-client/', k: 'Light theme — clients', v: 'The page for clients in the light palette.' },
+    ]
+  : [
+      { href: 'kbar/', k: 'Палитра ⌘K', v: 'Главная с палитрой команд: ⌘K / Ctrl+K или кнопка в углу.' },
+      { href: 'now/', k: 'Сейчас', v: 'Что выпустил, делаю и учу в этом месяце — живая страница вместо блога.' },
+      { href: 'mockups/', k: 'Живые мокапы', v: 'Экраны продуктов в HTML с лёгким наклоном и подсветкой кромки вместо PNG-скриншотов.' },
+      { href: 'light/', k: 'Светлая тема', v: 'Главная в светлой палитре (та же вёрстка).' },
+      { href: 'light-client/', k: 'Светлая тема — заказчики', v: 'Страница для заказчиков в светлой палитре.' },
+    ];
+---
+
+<LabShell lang={lang} title={en ? 'Lab — design prototypes' : 'Лаборатория — прототипы дизайна'}>
+  <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{en ? 'Design session · 2026-11-13' : 'Сессия дизайна · 2026-11-13'}</p>
+  <h1>Lab</h1>
+  <p class="lead">{en ? 'Prototypes of Linear-style moves. Not linked from the site and hidden from search.' : 'Прототипы ходов в стиле Linear. Без ссылок с сайта и закрыты от поиска.'}</p>
+  <ul class="lab-list">
+    {items.map((i) => <li><a href={base + i.href}><strong>{i.k}</strong><span>{i.v}</span></a></li>)}
+  </ul>
+</LabShell>

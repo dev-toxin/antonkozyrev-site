@@ -1,0 +1,29 @@
+---
+// Light theme prototype for /lab/light/: overrides the «business dark» tokens and the few
+// hardcoded dark surfaces of global.css. Contrast (WCAG): text 16.8:1, muted 5.5:1, accent 6.1:1,
+// white on accent buttons 6.5:1.
+---
+
+<style is:global>
+  :root {
+    color-scheme: light;
+    --bg: #F7F8FA; --bg2: #FFFFFF; --panel: #FFFFFF;
+    --line: #DDE2EA; --line2: #E7EBF1; --text: #0F172A; --text2: #334155; --muted: #5B6577; --icon: #5B6577;
+    --blue: #3451D1; --violet: #3451D1; --c2: #3451D1; --acid: #3451D1; --acid-hi: #2A41A8;
+    --c1-rgb: 52,81,209; --c2-rgb: 52,81,209; --acid-rgb: 52,81,209; --glow-rgb: 52,81,209;
+    --plan: #334155; --file: #2A41A8; --bar-bg: rgba(247,248,250,.88); --console-bg: #F1F4F8; --phone-bg: #FFFFFF;
+    --btn-bg: #3451D1; --grad: #3451D1; --ok: #15803D;
+  }
+  .btn.primary:hover { background: #2A41A8; }
+  .console-bar { background: #E9EDF3; }
+  .lights i, .lights i:first-child, .browser-bar i, .browser-bar i:nth-child(2), .browser-bar i:nth-child(3) { background: #C7CEDA; }
+  .browser-bar { background: #EEF1F5; }
+  .shots { background: #EEF1F5; }
+  .icon.mono { background: #E7EBF1; }
+  .svc-icon { background: #F1F4F8; }
+  .glow:hover, .card:hover .svc-icon, .c-card:hover .svc-icon { border-color: #B8C1D0; }
+  .cmd, .ask { color: var(--text); }
+  .ask .pfx { color: #8A6A10; }
+  .c-form ::placeholder { color: #6B7280; }
+  .c-card { border-color: var(--line); }
+</style>

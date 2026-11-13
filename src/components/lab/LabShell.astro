@@ -1,0 +1,56 @@
+---
+// Shell for /lab/ prototype pages: same fonts and palette as the site, never indexed.
+import '@fontsource-variable/manrope/wght.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import '../../styles/global.css';
+import Logo from '../Logo.astro';
+import CommandPalette from './CommandPalette.astro';
+import type { Lang } from '../../content';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  theme?: 'dark' | 'light';
+}
+const { lang, title, theme = 'dark' } = Astro.props;
+const en = lang === 'en';
+---
+
+<!doctype html>
+<html lang={en ? 'en' : 'ru'} data-theme={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content={title} />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  </head>
+  <body>
+    <header class="bar">
+      <div class="wrap bar-inner">
+        <a class="logo" href={en ? '/' : '/ru/'}><Logo /><span class="logo-name">{en ? 'Anton Kozyrev' : 'Антон Козырев'}</span></a>
+        <nav aria-label="Lab">
+          <a href={en ? '/lab/' : '/ru/lab/'}>Lab</a>
+          <a href={en ? '/lab/now/' : '/ru/lab/now/'}>{en ? 'Now' : 'Сейчас'}</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap lab">
+      <slot />
+    </main>
+    <CommandPalette lang={lang} />
+  </body>
+</html>
+
+<style is:global>
+  .lab { padding: 4.5rem 0 6rem; }
+  .lab h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
+  .lab .lab-note { color: var(--muted); font-size: .9rem; border-left: 2px solid var(--line); padding-left: .9rem; margin: 1rem 0 2.5rem; max-width: 68ch; }
+  .lab-list { list-style: none; padding: 0; margin: 2rem 0 0; border-top: 1px solid var(--line); }
+  .lab-list li { border-bottom: 1px solid var(--line); }
+  .lab-list a { display: grid; grid-template-columns: 12rem 1fr; gap: 1.5rem; padding: 1.2rem 0; text-decoration: none; color: var(--text); }
+  .lab-list a span { color: var(--muted); }
+  .lab-list a:hover strong { color: var(--acid-hi); }
+  @media (max-width: 640px) { .lab-list a { grid-template-columns: 1fr; gap: .2rem; } }
+</style>

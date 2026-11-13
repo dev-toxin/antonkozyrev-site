@@ -28,9 +28,11 @@ const appMedia = {
 
 interface Props {
   lang: Lang;
+  /** Prototype pages under /lab/: hidden from search. */
+  noindex?: boolean;
 }
 
-const { lang } = Astro.props;
+const { lang, noindex = false } = Astro.props;
 const c = client[lang];
 const home = copy[lang];
 const site = Astro.site ?? new URL('https://antonkozyrev.dev');
@@ -87,7 +89,7 @@ const faqLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{c.title}</title>
     <meta name="description" content={c.description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="alternate" hreflang={c.htmlLang} href={canonical} />
     <link rel="alternate" hreflang={client[altLang].htmlLang} href={altUrl} />
     <link rel="alternate" hreflang="x-default" href={new URL(client.en.path, site).href} />
@@ -332,5 +334,6 @@ const faqLd = {
         window.location.href = href;
       });
     </script>
+    <slot name="lab" />
   </body>
 </html>

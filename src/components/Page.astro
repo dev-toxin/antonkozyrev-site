@@ -36,6 +36,8 @@ const siteShots = { tapreply: tapreplyHome, terroir: terroirHome, frost: sitefar
 
 interface Props {
   lang: Lang;
+  /** Prototype pages under /lab/: hidden from search, see /lab/. */
+  noindex?: boolean;
 }
 
 const media: Record<AppId, { icon?: ImageMetadata; phones: ImageMetadata[] }> = {
@@ -48,7 +50,7 @@ const media: Record<AppId, { icon?: ImageMetadata; phones: ImageMetadata[] }> = 
   greenfeed: { icon: greenfeedIcon, phones: [greenfeed1, greenfeed2] },
 };
 
-const { lang } = Astro.props;
+const { lang, noindex = false } = Astro.props;
 const t = copy[lang];
 const site = Astro.site ?? new URL('https://antonkozyrev.dev');
 const canonical = new URL(t.path, site).href;
@@ -86,7 +88,7 @@ const personLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{t.title}</title>
     <meta name="description" content={t.description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="alternate" hreflang={t.htmlLang} href={canonical} />
     <link rel="alternate" hreflang={copy[altLang].htmlLang} href={altUrl} />
     <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
@@ -396,5 +398,6 @@ const personLd = {
         io.observe(nums[0].closest('.stats')!);
       }
     </script>
+    <slot name="lab" />
   </body>
 </html>
