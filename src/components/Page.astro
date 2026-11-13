@@ -2,7 +2,7 @@
 import '@fontsource-variable/manrope/wght.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/global.css';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { copy, links, type Lang, type AppId } from '../content';
 import AgentConsole from './AgentConsole.astro';
 import Logo from './Logo.astro';
@@ -56,7 +56,10 @@ const site = Astro.site ?? new URL('https://antonkozyrev.dev');
 const canonical = new URL(t.path, site).href;
 const altLang: Lang = lang === 'en' ? 'ru' : 'en';
 const altUrl = new URL(copy[altLang].path, site).href;
-const ogImage = new URL('/og.png', site).href;
+// EN preview leads with the Latin name, RU with Cyrillic.
+const ogImage = new URL(lang === 'en' ? '/og-en.png' : '/og.png', site).href;
+const ogAlt = lang === 'en' ? 'Anton Kozyrev — Senior Flutter Developer · Go · LLM' : 'Антон Козырев — Senior Flutter Developer · Go · LLM';
+const photo = await getImage({ src: antonPhoto, width: 400, height: 400, format: 'webp' });
 const isExternal = (href: string) => href.startsWith('http');
 const appsShots = t.apps.filter((a) => media[a.id].phones.length > 0);
 const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
@@ -67,8 +70,9 @@ const personLd = {
   name: t.hero.name,
   alternateName: lang === 'en' ? 'Антон Козырев' : 'Anton Kozyrev',
   jobTitle: 'Senior Flutter Developer',
-  url: canonical,
-  image: ogImage,
+  // One @id across languages, so url and image must not differ between EN and RU.
+  url: new URL('/', site).href,
+  image: new URL(photo.src, site).href,
   email: `mailto:${links.email}`,
   address: {
     '@type': 'PostalAddress',
@@ -105,11 +109,13 @@ const personLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'ru_RU'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={t.title} />
     <meta name="twitter:description" content={t.description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogAlt} />
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
   </head>
   <body id="top">
@@ -209,7 +215,7 @@ const personLd = {
             appsShots.map((a) => {
               const m = media[a.id];
               return (
-                <article class="app glow">
+                <article class="app glow" id={`app-${a.id}`}>
                   <div class="shots">
                     {a.badge && <span class="badge corner">{a.badge}</span>}
                     {m.phones.map((img, i) => (
@@ -245,7 +251,7 @@ const personLd = {
         {appsCompact.length > 0 && (
           <div class="apps-more">
             {appsCompact.map((a) => (
-              <article class="app compact glow">
+              <article class="app compact glow" id={`app-${a.id}`}>
                 <span class="icon mono" aria-hidden="true">{a.name.slice(0, 1)}</span>
                 <div class="compact-body">
                   <h3>{a.name}</h3>
@@ -334,7 +340,7 @@ const personLd = {
         <div class="about">
           <Image src={antonPhoto} alt={t.about.photoAlt} width={160} height={160} format="webp" loading="lazy" />
           <div>
-            <h2>{t.about.title}</h2>
+            <h2><span class="num">06</span>{t.about.title}</h2>
             <p class="sub">{t.about.text}</p>
           </div>
         </div>
@@ -342,7 +348,7 @@ const personLd = {
 
       <section id="contact" class="wrap section">
         <div class="contact glow">
-          <h2><span class="num">06</span>{t.contactTitle}</h2>
+          <h2><span class="num">07</span>{t.contactTitle}</h2>
           <p class="sub">{t.contactLead}</p>
           <div class="hire">
             <a class="btn primary" href={t.hero.resumePdf} target="_blank" rel="noopener"><Icon name="file-text" />{t.hero.ctaResume}</a>

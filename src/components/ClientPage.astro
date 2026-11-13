@@ -39,7 +39,8 @@ const site = Astro.site ?? new URL('https://antonkozyrev.dev');
 const canonical = new URL(c.path, site).href;
 const altUrl = new URL(c.altPath, site).href;
 const altLang: Lang = lang === 'en' ? 'ru' : 'en';
-const ogImage = new URL('/og.png', site).href;
+const ogImage = new URL(lang === 'en' ? '/og-en.png' : '/og.png', site).href;
+const ogAlt = lang === 'en' ? 'Anton Kozyrev — Senior Flutter Developer · Go · LLM' : 'Антон Козырев — Senior Flutter Developer · Go · LLM';
 const appsHref = `${c.homePath}#apps`;
 const exSites = c.examples.filter((e) => e.kind === 'site');
 const exApps = c.examples.filter((e) => e.kind === 'app');
@@ -66,7 +67,7 @@ const serviceLd = {
     '@id': new URL('/#person', site).href,
     name: home.hero.name,
     jobTitle: 'Senior Flutter Developer',
-    url: new URL(c.homePath, site).href,
+    url: new URL('/', site).href,
     sameAs: [links.github, links.linkedin, links.telegram, links.resume].filter(Boolean),
   },
 };
@@ -104,8 +105,15 @@ const faqLd = {
     <meta property="og:description" content={c.description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'ru_RU'} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={c.title} />
+    <meta name="twitter:description" content={c.description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogAlt} />
     <script type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
   </head>

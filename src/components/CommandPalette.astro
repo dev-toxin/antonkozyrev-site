@@ -13,19 +13,25 @@ const t = copy[lang];
 const en = lang === 'en';
 const home = t.path;
 const g = en
-  ? { jump: 'Jump to', projects: 'Projects', contact: 'Contact', site: 'Site' }
-  : { jump: 'Перейти', projects: 'Проекты', contact: 'Связаться', site: 'Сайт' };
-const items = [
+  ? { jump: 'Jump to', projects: 'Projects', apps: 'Apps', contact: 'Contact', site: 'Site' }
+  : { jump: 'Перейти', projects: 'Проекты', apps: 'Приложения', contact: 'Связаться', site: 'Сайт' };
+// Extra search words (not shown): stack of a case or app, so «Riverpod» or «Go» finds where it was used.
+type Item = { group: string; label: string; hint: string; href: string; extra?: string };
+const items: Item[] = [
   { group: g.jump, label: t.casesTitle, hint: '#work', href: `${home}#work` },
   { group: g.jump, label: t.appsTitle, hint: '#apps', href: `${home}#apps` },
   { group: g.jump, label: t.help.title, hint: '#help', href: `${home}#help` },
   { group: g.jump, label: t.aiTitle, hint: '#ai', href: `${home}#ai` },
-  { group: g.jump, label: t.stackTitle, hint: '#stack', href: `${home}#stack` },
-  ...t.cases.map((c) => ({ group: g.projects, label: c.title, hint: c.tag, href: `${home}#${c.id}` })),
+  { group: g.jump, label: t.stackTitle, hint: '#stack', href: `${home}#stack`, extra: t.stack.map((s) => s.items).join(' ') },
+  { group: g.jump, label: t.about.title, hint: '#about', href: `${home}#about` },
+  ...t.cases.map((c) => ({ group: g.projects, label: c.title, hint: c.tag, href: `${home}#${c.id}`, extra: c.stack })),
+  ...t.apps.map((a) => ({ group: g.apps, label: a.name, hint: `${a.years} · Flutter`, href: `${home}#app-${a.id}`, extra: a.stackNote })),
   { group: g.contact, label: t.hero.ctaResume, hint: 'PDF', href: t.hero.resumePdf },
   { group: g.contact, label: 'Telegram', hint: '@tokc_a', href: links.telegram },
   { group: g.contact, label: 'Email', hint: links.email, href: `mailto:${links.email}` },
   { group: g.contact, label: 'GitHub', hint: 'dev-toxin', href: links.github },
+  ...(links.linkedin ? [{ group: g.contact, label: 'LinkedIn', hint: 'linkedin.com/in/tokc', href: links.linkedin }] : []),
+  ...(links.resume ? [{ group: g.contact, label: t.resumeLabel, hint: 'hh.ru', href: links.resume }] : []),
   { group: g.site, label: t.help.clientLink.label, hint: t.help.clientLink.href, href: t.help.clientLink.href },
   { group: g.site, label: t.switchTitle, hint: t.switchLabel, href: altHref },
 ];
@@ -42,7 +48,7 @@ const ui = en
   </div>
   <ul class="kbar-list" id="kbar-list" role="listbox" aria-label={ui.label} data-kbar-list>
     {items.map((it, i) => (
-      <li role="option" id={`kbar-${i}`} data-text={`${it.label} ${it.hint} ${it.group}`.toLowerCase()}>
+      <li role="option" id={`kbar-${i}`} data-text={`${it.label} ${it.hint} ${it.group} ${it.extra ?? ''}`.toLowerCase()}>
         <a href={it.href} tabindex="-1" {...(it.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
           <span class="kbar-label">{it.label}</span><span class="kbar-hint">{it.group} · {it.hint}</span>
         </a>
@@ -75,6 +81,7 @@ const ui = en
     const q = input.value.trim().toLowerCase();
     rows.forEach((r) => (r.hidden = !!q && !r.dataset.text!.includes(q)));
     empty.hidden = visible().length > 0;
+    input.setAttribute('aria-expanded', String(empty.hidden));
     active = 0;
     mark();
   };

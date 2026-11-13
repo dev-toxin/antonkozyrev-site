@@ -89,7 +89,7 @@ export const copy: Record<Lang, Copy> = {
     path: '/',
     title: 'Anton Kozyrev — Senior Flutter Developer · Go · LLM Integrations',
     description:
-      'Senior Flutter developer: 4.5+ years of commercial mobile development, sole mobile developer behind three products. Go backends and LLM features with guardrails. Open to projects and full-time offers.',
+      'Senior Flutter developer, 4.5+ years in mobile; sole mobile dev behind three products. Go backends and LLM features. Open to projects and full-time offers.',
     nav: { cases: 'Work', apps: 'Apps', stack: 'Stack', ai: 'AI workflow', contact: 'Contact' },
     switchLabel: 'RU',
     switchTitle: 'Русская версия',
@@ -344,7 +344,7 @@ export const copy: Record<Lang, Copy> = {
     path: '/ru/',
     title: 'Антон Козырев — Senior Flutter Developer · Go · LLM-интеграции',
     description:
-      'Senior Flutter-разработчик: 4,5+\u00A0года коммерческой мобильной разработки, единственный мобильный разработчик трёх продуктов. Бэкенд на Go и функции на LLM с ограничителями. Открыт к проектам и предложениям о работе.',
+      'Senior Flutter-разработчик, 4,5+\u00A0года в мобильной разработке; единственный мобильный разработчик трёх продуктов. Go и LLM. Открыт к проектам и работе.',
     nav: { cases: 'Проекты', apps: 'Приложения', stack: 'Стек', ai: 'Работа с ИИ', contact: 'Контакты' },
     switchLabel: 'EN',
     switchTitle: 'English version',

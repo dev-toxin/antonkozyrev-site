@@ -1,32 +1,20 @@
+/* «Деловой тёмный» (2026-10-28): графит + один синий акцент (≤ 5–8 % площади); зелёный — только статус и ✓ в консоли.
+   Никаких свечений, градиентов на тексте, фоновой сетки и пятен.
+   --blue — кнопки, маркеры и крупный текст; мелкий текст на --panel — только --acid (5,74:1), у --blue там 4,24:1. */
 :root {
-  --bg: #04060d;
-  --bg2: #0a0e1a;
-  --panel: rgba(10,14,26,.86);
-  --line: rgba(0,240,255,.2);
-  --text: #eef4ff;
-  --muted: #9eaabf;
-  --text2: #d3dcec;
-  --blue: #00f0ff;
-  --violet: #ff6a00;
-  --c2: #ff6a00;
-  --acid: #00f0ff;
-  --acid-hi: #8cf8ff;
-  --c1-rgb: 0,240,255;
-  --c2-rgb: 255,106,0;
-  --acid-rgb: 0,240,255;
-  --glow-rgb: 255,106,0;
-  --plan: #ffb27a;
-  --file: #7ff5ff;
-  --bar-bg: rgba(4,6,13,.85);
-  --console-bg: rgba(4,7,14,.95);
-  --phone-bg: #0a0e1a;
-  --on-grad: #04060d;
-  --btn-bg: #fcee0a;
-  --grad: linear-gradient(100deg, #ff6a00, #ffb000 55%, #fcee0a);
-  --f-head: 'Unbounded Variable', system-ui, sans-serif;
+  --bg: #0B0F17; --panel: #121826;
+  --line: #222B3D; --line2: #1E2638; --line-hover: #33405A;
+  --text: #E8EDF6; --text2: #C9D2E1; --muted: #9AA6BA; --icon: #9AA4B8;
+  --blue: #4C6FFF; --acid: #6E8BFF; --acid-hi: #93A8FF; --ok: #22C55E;
+  --c1-rgb: 76,111,255; --acid-rgb: 110,139,255;
+  --plan: #C9D2E1; --file: #93A8FF;
+  --bar-bg: rgba(11,15,23,.88); --bar-solid: #0F1520; --console-bg: #0E131D; --phone-bg: #121826;
+  --dim: #2A3448; --chip-bg: #161E2D;
+  --btn-bg: #3D5AFE; --btn-hover: #3049E0;
+  --f-head: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --f-text: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --f-mono: 'JetBrains Mono Variable', ui-monospace, Menlo, monospace;
-  --r: 5px;
+  --r: 14px;
   color-scheme: dark;
 }
 *, *::before, *::after { box-sizing: border-box; }
