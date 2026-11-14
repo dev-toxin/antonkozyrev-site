@@ -288,7 +288,11 @@ const personLd = {
           <span class="tools-title">{t.toolsTitle}</span>
           <ul>
             {t.tools.map((x) => (
-              <li class={x.main ? 'main' : ''}><strong>{x.name}</strong><span>{x.note}</span></li>
+              <li class={x.main ? 'main' : ''}>
+                {x.href
+                  ? <a href={x.href} target="_blank" rel="sponsored noopener"><strong>{x.name}</strong><span>{x.note}</span></a>
+                  : <><strong>{x.name}</strong><span>{x.note}</span></>}
+              </li>
             ))}
           </ul>
         </div>
@@ -298,7 +302,11 @@ const personLd = {
               <li class="glow">
                 <span class="step">0{i + 1}</span>
                 <h3>{a.title}</h3>
-                <p>{a.text}</p>
+                <p>
+                  {a.text.includes('Veai')
+                    ? <>{a.text.split('Veai')[0]}<a href={links.veaiReferral} target="_blank" rel="sponsored noopener">Veai</a>{a.text.split('Veai').slice(1).join('Veai')}</>
+                    : a.text}
+                </p>
               </li>
             ))
           }

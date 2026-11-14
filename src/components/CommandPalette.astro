@@ -16,7 +16,7 @@ const g = en
   ? { jump: 'Jump to', projects: 'Projects', apps: 'Apps', contact: 'Contact', site: 'Site' }
   : { jump: 'Перейти', projects: 'Проекты', apps: 'Приложения', contact: 'Связаться', site: 'Сайт' };
 // Extra search words (not shown): stack of a case or app, so «Riverpod» or «Go» finds where it was used.
-type Item = { group: string; label: string; hint: string; href: string; extra?: string };
+type Item = { group: string; label: string; hint: string; href: string; extra?: string; sponsored?: boolean };
 const items: Item[] = [
   { group: g.jump, label: t.casesTitle, hint: '#work', href: `${home}#work` },
   { group: g.jump, label: t.appsTitle, hint: '#apps', href: `${home}#apps` },
@@ -30,6 +30,7 @@ const items: Item[] = [
   { group: g.contact, label: 'Telegram', hint: '@tokc_a', href: links.telegram },
   { group: g.contact, label: 'Email', hint: links.email, href: `mailto:${links.email}` },
   { group: g.contact, label: 'GitHub', hint: 'dev-toxin', href: links.github },
+  { group: g.site, label: 'Veai', hint: en ? 'AI agent I use daily' : 'ИИ-агент, которым пользуюсь', href: links.veaiReferral, sponsored: true },
   ...(links.linkedin ? [{ group: g.contact, label: 'LinkedIn', hint: 'linkedin.com/in/tokc', href: links.linkedin }] : []),
   ...(links.resume ? [{ group: g.contact, label: t.resumeLabel, hint: 'hh.ru', href: links.resume }] : []),
   { group: g.site, label: t.help.clientLink.label, hint: t.help.clientLink.href, href: t.help.clientLink.href },
@@ -49,7 +50,7 @@ const ui = en
   <ul class="kbar-list" id="kbar-list" role="listbox" aria-label={ui.label} data-kbar-list>
     {items.map((it, i) => (
       <li role="option" id={`kbar-${i}`} data-text={`${it.label} ${it.hint} ${it.group} ${it.extra ?? ''}`.toLowerCase()}>
-        <a href={it.href} tabindex="-1" {...(it.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
+        <a href={it.href} tabindex="-1" {...(it.href.startsWith('http') ? { target: '_blank', rel: it.sponsored ? 'sponsored noopener' : 'noopener' } : {})}>
           <span class="kbar-label">{it.label}</span><span class="kbar-hint">{it.group} · {it.hint}</span>
         </a>
       </li>

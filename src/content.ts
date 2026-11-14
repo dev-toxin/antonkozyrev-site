@@ -13,6 +13,8 @@ export const links = {
   terroirSite: 'https://www.terroir-app.com',
   email: 'hello@antonkozyrev.dev',
   telegram: 'https://t.me/tokc_a',
+  // Referral link: sign-ups through it earn Anton bonus minutes, so the link is marked rel="sponsored".
+  veaiReferral: 'https://app.veai.ru/?referralCode=ELHLYs08qr0k31uE',
   linkedin: 'https://www.linkedin.com/in/tokc/',
   resume: 'https://kaliningrad.hh.ru/resume/d6422a11ff0994ce8a0039ed1f546d58714a71',
 };
@@ -74,7 +76,7 @@ export type Copy = {
   aiLead: string;
   ai: { title: string; text: string }[];
   toolsTitle: string;
-  tools: { name: string; note: string; main?: boolean }[];
+  tools: { name: string; note: string; main?: boolean; href?: string }[];
   console: { title: string; approve: string; reject: string; lines: ConsoleLine[] };
   contactTitle: string;
   contactLead: string;
@@ -294,7 +296,7 @@ export const copy: Record<Lang, Copy> = {
     ],
     toolsTitle: 'Agent toolchain',
     tools: [
-      { name: 'Veai', note: 'daily driver', main: true },
+      { name: 'Veai', note: 'daily driver', main: true, href: links.veaiReferral },
       { name: 'Cursor', note: 'also used' },
       { name: 'GitHub Copilot', note: 'also used' },
       { name: 'Claude Code', note: 'same workflow' },
@@ -542,7 +544,7 @@ export const copy: Record<Lang, Copy> = {
     ],
     toolsTitle: 'Агентный инструментарий',
     tools: [
-      { name: 'Veai', note: 'каждый день', main: true },
+      { name: 'Veai', note: 'каждый день', main: true, href: links.veaiReferral },
       { name: 'Cursor', note: 'работал' },
       { name: 'GitHub Copilot', note: 'работал' },
       { name: 'Claude Code', note: 'тот же цикл' },

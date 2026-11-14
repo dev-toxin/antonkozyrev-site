@@ -179,6 +179,8 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; display: flex; a
 .tools li span { font: .72rem var(--f-mono); color: var(--muted); }
 .tools li.main { border-color: var(--acid); box-shadow: 0 0 14px rgba(var(--acid-rgb),.25); }
 .tools li.main span { color: var(--acid); }
+.tools li a { display: flex; gap: .5rem; align-items: baseline; color: inherit; text-decoration: none; }
+.tools li a:hover strong { text-decoration: underline; text-underline-offset: 3px; }
 .ai { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
 .ai li { padding: 1.5rem; }
 .step { font: .8rem var(--f-mono); color: var(--violet); }
@@ -427,4 +429,5 @@ h2 { font-weight: 800; }
   nav .lang { min-width: 44px; justify-content: center; }
   .stack .where { display: flex; flex-wrap: wrap; column-gap: .9rem; }
   .foot a { display: inline-flex; align-items: center; min-height: 44px; }
+  .tools li a { min-height: 44px; align-items: center; }
 }
