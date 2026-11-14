@@ -59,7 +59,7 @@ export type Copy = {
   switchLabel: string;
   switchTitle: string;
   switchHref: string;
-  hero: { name: string; role: string; lead: string; meta: string[]; stats: string[]; ctaPrimary: string; ctaSecondary: string; ctaResume: string; resumePdf: string; ctaOrder: string; statsNum: { n: number; dec?: number; suffix: string; label: string }[] };
+  hero: { name: string; role: string; lead: string; meta: string[]; ctaPrimary: string; ctaSecondary: string; ctaResume: string; resumePdf: string };
   about: { title: string; text: string; photoAlt: string };
   help: { title: string; nav: string; items: { title: string; text: string }[]; format: string; clientLink: { href: string; label: string } };
   casesTitle: string;
@@ -89,7 +89,7 @@ export const copy: Record<Lang, Copy> = {
     path: '/',
     title: 'Anton Kozyrev — Senior Flutter Developer · Go · LLM Integrations',
     description:
-      'Senior Flutter developer, 4.5+ years in mobile; sole mobile dev behind three products. Go backends and LLM features. Open to projects and full-time offers.',
+      'Senior Flutter developer, 4.5+ years in mobile; sole mobile dev behind three products. Go backends and LLM features. Open to full-time roles.',
     nav: { cases: 'Work', apps: 'Apps', stack: 'Stack', ai: 'AI workflow', contact: 'Contact' },
     switchLabel: 'RU',
     switchTitle: 'Русская версия',
@@ -99,29 +99,22 @@ export const copy: Record<Lang, Copy> = {
       role: 'Senior Flutter Developer · Go · LLM Integrations',
       lead:
         "Flutter developer with 4.5+ years of commercial mobile development. For the last three years I've been the sole mobile developer behind three products: architecture, stack, API contracts, releases. I build my own products end to end — Go backend, web, LLM integration, deployment.",
-      meta: ['Kaliningrad, Russia · Remote', 'Open to projects and full-time offers'],
-      stats: ['4.5+ yrs Flutter', '10 mobile apps', '3 products as sole mobile dev'],
+      meta: ['4.5+ yrs Flutter', 'Kaliningrad, Russia · Remote', 'Open to full-time roles'],
       ctaPrimary: 'See my work',
       ctaSecondary: 'Get in touch',
       ctaResume: 'Résumé PDF',
       resumePdf: '/resume/anton-kozyrev-resume-en.pdf',
-      ctaOrder: 'Discuss a project',
-      statsNum: [
-        { n: 4.5, dec: 1, suffix: '+', label: 'yrs Flutter' },
-        { n: 10, suffix: '', label: 'mobile apps' },
-        { n: 3, suffix: '', label: 'products as sole mobile dev' },
-      ],
     },
     help: {
-      title: 'What I can help with',
-      nav: 'Services',
+      title: 'What I bring to a team',
+      nav: 'Strengths',
       items: [
-        { title: 'Flutter features and releases', text: 'New screens and flows from Figma to the App Store and Google Play: state, API integration, push notifications, crash reporting.' },
-        { title: 'Taking over Flutter code', text: "Picking up someone else's codebase, refactoring legacy code without stopping feature work, covering key logic with tests." },
-        { title: 'Go backend and MVP API', text: 'REST API in Go with PostgreSQL and CI on GitHub Actions — enough to launch a product and validate the idea.' },
+        { title: 'Flutter features and releases', text: 'Screens and flows from Figma to the App Store and Google Play: state, API integration, push notifications, crash reporting.' },
+        { title: 'Taking over Flutter code', text: 'Picking up an existing codebase and refactoring legacy code without stopping feature work; covering key logic with tests.' },
+        { title: 'Go backend and API contracts', text: 'REST API in Go with PostgreSQL and CI on GitHub Actions; designing API contracts together with the backend team.' },
         { title: 'LLM features with guardrails', text: 'Budget limits, fact-checking and fallbacks: the model does not invent data and does not burn the budget.' },
       ],
-      format: "A one-off project, a long-term contract or a full-time role — tell me what you need, and I'll come back with a clear plan and an estimate.",
+      format: 'For client projects — custom development goes through my studio:',
       clientLink: { href: '/custom-development/', label: 'Custom development' },
     },
     casesTitle: 'Selected work',
@@ -344,7 +337,7 @@ export const copy: Record<Lang, Copy> = {
     path: '/ru/',
     title: 'Антон Козырев — Senior Flutter Developer · Go · LLM-интеграции',
     description:
-      'Senior Flutter-разработчик, 4,5+\u00A0года в мобильной разработке; единственный мобильный разработчик трёх продуктов. Go и LLM. Открыт к проектам и работе.',
+      'Senior Flutter-разработчик, 4,5+\u00A0года в мобильной разработке; единственный мобильный разработчик трёх продуктов. Go и LLM. Открыт к работе в команде.',
     nav: { cases: 'Проекты', apps: 'Приложения', stack: 'Стек', ai: 'Работа с ИИ', contact: 'Контакты' },
     switchLabel: 'EN',
     switchTitle: 'English version',
@@ -354,29 +347,22 @@ export const copy: Record<Lang, Copy> = {
       role: 'Senior Flutter · Go · LLM',
       lead:
         'Flutter-разработчик, 4,5+\u00A0года коммерческой мобильной разработки. Последние три года — единственный мобильный разработчик трёх продуктов: архитектура, стек, API-контракты, релизы. Свои продукты делаю целиком: бэкенд на Go, веб, интеграции с LLM, развёртывание.',
-      meta: ['Калининград · удалённо', 'Открыт к проектам и предложениям о работе'],
-      stats: ['4,5+\u00A0года Flutter', '10\u00A0мобильных приложений', '3\u00A0продукта — единственный мобильный разработчик'],
+      meta: ['4,5+\u00A0года Flutter', 'Калининград · удалённо', 'Открыт к работе в команде'],
       ctaPrimary: 'Смотреть проекты',
       ctaSecondary: 'Связаться',
       ctaResume: 'Резюме PDF',
       resumePdf: '/resume/anton-kozyrev-resume-ru.pdf',
-      ctaOrder: 'Обсудить задачу',
-      statsNum: [
-        { n: 4.5, dec: 1, suffix: '+', label: 'года Flutter' },
-        { n: 10, suffix: '', label: 'мобильных приложений' },
-        { n: 3, suffix: '', label: 'продукта — единственный мобильный разработчик' },
-      ],
     },
     help: {
-      title: 'С чем могу помочь',
-      nav: 'Услуги',
+      title: 'Чем полезен команде',
+      nav: 'Сильные стороны',
       items: [
         { title: 'Новые функции и релизы на Flutter', text: 'Новые экраны и сценарии от макета в Figma до App Store и Google Play: состояние, интеграция с API, push-уведомления, отчёты о сбоях.' },
-        { title: 'Доработка чужого Flutter-кода', text: 'Разберусь в чужой кодовой базе, проведу рефакторинг старого кода без остановки разработки, покрою ключевую логику тестами.' },
-        { title: 'Бэкенд на Go и API для MVP', text: 'REST API на Go с PostgreSQL и CI на GitHub Actions — достаточно, чтобы запустить продукт и проверить идею.' },
-        { title: 'Функции на LLM с ограничителями', text: 'Лимит бюджета, проверка фактов и запасной сценарий: модель не выдумывает данные и не сжигает бюджет.' },
+        { title: 'Подхват существующего Flutter-кода', text: 'Вхожу в готовую кодовую базу, провожу рефакторинг старого кода без остановки разработки, покрываю ключевую логику тестами.' },
+        { title: 'Бэкенд на Go и API-контракты', text: 'REST API на Go с PostgreSQL и CI на GitHub Actions; проектирую API-контракты вместе с бэкенд-командой.' },
+        { title: 'Функции на LLM с проверкой ответов', text: 'Лимит бюджета, проверка фактов и запасной сценарий: модель не выдумывает данные и не сжигает бюджет.' },
       ],
-      format: 'Проект, долгий контракт или работа в штат — расскажите о задаче, а я вернусь с понятным планом и оценкой.',
+      format: 'Заказная разработка — через мою студию:',
       clientLink: { href: '/ru/razrabotka-saytov-i-prilozheniy-kaliningrad/', label: 'Разработка на заказ' },
     },
     casesTitle: 'Проекты',

@@ -61,6 +61,7 @@ const ogImage = new URL(lang === 'en' ? '/og-en.png' : '/og.png', site).href;
 const ogAlt = lang === 'en' ? 'Anton Kozyrev — Senior Flutter Developer · Go · LLM' : 'Антон Козырев — Senior Flutter Developer · Go · LLM';
 const photo = await getImage({ src: antonPhoto, width: 400, height: 400, format: 'webp' });
 const isExternal = (href: string) => href.startsWith('http');
+const studioHref = lang === 'en' ? 'https://www.ankosoftlab.com/' : 'https://www.ankosoftlab.com/ru/';
 const appsShots = t.apps.filter((a) => media[a.id].phones.length > 0);
 const appsCompact = t.apps.filter((a) => media[a.id].phones.length === 0);
 const personLd = {
@@ -148,13 +149,7 @@ const personLd = {
           <div class="cta">
             <a class="btn primary" href={t.hero.resumePdf} target="_blank" rel="noopener"><Icon name="file-text" />{t.hero.ctaResume}</a>
             <a class="btn" href={links.telegram} target="_blank" rel="noopener"><Icon name="send" />Telegram</a>
-            <a class="btn ghost" href={t.help.clientLink.href}>{t.hero.ctaOrder} →</a>
           </div>
-          <ul class="stats" aria-label={t.hero.stats.join(' · ')}>
-            {t.hero.statsNum.map((m) => (
-              <li><b data-count={m.n} data-dec={m.dec ?? 0} data-suffix={m.suffix}>{m.n.toLocaleString(lang === 'en' ? 'en-US' : 'ru-RU', { minimumFractionDigits: m.dec ?? 0 })}{m.suffix}</b><span>{m.label}</span></li>
-            ))}
-          </ul>
         </div>
         <AgentConsole c={t.console} />
       </section>
@@ -283,8 +278,7 @@ const personLd = {
             ))
           }
         </div>
-        <p class="sub">{t.help.format} <a href="#contact">{t.hero.ctaSecondary} →</a></p>
-        <p class="sub"><a class="btn primary" href={t.help.clientLink.href}>{t.hero.ctaOrder} →</a></p>
+        <p class="sub">{t.help.format} <a href={studioHref} target="_blank" rel="noopener">AnKo Software Labs ↗</a></p>
       </section>
 
       <section id="ai" class="wrap section">
@@ -377,6 +371,7 @@ const personLd = {
 
     <footer class="wrap foot">
       <span>© {new Date().getFullYear()} {t.footer}</span>
+      <a href={studioHref} target="_blank" rel="noopener">{lang === 'en' ? 'Need development? AnKo Software Labs ↗' : 'Нужна разработка? Студия AnKo ↗'}</a>
       <a href={t.switchHref} hreflang={copy[altLang].htmlLang}>{t.switchTitle}</a>
     </footer>
     <script>
@@ -394,32 +389,6 @@ const personLd = {
         }, { threshold: 0.25 });
         document.documentElement.classList.add('reveal-on');
         shots.forEach((el) => shotIo.observe(el));
-      }
-      const nums = Array.from(document.querySelectorAll<HTMLElement>('.stats b[data-count]'));
-      if (!reduce && 'IntersectionObserver' in window && nums.length) {
-        const lang = document.documentElement.lang === 'en' ? 'en-US' : 'ru-RU';
-        const fmt = (el: HTMLElement, v: number) => {
-          const dec = Number(el.dataset.dec ?? 0);
-          el.textContent = v.toLocaleString(lang, { minimumFractionDigits: dec, maximumFractionDigits: dec }) + (el.dataset.suffix ?? '');
-        };
-        const io = new IntersectionObserver((entries) => {
-          if (!entries.some((e) => e.isIntersecting)) return;
-          io.disconnect();
-          // Отсчёт начинается с первого кадра: если кадры не идут (фоновая вкладка, скриншотер),
-          // на странице остаются итоговые значения из HTML, а не нули.
-          let t0 = -1;
-          const step = (now: number) => {
-            if (t0 < 0) t0 = now;
-            const k = Math.min(1, (now - t0) / 800);
-            const e = 1 - Math.pow(1 - k, 3);
-            nums.forEach((el) => fmt(el, Number(el.dataset.count) * e));
-            if (k < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-          // Страховка: если анимация не дошла до конца (вкладка в фоне, медленный кадр) — показать итоговые значения.
-          setTimeout(() => nums.forEach((el) => fmt(el, Number(el.dataset.count))), 1200);
-        }, { threshold: 0.4 });
-        io.observe(nums[0].closest('.stats')!);
       }
     </script>
     <CommandPalette lang={lang} altHref={t.switchHref} />
